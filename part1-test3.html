@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Listening Part 1 - Test 3 Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #e8590c; --orange-light: #ff922b; --orange-bg: #fff8f2;
+    --orange-border: #ffd0b5; --orange-dark: #b94608;
+    --green: #2f9e44; --green-bg: #ebfbee;
+    --red: #c92a2a; --red-bg: #fff5f5;
+    --blue: #1971c2; --gray: #495057; --text: #212529;
+    --radius: 14px; --radius-lg: 20px;
+    --shadow: 0 2px 12px rgba(232,89,12,0.08);
+  }
+  body { font-family: 'Nunito', sans-serif; background: var(--orange-bg); color: var(--text); min-height: 100vh; padding: 0 0 60px; }
+  .header { background: linear-gradient(135deg, #e8590c 0%, #ff922b 100%); padding: 32px 24px 28px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+  .header h1 { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 6px; }
+  .header p { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
+  .progress-wrap { background: #fff; padding: 14px 20px; border-bottom: 1px solid var(--orange-border); display: flex; align-items: center; gap: 14px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .progress-label { font-size: 13px; font-weight: 700; color: var(--orange); white-space: nowrap; }
+  .progress-bar-bg { flex: 1; height: 8px; background: var(--orange-border); border-radius: 99px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #e8590c, #ff922b); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+  .progress-count { font-size: 13px; font-weight: 700; color: var(--gray); white-space: nowrap; }
+  .tabs-wrap { padding: 16px 16px 0; overflow-x: auto; display: flex; gap: 8px; scrollbar-width: none; }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+  .tab-btn { flex-shrink: 0; padding: 7px 14px; border-radius: 99px; border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray); cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+  .tab-btn:hover { border-color: var(--orange-light); color: var(--orange); }
+  .tab-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .mode-bar { display: flex; gap: 8px; padding: 14px 16px 0; justify-content: center; }
+  .mode-btn { display: flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 99px; border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray); cursor: pointer; transition: all 0.18s; }
+  .mode-btn svg { width: 16px; height: 16px; }
+  .mode-btn:hover { border-color: var(--orange-light); color: var(--orange); }
+  .mode-btn.active { background: var(--orange-bg); border-color: var(--orange); color: var(--orange); }
+  #mode-cards { display: block; } #mode-quiz, #mode-match { display: none; }
+  .cards-section { padding: 18px 16px; }
+  .group-title { font-size: 15px; font-weight: 800; color: var(--orange); margin-bottom: 14px; padding-left: 4px; display: flex; align-items: center; gap: 8px; }
+  .group-title::before { content: ''; display: inline-block; width: 5px; height: 18px; background: var(--orange); border-radius: 3px; }
+  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .card-wrap { perspective: 900px; cursor: pointer; }
+  .card-inner { position: relative; width: 100%; min-height: 170px; transform-style: preserve-3d; transition: transform 0.45s cubic-bezier(.4,0,.2,1); border-radius: var(--radius); }
+  .card-wrap.flipped .card-inner { transform: rotateY(180deg); }
+  .card-front, .card-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .card-front { background: #fff; border: 1.5px solid var(--orange-border); display: flex; flex-direction: column; justify-content: space-between; }
+  .card-back { background: var(--orange-bg); border: 1.5px solid var(--orange); transform: rotateY(180deg); display: flex; flex-direction: column; gap: 8px; }
+  .card-word { font-size: 20px; font-weight: 800; color: var(--orange); line-height: 1.2; }
+  .card-hint { font-size: 12px; color: #adb5bd; font-weight: 600; margin-top: 4px; }
+  .card-flip-icon { text-align: right; font-size: 11px; font-weight: 700; color: #adb5bd; display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
+  .card-flip-icon svg { width: 14px; height: 14px; opacity: .6; }
+  .back-label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: .5px; }
+  .back-meaning { font-size: 16px; font-weight: 700; color: var(--text); }
+  .back-note { font-size: 12px; color: var(--gray); font-weight: 600; background: #fff; border-radius: 8px; padding: 6px 10px; border-left: 3px solid var(--orange-light); }
+  .back-example { font-size: 13px; color: var(--blue); font-weight: 600; font-style: italic; }
+  .card-front.learned { border-color: var(--green); background: var(--green-bg); }
+  .card-front.learned .card-word { color: var(--green); }
+  .learned-badge { display: none; background: var(--green); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 99px; align-self: flex-start; letter-spacing: .5px; }
+  .card-front.learned .learned-badge { display: inline-block; }
+  .quiz-container { padding: 20px 16px; max-width: 600px; margin: 0 auto; }
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 13px; font-weight: 700; color: var(--gray); }
+  .quiz-q-num { background: var(--orange); color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 800; }
+  .quiz-card { background: #fff; border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow); border: 1.5px solid var(--orange-border); margin-bottom: 20px; text-align: center; }
+  .quiz-prompt-label { font-size: 12px; font-weight: 700; color: #adb5bd; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; }
+  .quiz-word { font-size: 26px; font-weight: 800; color: var(--orange); margin-bottom: 6px; }
+  .quiz-example { font-size: 13px; color: var(--gray); font-style: italic; }
+  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .quiz-opt { padding: 13px 16px; border-radius: var(--radius); border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.3; }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--orange-light); background: var(--orange-bg); }
+  .quiz-opt.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .quiz-opt.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-feedback { text-align: center; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: var(--radius); margin-bottom: 14px; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: var(--green-bg); color: var(--green); }
+  .quiz-feedback.wrong { background: var(--red-bg); color: var(--red); }
+  .quiz-next-btn { width: 100%; padding: 13px; border-radius: var(--radius); border: none; background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; transition: background 0.15s; display: none; }
+  .quiz-next-btn.show { display: block; }
+  .quiz-next-btn:hover { background: var(--orange-dark); }
+  .quiz-score-card { background: #fff; border-radius: var(--radius-lg); padding: 36px 24px; text-align: center; box-shadow: var(--shadow); border: 1.5px solid var(--orange-border); }
+  .score-emoji { font-size: 22px; font-weight: 800; color: var(--orange); margin-bottom: 12px; padding: 10px 20px; background: var(--orange-bg); border-radius: 99px; display: inline-block; }
+  .score-num { font-size: 40px; font-weight: 800; color: var(--orange); }
+  .score-label { font-size: 15px; font-weight: 700; color: var(--gray); margin-bottom: 20px; }
+  .score-retry { padding: 12px 28px; border-radius: 99px; border: none; background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; }
+  .score-retry:hover { background: var(--orange-dark); }
+  .match-container { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+  .match-header { text-align: center; margin-bottom: 18px; }
+  .match-header h3 { font-size: 16px; font-weight: 800; color: var(--orange); margin-bottom: 4px; }
+  .match-header p { font-size: 13px; color: var(--gray); font-weight: 600; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .match-col { display: flex; flex-direction: column; gap: 10px; }
+  .match-item { padding: 12px 14px; border-radius: var(--radius); border: 1.5px solid var(--orange-border); background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; min-height: 52px; display: flex; align-items: center; line-height: 1.3; }
+  .match-item.word { color: var(--orange); font-size: 15px; }
+  .match-item.meaning { color: var(--text); font-size: 13px; }
+  .match-item:hover:not(.matched):not(.selected) { border-color: var(--orange-light); background: var(--orange-bg); }
+  .match-item.selected { border-color: var(--orange); background: var(--orange-bg); box-shadow: 0 0 0 2px rgba(232,89,12,0.18); }
+  .match-item.matched { border-color: var(--green); background: var(--green-bg); color: var(--green); cursor: default; opacity: .75; }
+  .match-item.wrong-flash { border-color: var(--red); background: var(--red-bg); }
+  .match-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
+  .match-btn { padding: 10px 24px; border-radius: 99px; border: 1.5px solid var(--orange); background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; }
+  .match-btn.outline { background: #fff; color: var(--orange); }
+  .match-btn:hover { opacity: .88; }
+  .match-complete { text-align: center; padding: 28px; background: var(--green-bg); border-radius: var(--radius-lg); border: 1.5px solid var(--green); display: none; }
+  .match-complete.show { display: block; }
+  .match-complete h3 { font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 6px; }
+  .match-complete p { font-size: 14px; color: var(--gray); font-weight: 600; }
+  .stats-bar { background: #fff; border-top: 1px solid var(--orange-border); padding: 12px 20px; display: flex; gap: 20px; justify-content: center; position: fixed; bottom: 0; left: 0; right: 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.06); z-index: 100; }
+  .stat-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .stat-num { font-size: 17px; font-weight: 800; color: var(--orange); }
+  .stat-num.green { color: var(--green); }
+  .stat-label { font-size: 10px; font-weight: 700; color: #adb5bd; text-transform: uppercase; letter-spacing: .5px; }
+  @media (max-width: 520px) { .vocab-grid { grid-template-columns: 1fr; } .quiz-options { grid-template-columns: 1fr; } .match-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>TOEIC Listening Part 1 - Test 3</h1>
+  <p>Vocabulary Flashcards &amp; Practice</p>
+</div>
+<div class="progress-wrap">
+  <span class="progress-label">&#272;&#227; thu&#7897;c</span>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  <span class="progress-count" id="progressCount">0 / 17</span>
+</div>
+<div class="mode-bar">
+  <button class="mode-btn active" onclick="switchMode('cards')" id="btn-cards">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h12M6 13h8"/></svg>
+    Flashcard
+  </button>
+  <button class="mode-btn" onclick="switchMode('quiz')" id="btn-quiz">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+    Tr&#7855;c nghi&#7879;m
+  </button>
+  <button class="mode-btn" onclick="switchMode('match')" id="btn-match">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    N&#7889;i t&#7915;
+  </button>
+</div>
+<div class="tabs-wrap" id="groupTabs"></div>
+<div id="mode-cards"><div class="cards-section" id="cardsContainer"></div></div>
+<div id="mode-quiz"><div class="quiz-container" id="quizContainer"></div></div>
+<div id="mode-match"><div class="match-container" id="matchContainer"></div></div>
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num" id="statTotal">17</span><span class="stat-label">T&#7893;ng t&#7915;</span></div>
+  <div class="stat-item"><span class="stat-num green" id="statLearned">0</span><span class="stat-label">&#272;&#227; thu&#7897;c</span></div>
+  <div class="stat-item"><span class="stat-num" id="statLeft">17</span><span class="stat-label">C&#242;n l&#7841;i</span></div>
+</div>
+<script>
+var VOCAB = [
+  {id:1,group:1,groupName:"Kitchen & Indoor Objects",word:"oven",meaning:"l\u00f2 n\u01b0\u1edbng",note:"Th\u01b0\u1eddng xu\u1ea5t hi\u1ec7n trong kitchen scenes.",example:"The food is being cooked in the oven."},
+  {id:2,group:1,groupName:"Kitchen & Indoor Objects",word:"pot",meaning:"c\u00e1i n\u1ed3i, ch\u1eadu c\u00e2y",note:"TOEIC th\u01b0\u1eddng g\u1eb7p: cooking pot, flower pot.",example:"A pot is sitting on the stove."},
+  {id:3,group:1,groupName:"Kitchen & Indoor Objects",word:"cabinet",meaning:"t\u1ee7 \u0111\u1ef1ng \u0111\u1ed3",note:"kitchen cabinet, storage cabinet.",example:"The dishes are stored in the cabinet."},
+  {id:4,group:1,groupName:"Kitchen & Indoor Objects",word:"towel",meaning:"kh\u0103n lau, kh\u0103n t\u1eafm",note:"paper towel, bath towel.",example:"A towel is hanging near the sink."},
+  {id:5,group:1,groupName:"Kitchen & Indoor Objects",word:"shelving unit",meaning:"k\u1ec7 nhi\u1ec1u t\u1ea7ng",note:"shelving = h\u1ec7 th\u1ed1ng k\u1ec7.",example:"The boxes were placed on a shelving unit."},
+  {id:6,group:2,groupName:"Actions & Movement",word:"extend",meaning:"k\u00e9o d\u00e0i, m\u1edf r\u1ed9ng",note:"extend a table / road / building.",example:"The workers extended the platform."},
+  {id:7,group:2,groupName:"Actions & Movement",word:"install a sign",meaning:"l\u1eafp \u0111\u1eb7t b\u1ea3ng hi\u1ec7u",note:"install = l\u1eafp \u0111\u1eb7t.",example:"They installed a sign above the entrance."},
+  {id:8,group:2,groupName:"Actions & Movement",word:"gather",meaning:"t\u1ee5 t\u1eadp, t\u1eadp h\u1ee3p",note:"gather around = t\u1ee5 t\u1eadp quanh.",example:"People gathered near the stage."},
+  {id:9,group:2,groupName:"Actions & Movement",word:"laid out",meaning:"\u0111\u01b0\u1ee3c b\u00e0y ra, s\u1eafp x\u1ebfp s\u1eb5n",note:"Th\u01b0\u1eddng \u1edf d\u1ea1ng b\u1ecb \u0111\u1ed9ng.",example:"The tools were laid out on the table."},
+  {id:10,group:2,groupName:"Actions & Movement",word:"spill",meaning:"l\u00e0m \u0111\u1ed5",note:"spill water / coffee / paint.",example:"Someone spilled coffee on the desk."},
+  {id:11,group:3,groupName:"Construction & Tools",word:"railing",meaning:"lan can, tay v\u1ecbn",note:"hold onto a railing.",example:"He was holding the railing."},
+  {id:12,group:3,groupName:"Construction & Tools",word:"construction",meaning:"c\u00f4ng tr\u00ecnh x\u00e2y d\u1ef1ng, s\u1ef1 x\u00e2y d\u1ef1ng",note:"under construction = \u0111ang thi c\u00f4ng.",example:"The building is under construction."},
+  {id:13,group:3,groupName:"Construction & Tools",word:"ladder",meaning:"c\u00e1i thang",note:"Th\u01b0\u1eddng g\u1eb7p trong construction scenes.",example:"A ladder is leaning against the wall."},
+  {id:14,group:3,groupName:"Construction & Tools",word:"sheets of metal",meaning:"nh\u1eefng t\u1ea5m kim lo\u1ea1i",note:"sheet = t\u1ea5m m\u1ecfng.",example:"Sheets of metal were stacked near the building."},
+  {id:15,group:4,groupName:"Outdoor & Nature Scenes",word:"lean against a tree",meaning:"t\u1ef1a v\u00e0o c\u00e2y",note:"lean against = t\u1ef1a v\u00e0o.",example:"The bicycle was leaning against a tree."},
+  {id:16,group:4,groupName:"Outdoor & Nature Scenes",word:"piles of tree branches",meaning:"nh\u1eefng \u0111\u1ed1ng c\u00e0nh c\u00e2y",note:"pile of = \u0111\u1ed1ng / ch\u1ed3ng.",example:"Piles of tree branches were left on the ground."},
+  {id:17,group:4,groupName:"Outdoor & Nature Scenes",word:"wooden structure",meaning:"c\u1ea5u tr\u00fac b\u1eb1ng g\u1ed7",note:"Th\u01b0\u1eddng g\u1eb7p trong construction scenes.",example:"Workers were building a wooden structure."}
+];
+
+var TOTAL = VOCAB.length;
+var learned = new Set();
+var currentGroup = 0;
+var currentMode = 'cards';
+var quizQuestions = [], quizIndex = 0, quizScore = 0, quizAnswered = false;
+var matchPairs = [], matchSelected = null, matchedCount = 0;
+
+function updateProgress() {
+  var n = learned.size;
+  document.getElementById('progressFill').style.width = (n/TOTAL*100)+'%';
+  document.getElementById('progressCount').textContent = n + ' / ' + TOTAL;
+  document.getElementById('statLearned').textContent = n;
+  document.getElementById('statLeft').textContent = TOTAL - n;
+}
+function getGroups() {
+  var gMap = {};
+  VOCAB.forEach(function(v) { if(!gMap[v.group]) gMap[v.group] = v.groupName; });
+  return Object.entries(gMap).map(function(e) { return {id:parseInt(e[0]),name:e[1]}; });
+}
+function buildTabs() {
+  var tabs = document.getElementById('groupTabs');
+  tabs.innerHTML = '';
+  var btn0 = document.createElement('button');
+  btn0.className = 'tab-btn active';
+  btn0.textContent = 'T\u1ea5t c\u1ea3';
+  btn0.onclick = function() { selectGroup(0); };
+  btn0.setAttribute('data-g','0');
+  tabs.appendChild(btn0);
+  getGroups().forEach(function(g) {
+    var btn = document.createElement('button');
+    btn.className = 'tab-btn';
+    btn.textContent = g.name;
+    btn.onclick = function() { selectGroup(g.id); };
+    btn.setAttribute('data-g', g.id);
+    tabs.appendChild(btn);
+  });
+}
+function selectGroup(gid) {
+  currentGroup = gid;
+  document.querySelectorAll('.tab-btn').forEach(function(b) {
+    b.classList.toggle('active', parseInt(b.getAttribute('data-g')) === gid);
+  });
+  renderCurrentMode();
+}
+function filteredVocab() {
+  return currentGroup === 0 ? VOCAB : VOCAB.filter(function(v) { return v.group === currentGroup; });
+}
+function renderCards() {
+  var container = document.getElementById('cardsContainer');
+  container.innerHTML = '';
+  var byGroup = {};
+  filteredVocab().forEach(function(v) {
+    if(!byGroup[v.group]) byGroup[v.group] = {name:v.groupName, items:[]};
+    byGroup[v.group].items.push(v);
+  });
+  Object.values(byGroup).forEach(function(g) {
+    var sec = document.createElement('div');
+    var title = document.createElement('div');
+    title.className = 'group-title';
+    title.textContent = g.name;
+    sec.appendChild(title);
+    var grid = document.createElement('div');
+    grid.className = 'vocab-grid';
+    g.items.forEach(function(v) { grid.appendChild(makeCard(v)); });
+    sec.appendChild(grid);
+    container.appendChild(sec);
+  });
+}
+function makeCard(v) {
+  var wrap = document.createElement('div');
+  wrap.className = 'card-wrap'; wrap.id = 'card-'+v.id;
+  var inner = document.createElement('div');
+  inner.className = 'card-inner';
+  var front = document.createElement('div');
+  front.className = 'card-front' + (learned.has(v.id) ? ' learned' : '');
+  front.innerHTML = '<div><div class="learned-badge">\u2713 \u0110\u00c3 THU\u1ed8C</div><div class="card-word">'+v.word+'</div><div class="card-hint">Nh\u1ea5n \u0111\u1ec3 xem ngh\u0129a</div></div><div class="card-flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>l\u1eadt th\u1ebb</div>';
+  var back = document.createElement('div');
+  back.className = 'card-back';
+  var noteHtml = v.note ? '<div class="back-note">[!] '+v.note+'</div>' : '';
+  var btnBg = learned.has(v.id) ? '#c92a2a' : '#2f9e44';
+  var btnTxt = learned.has(v.id) ? '\u2715 B\u1ecf \u0111\u00e1nh d\u1ea5u' : '\u2713 \u0110\u00e3 thu\u1ed9c';
+  back.innerHTML = '<div class="back-label">Ngh\u0129a</div><div class="back-meaning">'+v.meaning+'</div>'+noteHtml+'<div class="back-example">Vd: '+v.example+'</div><button onclick="toggleLearned(event,'+v.id+')" style="margin-top:4px;padding:7px 14px;border-radius:99px;border:none;background:'+btnBg+';color:#fff;font-family:Nunito,sans-serif;font-size:12px;font-weight:800;cursor:pointer;align-self:flex-start;">'+btnTxt+'</button>';
+  inner.appendChild(front); inner.appendChild(back); wrap.appendChild(inner);
+  wrap.onclick = function(e) { if(e.target.tagName === 'BUTTON') return; wrap.classList.toggle('flipped'); };
+  return wrap;
+}
+function toggleLearned(e, id) {
+  e.stopPropagation();
+  if(learned.has(id)) learned.delete(id); else learned.add(id);
+  updateProgress(); renderCards();
+}
+function buildQuizQuestions(vocab) {
+  var all = vocab.slice().sort(function() { return Math.random()-.5; }).slice(0, Math.min(vocab.length, 10));
+  return all.map(function(v) {
+    var wrongs = VOCAB.filter(function(x) { return x.id !== v.id; }).sort(function() { return Math.random()-.5; }).slice(0,3).map(function(x) { return x.meaning; });
+    var opts = [v.meaning].concat(wrongs).sort(function() { return Math.random()-.5; });
+    return {vocab:v, opts:opts, correct:v.meaning};
+  });
+}
+function renderQuiz() {
+  quizQuestions = buildQuizQuestions(filteredVocab());
+  quizIndex = 0; quizScore = 0; quizAnswered = false;
+  renderQuizQuestion();
+}
+function renderQuizQuestion() {
+  var container = document.getElementById('quizContainer');
+  if(quizIndex >= quizQuestions.length) {
+    var pct = Math.round(quizScore/quizQuestions.length*100);
+    var label = pct >= 90 ? 'Xu\u1ea5t s\u1eafc!' : pct >= 70 ? 'T\u1ed1t l\u1eafm!' : pct >= 50 ? 'C\u1ed1 l\u00ean!' : '\u00d4n l\u1ea1i nh\u00e9!';
+    container.innerHTML = '<div class="quiz-score-card"><div class="score-emoji">'+label+'</div><div class="score-num">'+quizScore+'/'+quizQuestions.length+'</div><div class="score-label">\u0110i\u1ec3m c\u1ee7a b\u1ea1n: '+pct+'%</div><button class="score-retry" onclick="renderQuiz()">L\u00e0m l\u1ea1i</button></div>';
+    return;
+  }
+  var q = quizQuestions[quizIndex]; quizAnswered = false;
+  var optsHtml = q.opts.map(function(opt) {
+    return '<button class="quiz-opt" onclick="selectQuizOpt(this,'+JSON.stringify(opt)+','+q.vocab.id+')">'+opt+'</button>';
+  }).join('');
+  var nextTxt = quizIndex+1 < quizQuestions.length ? 'C\u00e2u ti\u1ebfp \u2192' : 'Xem k\u1ebft qu\u1ea3 \u2192';
+  container.innerHTML = '<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>\u0110i\u1ec3m: <strong>'+quizScore+'</strong></span></div><div class="quiz-card"><div class="quiz-prompt-label">T\u1eeb / C\u1ee5m t\u1eeb</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div><div class="quiz-options" id="quizOpts">'+optsHtml+'</div><div class="quiz-feedback" id="quizFeedback"></div><button class="quiz-next-btn" id="quizNext" onclick="nextQuizQ()">'+nextTxt+'</button>';
+}
+function selectQuizOpt(btn, chosen, vid) {
+  if(quizAnswered) return; quizAnswered = true;
+  var q = quizQuestions[quizIndex];
+  var fb = document.getElementById('quizFeedback');
+  document.querySelectorAll('.quiz-opt').forEach(function(b) { b.disabled = true; });
+  if(chosen === q.correct) {
+    btn.classList.add('correct'); quizScore++;
+    fb.textContent = '\u2713 Ch\u00ednh x\u00e1c!';
+    fb.className = 'quiz-feedback show correct';
+    learned.add(vid); updateProgress();
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = '\u2715 Sai r\u1ed3i! \u0110\u00e1p \u00e1n: ' + q.correct;
+    fb.className = 'quiz-feedback show wrong';
+    document.querySelectorAll('.quiz-opt').forEach(function(b) { if(b.textContent.trim() === q.correct) b.classList.add('correct'); });
+  }
+  document.getElementById('quizNext').classList.add('show');
+}
+function nextQuizQ() { quizIndex++; renderQuizQuestion(); }
+function renderMatch() {
+  var vocab = filteredVocab().slice().sort(function() { return Math.random()-.5; }).slice(0,8);
+  matchPairs = vocab; matchSelected = null; matchedCount = 0;
+  var container = document.getElementById('matchContainer');
+  var words = vocab.slice().sort(function() { return Math.random()-.5; });
+  var meanings = vocab.slice().sort(function() { return Math.random()-.5; });
+  var wordsHtml = words.map(function(v) { return '<div class="match-item word" data-id="'+v.id+'" data-type="word" onclick="matchClick(this)">'+v.word+'</div>'; }).join('');
+  var meaningsHtml = meanings.map(function(v) { return '<div class="match-item meaning" data-id="'+v.id+'" data-type="meaning" onclick="matchClick(this)">'+v.meaning+'</div>'; }).join('');
+  container.innerHTML = '<div class="match-header"><h3>N\u1ed1i t\u1eeb v\u1edbi ngh\u0129a \u0111\u00fang</h3><p>Nh\u1ea5n m\u1ed9t t\u1eeb r\u1ed3i nh\u1ea5n ngh\u0129a t\u01b0\u01a1ng \u1ee9ng</p></div><div class="match-grid"><div class="match-col" id="matchWords">'+wordsHtml+'</div><div class="match-col" id="matchMeanings">'+meaningsHtml+'</div></div><div class="match-complete" id="matchComplete"><h3>\u2605 Ho\u00e0n th\u00e0nh!</h3><p>B\u1ea1n \u0111\u00e3 n\u1ed1i \u0111\u00fang t\u1ea5t c\u1ea3 c\u00e1c t\u1eeb!</p></div><div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">L\u00e0m l\u1ea1i</button></div>';
+}
+function matchClick(el) {
+  if(el.classList.contains('matched')) return;
+  if(!matchSelected) {
+    document.querySelectorAll('.match-item.selected').forEach(function(e) { e.classList.remove('selected'); });
+    el.classList.add('selected'); matchSelected = el;
+  } else {
+    if(el === matchSelected) { el.classList.remove('selected'); matchSelected=null; return; }
+    var a = matchSelected, b = el;
+    var aId = parseInt(a.getAttribute('data-id')), bId = parseInt(b.getAttribute('data-id'));
+    if(aId === bId && a.getAttribute('data-type') !== b.getAttribute('data-type')) {
+      a.classList.remove('selected'); a.classList.add('matched'); b.classList.add('matched');
+      matchedCount++; learned.add(aId); updateProgress();
+      if(matchedCount === matchPairs.length) setTimeout(function() { document.getElementById('matchComplete').classList.add('show'); }, 300);
+    } else {
+      a.classList.add('wrong-flash'); b.classList.add('wrong-flash');
+      setTimeout(function() { a.classList.remove('wrong-flash','selected'); b.classList.remove('wrong-flash'); }, 500);
+    }
+    matchSelected = null;
+  }
+}
+function switchMode(mode) {
+  currentMode = mode;
+  ['cards','quiz','match'].forEach(function(m) {
+    document.getElementById('mode-'+m).style.display = m===mode ? 'block' : 'none';
+    document.getElementById('btn-'+m).classList.toggle('active', m===mode);
+  });
+  renderCurrentMode();
+}
+function renderCurrentMode() {
+  if(currentMode==='cards') renderCards();
+  else if(currentMode==='quiz') renderQuiz();
+  else if(currentMode==='match') renderMatch();
+}
+buildTabs(); renderCards(); updateProgress();
+</script>
+</body>
+</html>
