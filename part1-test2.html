@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Listening Part 1 - Test 2 Vocabulary</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #e8590c; --orange-light: #ff922b; --orange-bg: #fff8f2;
+    --orange-border: #ffd0b5; --orange-dark: #b94608;
+    --green: #2f9e44; --green-bg: #ebfbee;
+    --red: #c92a2a; --red-bg: #fff5f5;
+    --blue: #1971c2; --gray: #495057; --text: #212529;
+    --radius: 14px; --radius-lg: 20px;
+    --shadow: 0 2px 12px rgba(232,89,12,0.08);
+  }
+  body { font-family: 'Nunito', sans-serif; background: var(--orange-bg); color: var(--text); min-height: 100vh; padding: 0 0 60px; }
+  .header { background: linear-gradient(135deg, #e8590c 0%, #ff922b 100%); padding: 32px 24px 28px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.08); }
+  .header h1 { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 6px; }
+  .header p { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
+  .progress-wrap { background: #fff; padding: 14px 20px; border-bottom: 1px solid var(--orange-border); display: flex; align-items: center; gap: 14px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .progress-label { font-size: 13px; font-weight: 700; color: var(--orange); white-space: nowrap; }
+  .progress-bar-bg { flex: 1; height: 8px; background: var(--orange-border); border-radius: 99px; overflow: hidden; }
+  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #e8590c, #ff922b); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
+  .progress-count { font-size: 13px; font-weight: 700; color: var(--gray); white-space: nowrap; }
+  .tabs-wrap { padding: 16px 16px 0; overflow-x: auto; display: flex; gap: 8px; scrollbar-width: none; }
+  .tabs-wrap::-webkit-scrollbar { display: none; }
+  .tab-btn { flex-shrink: 0; padding: 7px 14px; border-radius: 99px; border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray); cursor: pointer; transition: all 0.18s; white-space: nowrap; }
+  .tab-btn:hover { border-color: var(--orange-light); color: var(--orange); }
+  .tab-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
+  .mode-bar { display: flex; gap: 8px; padding: 14px 16px 0; justify-content: center; }
+  .mode-btn { display: flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 99px; border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray); cursor: pointer; transition: all 0.18s; }
+  .mode-btn svg { width: 16px; height: 16px; }
+  .mode-btn:hover { border-color: var(--orange-light); color: var(--orange); }
+  .mode-btn.active { background: var(--orange-bg); border-color: var(--orange); color: var(--orange); }
+  #mode-cards { display: block; } #mode-quiz, #mode-match { display: none; }
+  .cards-section { padding: 18px 16px; }
+  .group-title { font-size: 15px; font-weight: 800; color: var(--orange); margin-bottom: 14px; padding-left: 4px; display: flex; align-items: center; gap: 8px; }
+  .group-title::before { content: ''; display: inline-block; width: 5px; height: 18px; background: var(--orange); border-radius: 3px; }
+  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-bottom: 24px; }
+  .card-wrap { perspective: 900px; cursor: pointer; }
+  .card-inner { position: relative; width: 100%; min-height: 170px; transform-style: preserve-3d; transition: transform 0.45s cubic-bezier(.4,0,.2,1); border-radius: var(--radius); }
+  .card-wrap.flipped .card-inner { transform: rotateY(180deg); }
+  .card-front, .card-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
+  .card-front { background: #fff; border: 1.5px solid var(--orange-border); display: flex; flex-direction: column; justify-content: space-between; }
+  .card-back { background: var(--orange-bg); border: 1.5px solid var(--orange); transform: rotateY(180deg); display: flex; flex-direction: column; gap: 8px; }
+  .card-word { font-size: 20px; font-weight: 800; color: var(--orange); line-height: 1.2; }
+  .card-hint { font-size: 12px; color: #adb5bd; font-weight: 600; margin-top: 4px; }
+  .card-flip-icon { text-align: right; font-size: 11px; font-weight: 700; color: #adb5bd; display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
+  .card-flip-icon svg { width: 14px; height: 14px; opacity: .6; }
+  .back-label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: .5px; }
+  .back-meaning { font-size: 16px; font-weight: 700; color: var(--text); }
+  .back-note { font-size: 12px; color: var(--gray); font-weight: 600; background: #fff; border-radius: 8px; padding: 6px 10px; border-left: 3px solid var(--orange-light); }
+  .back-example { font-size: 13px; color: var(--blue); font-weight: 600; font-style: italic; }
+  .card-front.learned { border-color: var(--green); background: var(--green-bg); }
+  .card-front.learned .card-word { color: var(--green); }
+  .learned-badge { display: none; background: var(--green); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 99px; align-self: flex-start; letter-spacing: .5px; }
+  .card-front.learned .learned-badge { display: inline-block; }
+  .quiz-container { padding: 20px 16px; max-width: 600px; margin: 0 auto; }
+  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 13px; font-weight: 700; color: var(--gray); }
+  .quiz-q-num { background: var(--orange); color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 800; }
+  .quiz-card { background: #fff; border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow); border: 1.5px solid var(--orange-border); margin-bottom: 20px; text-align: center; }
+  .quiz-prompt-label { font-size: 12px; font-weight: 700; color: #adb5bd; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; }
+  .quiz-word { font-size: 26px; font-weight: 800; color: var(--orange); margin-bottom: 6px; }
+  .quiz-example { font-size: 13px; color: var(--gray); font-style: italic; }
+  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
+  .quiz-opt { padding: 13px 16px; border-radius: var(--radius); border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.3; }
+  .quiz-opt:hover:not(:disabled) { border-color: var(--orange-light); background: var(--orange-bg); }
+  .quiz-opt.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
+  .quiz-opt.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
+  .quiz-opt:disabled { cursor: default; }
+  .quiz-feedback { text-align: center; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: var(--radius); margin-bottom: 14px; display: none; }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct { background: var(--green-bg); color: var(--green); }
+  .quiz-feedback.wrong { background: var(--red-bg); color: var(--red); }
+  .quiz-next-btn { width: 100%; padding: 13px; border-radius: var(--radius); border: none; background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; transition: background 0.15s; display: none; }
+  .quiz-next-btn.show { display: block; }
+  .quiz-next-btn:hover { background: var(--orange-dark); }
+  .quiz-score-card { background: #fff; border-radius: var(--radius-lg); padding: 36px 24px; text-align: center; box-shadow: var(--shadow); border: 1.5px solid var(--orange-border); }
+  .score-emoji { font-size: 22px; font-weight: 800; color: var(--orange); margin-bottom: 12px; padding: 10px 20px; background: var(--orange-bg); border-radius: 99px; display: inline-block; }
+  .score-num { font-size: 40px; font-weight: 800; color: var(--orange); }
+  .score-label { font-size: 15px; font-weight: 700; color: var(--gray); margin-bottom: 20px; }
+  .score-retry { padding: 12px 28px; border-radius: 99px; border: none; background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; }
+  .score-retry:hover { background: var(--orange-dark); }
+  .match-container { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+  .match-header { text-align: center; margin-bottom: 18px; }
+  .match-header h3 { font-size: 16px; font-weight: 800; color: var(--orange); margin-bottom: 4px; }
+  .match-header p { font-size: 13px; color: var(--gray); font-weight: 600; }
+  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .match-col { display: flex; flex-direction: column; gap: 10px; }
+  .match-item { padding: 12px 14px; border-radius: var(--radius); border: 1.5px solid var(--orange-border); background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; min-height: 52px; display: flex; align-items: center; line-height: 1.3; }
+  .match-item.word { color: var(--orange); font-size: 15px; }
+  .match-item.meaning { color: var(--text); font-size: 13px; }
+  .match-item:hover:not(.matched):not(.selected) { border-color: var(--orange-light); background: var(--orange-bg); }
+  .match-item.selected { border-color: var(--orange); background: var(--orange-bg); box-shadow: 0 0 0 2px rgba(232,89,12,0.18); }
+  .match-item.matched { border-color: var(--green); background: var(--green-bg); color: var(--green); cursor: default; opacity: .75; }
+  .match-item.wrong-flash { border-color: var(--red); background: var(--red-bg); }
+  .match-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
+  .match-btn { padding: 10px 24px; border-radius: 99px; border: 1.5px solid var(--orange); background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; }
+  .match-btn.outline { background: #fff; color: var(--orange); }
+  .match-btn:hover { opacity: .88; }
+  .match-complete { text-align: center; padding: 28px; background: var(--green-bg); border-radius: var(--radius-lg); border: 1.5px solid var(--green); display: none; }
+  .match-complete.show { display: block; }
+  .match-complete h3 { font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 6px; }
+  .match-complete p { font-size: 14px; color: var(--gray); font-weight: 600; }
+  .stats-bar { background: #fff; border-top: 1px solid var(--orange-border); padding: 12px 20px; display: flex; gap: 20px; justify-content: center; position: fixed; bottom: 0; left: 0; right: 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.06); z-index: 100; }
+  .stat-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
+  .stat-num { font-size: 17px; font-weight: 800; color: var(--orange); }
+  .stat-num.green { color: var(--green); }
+  .stat-label { font-size: 10px; font-weight: 700; color: #adb5bd; text-transform: uppercase; letter-spacing: .5px; }
+  @media (max-width: 520px) { .vocab-grid { grid-template-columns: 1fr; } .quiz-options { grid-template-columns: 1fr; } .match-grid { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <h1>TOEIC Listening Part 1 - Test 2</h1>
+  <p>Vocabulary Flashcards &amp; Practice</p>
+</div>
+<div class="progress-wrap">
+  <span class="progress-label">Da thuoc</span>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  <span class="progress-count" id="progressCount">0 / 29</span>
+</div>
+<div class="mode-bar">
+  <button class="mode-btn active" onclick="switchMode('cards')" id="btn-cards">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h12M6 13h8"/></svg>
+    Flashcard
+  </button>
+  <button class="mode-btn" onclick="switchMode('quiz')" id="btn-quiz">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+    Trac nghiem
+  </button>
+  <button class="mode-btn" onclick="switchMode('match')" id="btn-match">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    Noi tu
+  </button>
+</div>
+<div class="tabs-wrap" id="groupTabs"></div>
+<div id="mode-cards"><div class="cards-section" id="cardsContainer"></div></div>
+<div id="mode-quiz"><div class="quiz-container" id="quizContainer"></div></div>
+<div id="mode-match"><div class="match-container" id="matchContainer"></div></div>
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num" id="statTotal">29</span><span class="stat-label">Tong tu</span></div>
+  <div class="stat-item"><span class="stat-num green" id="statLearned">0</span><span class="stat-label">Da thuoc</span></div>
+  <div class="stat-item"><span class="stat-num" id="statLeft">29</span><span class="stat-label">Con lai</span></div>
+</div>
+<script>
+const VOCAB = [
+  {id:1,group:1,groupName:"Electricity & Equipment",word:"insert sth into",meaning:"chen / dua cai gi vao",note:"insert A into B = dua A vao B.",example:"She inserted the key into the lock."},
+  {id:2,group:1,groupName:"Electricity & Equipment",word:"a cord",meaning:"day dien, day cap",note:"power cord = day nguon.",example:"The cord is plugged into the outlet."},
+  {id:3,group:1,groupName:"Electricity & Equipment",word:"an outlet",meaning:"o cam dien",note:"thuong di voi plug, cord, cable.",example:"There is an outlet near the desk."},
+  {id:4,group:1,groupName:"Electricity & Equipment",word:"press a button",meaning:"nhan nut",note:"TOEIC thuong dung press thay vi push.",example:"Press the button to open the door."},
+  {id:5,group:1,groupName:"Electricity & Equipment",word:"grip",meaning:"nam chat",note:"grip tightly = nam that chat.",example:"He gripped the railing tightly."},
+  {id:6,group:1,groupName:"Electricity & Equipment",word:"the handle of",meaning:"tay cam cua",note:"handle of a suitcase / door / pan.",example:"She cleaned the handle of the suitcase."},
+  {id:7,group:2,groupName:"Indoor Objects & Furniture",word:"a pillow",meaning:"cai goi",note:null,example:"She put a pillow on the bed."},
+  {id:8,group:2,groupName:"Indoor Objects & Furniture",word:"arrange",meaning:"sap xep",note:"arranged neatly, arranged in rows.",example:"The chairs are arranged neatly."},
+  {id:9,group:2,groupName:"Indoor Objects & Furniture",word:"a seat",meaning:"cho ngoi",note:"take a seat = ngoi xuong.",example:"Please take a seat."},
+  {id:10,group:2,groupName:"Indoor Objects & Furniture",word:"a rolling chair",meaning:"ghe co banh xe",note:null,example:"She sat on a rolling chair."},
+  {id:11,group:2,groupName:"Indoor Objects & Furniture",word:"place (v)",meaning:"dat",note:"trang trong hon put.",example:"He placed the bag on the chair."},
+  {id:12,group:2,groupName:"Indoor Objects & Furniture",word:"drawer",meaning:"ngan keo",note:null,example:"The keys are in the drawer."},
+  {id:13,group:2,groupName:"Indoor Objects & Furniture",word:"left open",meaning:"de mo",note:"thuong o dang bi dong.",example:"The window was left open."},
+  {id:14,group:3,groupName:"Outdoor & Construction",word:"wooden boards",meaning:"nhung tam van go",note:null,example:"Wooden boards were stacked outside."},
+  {id:15,group:3,groupName:"Outdoor & Construction",word:"paint",meaning:"son, ve",note:null,example:"She painted the wall blue."},
+  {id:16,group:3,groupName:"Outdoor & Construction",word:"clear off",meaning:"don sach khoi",note:"clear A off B.",example:"He cleared the papers off the desk."},
+  {id:17,group:3,groupName:"Outdoor & Construction",word:"leaves",meaning:"la cay",note:null,example:"Leaves covered the ground."},
+  {id:18,group:3,groupName:"Outdoor & Construction",word:"grass",meaning:"co",note:null,example:"The grass is very green."},
+  {id:19,group:3,groupName:"Outdoor & Construction",word:"scatter across sth",meaning:"rai rac khap",note:"be scattered across / on / around.",example:"Papers were scattered across the floor."},
+  {id:20,group:3,groupName:"Outdoor & Construction",word:"discard sth in a bin",meaning:"vut cai gi vao thung rac",note:null,example:"Please discard the trash in a bin."},
+  {id:21,group:4,groupName:"Transportation & Public Areas",word:"standing in line",meaning:"dung xep hang",note:"= waiting in line.",example:"People are standing in line for tickets."},
+  {id:22,group:4,groupName:"Transportation & Public Areas",word:"a lobby",meaning:"sanh",note:null,example:"They waited in the hotel lobby."},
+  {id:23,group:4,groupName:"Transportation & Public Areas",word:"load into",meaning:"chat len / dua vao",note:"load A into B.",example:"Workers loaded the boxes into the truck."},
+  {id:24,group:4,groupName:"Transportation & Public Areas",word:"a parking area",meaning:"khu vuc do xe",note:null,example:"The parking area is crowded."},
+  {id:25,group:4,groupName:"Transportation & Public Areas",word:"luggage",meaning:"hanh ly",note:"danh tu khong dem duoc.",example:"His luggage was heavy."},
+  {id:26,group:4,groupName:"Transportation & Public Areas",word:"stack",meaning:"xep chong",note:"stacked neatly, stacked in piles.",example:"The chairs were stacked in the corner."},
+  {id:27,group:4,groupName:"Transportation & Public Areas",word:"an escalator",meaning:"thang cuon",note:"escalator = thang cuon, elevator = thang may.",example:"They took the escalator upstairs."},
+  {id:28,group:4,groupName:"Transportation & Public Areas",word:"suitcase",meaning:"va li",note:null,example:"She carried a large suitcase."},
+  {id:29,group:4,groupName:"Transportation & Public Areas",word:"a luggage rack",meaning:"ke de hanh ly",note:null,example:"She put her bag on the luggage rack."}
+];
+
+const TOTAL = VOCAB.length;
+let learned = new Set();
+let currentGroup = 0;
+let currentMode = 'cards';
+let quizQuestions = [], quizIndex = 0, quizScore = 0, quizAnswered = false;
+let matchPairs = [], matchSelected = null, matchedCount = 0;
+
+function updateProgress() {
+  const n = learned.size;
+  document.getElementById('progressFill').style.width = (n/TOTAL*100)+'%';
+  document.getElementById('progressCount').textContent = n + ' / ' + TOTAL;
+  document.getElementById('statLearned').textContent = n;
+  document.getElementById('statLeft').textContent = TOTAL - n;
+}
+function getGroups() {
+  const gMap = {};
+  VOCAB.forEach(v => { if(!gMap[v.group]) gMap[v.group] = v.groupName; });
+  return Object.entries(gMap).map(([id,name]) => ({id:parseInt(id),name}));
+}
+function buildTabs() {
+  const tabs = document.getElementById('groupTabs');
+  tabs.innerHTML = '';
+  const btn0 = document.createElement('button');
+  btn0.className = 'tab-btn active'; btn0.textContent = 'Tat ca';
+  btn0.onclick = () => selectGroup(0); btn0.dataset.g = '0';
+  tabs.appendChild(btn0);
+  getGroups().forEach(g => {
+    const btn = document.createElement('button');
+    btn.className = 'tab-btn'; btn.textContent = g.name;
+    btn.onclick = () => selectGroup(g.id); btn.dataset.g = g.id;
+    tabs.appendChild(btn);
+  });
+}
+function selectGroup(gid) {
+  currentGroup = gid;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', parseInt(b.dataset.g) === gid));
+  renderCurrentMode();
+}
+function filteredVocab() {
+  return currentGroup === 0 ? VOCAB : VOCAB.filter(v => v.group === currentGroup);
+}
+function renderCards() {
+  const container = document.getElementById('cardsContainer');
+  container.innerHTML = '';
+  const byGroup = {};
+  filteredVocab().forEach(v => {
+    if(!byGroup[v.group]) byGroup[v.group] = {name:v.groupName, items:[]};
+    byGroup[v.group].items.push(v);
+  });
+  Object.values(byGroup).forEach(g => {
+    const sec = document.createElement('div');
+    const title = document.createElement('div');
+    title.className = 'group-title'; title.textContent = g.name;
+    sec.appendChild(title);
+    const grid = document.createElement('div');
+    grid.className = 'vocab-grid';
+    g.items.forEach(v => grid.appendChild(makeCard(v)));
+    sec.appendChild(grid);
+    container.appendChild(sec);
+  });
+}
+function makeCard(v) {
+  const wrap = document.createElement('div');
+  wrap.className = 'card-wrap'; wrap.id = 'card-'+v.id;
+  const inner = document.createElement('div');
+  inner.className = 'card-inner';
+  const front = document.createElement('div');
+  front.className = 'card-front' + (learned.has(v.id) ? ' learned' : '');
+  front.innerHTML = `<div><div class="learned-badge">✓ DA THUOC</div><div class="card-word">${v.word}</div><div class="card-hint">Nhan de xem nghia</div></div><div class="card-flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>lat the</div>`;
+  const back = document.createElement('div');
+  back.className = 'card-back';
+  back.innerHTML = `<div class="back-label">Nghia</div><div class="back-meaning">${v.meaning}</div>${v.note ? `<div class="back-note">[!] ${v.note}</div>` : ''}<div class="back-example">Vd: ${v.example}</div><button onclick="toggleLearned(event,${v.id})" style="margin-top:4px;padding:7px 14px;border-radius:99px;border:none;background:${learned.has(v.id)?'#c92a2a':'#2f9e44'};color:#fff;font-family:'Nunito',sans-serif;font-size:12px;font-weight:800;cursor:pointer;align-self:flex-start;">${learned.has(v.id) ? 'X Bo danh dau' : '✓ Da thuoc'}</button>`;
+  inner.appendChild(front); inner.appendChild(back); wrap.appendChild(inner);
+  wrap.onclick = (e) => { if(e.target.tagName === 'BUTTON') return; wrap.classList.toggle('flipped'); };
+  return wrap;
+}
+function toggleLearned(e, id) {
+  e.stopPropagation();
+  if(learned.has(id)) learned.delete(id); else learned.add(id);
+  updateProgress(); renderCards();
+}
+function buildQuizQuestions(vocab) {
+  const all = [...vocab].sort(() => Math.random()-.5).slice(0, Math.min(vocab.length, 10));
+  return all.map(v => {
+    const wrongs = VOCAB.filter(x => x.id !== v.id).sort(() => Math.random()-.5).slice(0,3).map(x => x.meaning);
+    const opts = [v.meaning, ...wrongs].sort(() => Math.random()-.5);
+    return {vocab:v, opts, correct:v.meaning};
+  });
+}
+function renderQuiz() {
+  quizQuestions = buildQuizQuestions(filteredVocab());
+  quizIndex = 0; quizScore = 0; quizAnswered = false;
+  renderQuizQuestion();
+}
+function renderQuizQuestion() {
+  const container = document.getElementById('quizContainer');
+  if(quizIndex >= quizQuestions.length) {
+    const pct = Math.round(quizScore/quizQuestions.length*100);
+    const label = pct >= 90 ? 'Xuat sac!' : pct >= 70 ? 'Tot lam!' : pct >= 50 ? 'Co len!' : 'On lai nhe!';
+    container.innerHTML = `<div class="quiz-score-card"><div class="score-emoji">${label}</div><div class="score-num">${quizScore}/${quizQuestions.length}</div><div class="score-label">Diem cua ban: ${pct}%</div><button class="score-retry" onclick="renderQuiz()">Lam lai</button></div>`;
+    return;
+  }
+  const q = quizQuestions[quizIndex]; quizAnswered = false;
+  container.innerHTML = `<div class="quiz-header"><span class="quiz-q-num">${quizIndex+1} / ${quizQuestions.length}</span><span>Diem: <strong>${quizScore}</strong></span></div><div class="quiz-card"><div class="quiz-prompt-label">Tu / Cum tu</div><div class="quiz-word">${q.vocab.word}</div><div class="quiz-example">${q.vocab.example}</div></div><div class="quiz-options" id="quizOpts">${q.opts.map(opt => `<button class="quiz-opt" onclick="selectQuizOpt(this,'${opt.replace(/'/g,"\\'")}',${q.vocab.id})">${opt}</button>`).join('')}</div><div class="quiz-feedback" id="quizFeedback"></div><button class="quiz-next-btn" id="quizNext" onclick="nextQuizQ()">${quizIndex+1 < quizQuestions.length ? 'Cau tiep ->' : 'Xem ket qua ->'}</button>`;
+}
+function selectQuizOpt(btn, chosen, vid) {
+  if(quizAnswered) return; quizAnswered = true;
+  const q = quizQuestions[quizIndex];
+  const fb = document.getElementById('quizFeedback');
+  document.querySelectorAll('.quiz-opt').forEach(b => b.disabled = true);
+  if(chosen === q.correct) {
+    btn.classList.add('correct'); quizScore++;
+    fb.textContent = '✓ Chinh xac!'; fb.className = 'quiz-feedback show correct';
+    learned.add(vid); updateProgress();
+  } else {
+    btn.classList.add('wrong');
+    fb.textContent = 'X Sai roi! Dap an: ' + q.correct; fb.className = 'quiz-feedback show wrong';
+    document.querySelectorAll('.quiz-opt').forEach(b => { if(b.textContent.trim() === q.correct) b.classList.add('correct'); });
+  }
+  document.getElementById('quizNext').classList.add('show');
+}
+function nextQuizQ() { quizIndex++; renderQuizQuestion(); }
+function renderMatch() {
+  const vocab = filteredVocab().sort(() => Math.random()-.5).slice(0, 8);
+  matchPairs = vocab; matchSelected = null; matchedCount = 0;
+  const container = document.getElementById('matchContainer');
+  const words = [...vocab].sort(() => Math.random()-.5);
+  const meanings = [...vocab].sort(() => Math.random()-.5);
+  container.innerHTML = `<div class="match-header"><h3>Noi tu voi nghia dung</h3><p>Nhan mot tu roi nhan nghia tuong ung</p></div><div class="match-grid"><div class="match-col" id="matchWords">${words.map(v=>`<div class="match-item word" data-id="${v.id}" data-type="word" onclick="matchClick(this)">${v.word}</div>`).join('')}</div><div class="match-col" id="matchMeanings">${meanings.map(v=>`<div class="match-item meaning" data-id="${v.id}" data-type="meaning" onclick="matchClick(this)">${v.meaning}</div>`).join('')}</div></div><div class="match-complete" id="matchComplete"><h3>★ Hoan thanh!</h3><p>Ban da noi dung tat ca cac tu!</p></div><div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">Lam lai</button></div>`;
+}
+function matchClick(el) {
+  if(el.classList.contains('matched')) return;
+  if(!matchSelected) {
+    document.querySelectorAll('.match-item.selected').forEach(e=>e.classList.remove('selected'));
+    el.classList.add('selected'); matchSelected = el;
+  } else {
+    if(el === matchSelected) { el.classList.remove('selected'); matchSelected=null; return; }
+    const a = matchSelected, b = el;
+    const aId = parseInt(a.dataset.id), bId = parseInt(b.dataset.id);
+    if(aId === bId && a.dataset.type !== b.dataset.type) {
+      a.classList.remove('selected'); a.classList.add('matched'); b.classList.add('matched');
+      matchedCount++; learned.add(aId); updateProgress();
+      if(matchedCount === matchPairs.length) setTimeout(() => document.getElementById('matchComplete').classList.add('show'), 300);
+    } else {
+      a.classList.add('wrong-flash'); b.classList.add('wrong-flash');
+      setTimeout(() => { a.classList.remove('wrong-flash','selected'); b.classList.remove('wrong-flash'); }, 500);
+    }
+    matchSelected = null;
+  }
+}
+function switchMode(mode) {
+  currentMode = mode;
+  ['cards','quiz','match'].forEach(m => {
+    document.getElementById('mode-'+m).style.display = m===mode ? 'block' : 'none';
+    document.getElementById('btn-'+m).classList.toggle('active', m===mode);
+  });
+  renderCurrentMode();
+}
+function renderCurrentMode() {
+  if(currentMode==='cards') renderCards();
+  else if(currentMode==='quiz') renderQuiz();
+  else if(currentMode==='match') renderMatch();
+}
+buildTabs(); renderCards(); updateProgress();
+</script>
+</body>
+</html>
