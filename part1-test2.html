@@ -38,46 +38,44 @@
   #mode-cards { display:block; }
   #mode-quiz, #mode-match { display:none; }
 
-  .fc-container { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
+  .fc-container { padding:20px 16px; max-width:700px; margin:0 auto; }
   .fc-counter { text-align:center; font-size:13px; color:var(--gray); margin-bottom:12px; font-weight:700; }
 
-  .fc-scene { perspective: 1200px; width:100%; cursor:pointer; margin-bottom:18px; }
-  .fc-inner { position: relative; width:100%; height: 260px; transform-style: preserve-3d; transition: transform 0.5s cubic-bezier(.4,0,.2,1); border-radius: var(--radius-lg); }
-  .fc-scene.flipped .fc-inner { transform: rotateY(180deg); }
+  .fc-scene { perspective:1200px; width:100%; cursor:pointer; margin-bottom:18px; }
+  .fc-inner { position:relative; width:100%; height:260px; transform-style:preserve-3d; transition:transform 0.5s cubic-bezier(.4,0,.2,1); border-radius:var(--radius-lg); }
+  .fc-scene.flipped .fc-inner { transform:rotateY(180deg); }
 
-  .fc-face { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius-lg); box-shadow: var(--shadow); display: flex; flex-direction: row; overflow: hidden; }
+  .fc-face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius-lg); box-shadow:var(--shadow); display:flex; flex-direction:row; overflow:hidden; }
 
   .fc-front { background:#fff; border:1.5px solid var(--orange-border); }
   .fc-front.learned { border-color:var(--green); background:var(--green-bg); }
 
-  .fc-front-left { flex: 1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding: 28px; gap: 12px; }
-  .fc-front-right { width: 240px; flex-shrink:0; background: #f8f9fa; display:flex; align-items:center; justify-content:center; border-left: 1.5px solid var(--orange-border); overflow: hidden; }
-  .fc-front.learned .fc-front-right { border-left-color: var(--green); background: #d3f9d8; }
+  .fc-front-left { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:28px; gap:12px; min-width:0; }
+  .fc-front-right { width:240px; flex-shrink:0; background:#f8f9fa; display:flex; align-items:center; justify-content:center; border-left:1.5px solid var(--orange-border); overflow:hidden; }
+  .fc-front.learned .fc-front-right { border-left-color:var(--green); background:#d3f9d8; }
   .fc-front-right img { width:100%; height:100%; object-fit:cover; display:block; }
-  .fc-front-right .no-img { font-size:48px; color:#dee2e6; }
 
-  .fc-learned-badge { background:var(--green); color:#fff; font-size:10px; font-weight:800; padding:3px 10px; border-radius:99px; letter-spacing:.5px; display:none; align-self:flex-start; }
+  .fc-learned-badge { background:var(--green); color:#fff; font-size:10px; font-weight:800; padding:3px 10px; border-radius:99px; letter-spacing:.5px; display:none; }
   .fc-front.learned .fc-learned-badge { display:inline-block; }
-  .fc-word { font-size:26px; font-weight:800; color:var(--orange); line-height:1.2; }
+  .fc-word { font-size:24px; font-weight:800; color:var(--orange); line-height:1.2; word-break:break-word; }
   .fc-front.learned .fc-word { color:var(--green); }
-  .fc-flip-hint { font-size:11px; color:#adb5bd; font-weight:700; display:flex; align-items:center; gap:4px; margin-top:4px; }
+  .fc-flip-hint { font-size:11px; color:#adb5bd; font-weight:700; display:flex; align-items:center; gap:4px; }
   .fc-flip-hint svg { width:12px; height:12px; opacity:.6; }
 
-  .fc-back { background: var(--orange-bg); border:1.5px solid var(--orange); transform: rotateY(180deg); }
-  .fc-back-left { width: 240px; flex-shrink:0; background: #fff3e8; display:flex; align-items:center; justify-content:center; border-right: 1.5px solid var(--orange-border); overflow:hidden; }
+  .fc-back { background:var(--orange-bg); border:1.5px solid var(--orange); transform:rotateY(180deg); }
+  .fc-back-left { width:240px; flex-shrink:0; background:#fff3e8; display:flex; align-items:center; justify-content:center; border-right:1.5px solid var(--orange-border); overflow:hidden; }
   .fc-back-left img { width:100%; height:100%; object-fit:cover; display:block; }
-  .fc-back-left .no-img { font-size:48px; color:#ffd0b5; }
-  .fc-back-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px; gap:10px; overflow:hidden; }
+  .fc-back-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px; gap:10px; overflow:hidden; min-width:0; }
   .fc-back-label { font-size:10px; font-weight:800; color:var(--orange); text-transform:uppercase; letter-spacing:1px; }
-  .fc-meaning { font-size:20px; font-weight:800; color:var(--text); line-height:1.3; }
+  .fc-meaning { font-size:18px; font-weight:800; color:var(--text); line-height:1.3; }
   .fc-note { font-size:12px; color:var(--gray); font-weight:600; background:#fff; border-radius:8px; padding:6px 10px; border-left:3px solid var(--orange-light); }
   .fc-example { font-size:13px; color:var(--blue); font-weight:600; font-style:italic; }
-  .fc-speak-row { display:flex; gap:8px; flex-wrap:wrap; margin-top:2px; }
+  .fc-speak-row { display:flex; gap:8px; flex-wrap:wrap; }
 
-  .fc-speak { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:3px 10px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; transition:all 0.15s; }
+  .fc-speak { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:3px 10px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; }
   .fc-speak:hover { background:var(--orange-bg); border-color:var(--orange); }
   .fc-speak svg { width:12px; height:12px; }
-  .fc-speak-front { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:4px 12px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; margin-top:2px; }
+  .fc-speak-front { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:4px 12px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; }
   .fc-speak-front:hover { background:var(--orange-bg); border-color:var(--orange); }
   .fc-speak-front svg { width:12px; height:12px; }
 
@@ -85,10 +83,11 @@
   .fc-nav-btn { width:46px; height:46px; border-radius:50%; border:1.5px solid var(--orange-border); background:#fff; color:var(--orange); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; flex-shrink:0; font-weight:800; }
   .fc-nav-btn:hover:not(:disabled) { background:var(--orange-bg); border-color:var(--orange); }
   .fc-nav-btn:disabled { opacity:.3; cursor:default; }
-  .fc-learned-btn { flex:1; padding:11px; border-radius:99px; border:none; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; transition:all 0.15s; }
+  .fc-learned-btn { flex:1; padding:11px; border-radius:99px; border:none; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; }
   .fc-learned-btn.no { background:var(--green); color:#fff; }
   .fc-learned-btn.yes { background:var(--red); color:#fff; }
 
+  /* QUIZ */
   .quiz-container { padding:20px 16px; max-width:600px; margin:0 auto; }
   .quiz-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:13px; font-weight:700; color:var(--gray); }
   .quiz-q-num { background:var(--orange); color:#fff; padding:4px 12px; border-radius:99px; font-size:12px; font-weight:800; }
@@ -114,8 +113,8 @@
   .score-num { font-size:40px; font-weight:800; color:var(--orange); }
   .score-label { font-size:15px; font-weight:700; color:var(--gray); margin-bottom:20px; }
   .score-retry { padding:12px 28px; border-radius:99px; border:none; background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; cursor:pointer; }
-  .score-retry:hover { background:var(--orange-dark); }
 
+  /* MATCH */
   .match-container { padding:20px 16px; max-width:700px; margin:0 auto; }
   .match-header { text-align:center; margin-bottom:18px; }
   .match-header h3 { font-size:16px; font-weight:800; color:var(--orange); margin-bottom:4px; }
@@ -123,7 +122,7 @@
   .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
   .match-col { display:flex; flex-direction:column; gap:10px; }
   .match-item { padding:12px 14px; border-radius:var(--radius); border:1.5px solid var(--orange-border); background:#fff; font-size:14px; font-weight:700; cursor:pointer; transition:all 0.15s; min-height:52px; display:flex; align-items:center; line-height:1.3; }
-  .match-item.word { color:var(--orange); font-size:15px; }
+  .match-item.word { color:var(--orange); font-size:14px; }
   .match-item.meaning { color:var(--text); font-size:13px; }
   .match-item:hover:not(.matched):not(.selected) { border-color:var(--orange-light); background:var(--orange-bg); }
   .match-item.selected { border-color:var(--orange); background:var(--orange-bg); box-shadow:0 0 0 2px rgba(232,89,12,0.18); }
@@ -132,7 +131,6 @@
   .match-actions { margin-top:20px; display:flex; gap:10px; justify-content:center; }
   .match-btn { padding:10px 24px; border-radius:99px; border:1.5px solid var(--orange); background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:14px; font-weight:800; cursor:pointer; }
   .match-btn.outline { background:#fff; color:var(--orange); }
-  .match-btn:hover { opacity:.88; }
   .match-complete { text-align:center; padding:28px; background:var(--green-bg); border-radius:var(--radius-lg); border:1.5px solid var(--green); display:none; margin-top:16px; }
   .match-complete.show { display:block; }
   .match-complete h3 { font-size:22px; font-weight:800; color:var(--green); margin-bottom:6px; }
@@ -144,11 +142,10 @@
   .stat-num.green { color:var(--green); }
   .stat-label { font-size:10px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.5px; }
 
-  @media (max-width: 600px) {
-    .fc-inner { height: 220px; }
-    .fc-front-right, .fc-back-left { width: 140px; }
-    .fc-word { font-size: 18px; }
-    .fc-meaning { font-size: 16px; }
+  @media (max-width:600px) {
+    .fc-inner { height:220px; }
+    .fc-front-right, .fc-back-left { width:130px; }
+    .fc-word { font-size:18px; }
     .quiz-options { grid-template-columns:1fr; }
     .match-grid { grid-template-columns:1fr; }
   }
@@ -187,7 +184,6 @@
     <div class="fc-counter" id="fcCounter">1 / 29</div>
     <div class="fc-scene" id="fcScene" onclick="flipCard()">
       <div class="fc-inner">
-        <!-- FRONT -->
         <div class="fc-face fc-front" id="fcFront">
           <div class="fc-front-left">
             <div class="fc-learned-badge" id="fcBadge">✓ ĐÃ THUỘC</div>
@@ -203,14 +199,11 @@
           </div>
           <div class="fc-front-right">
             <img id="fcImgFront" src="" alt="">
-            <div class="no-img" style="display:none">🖼️</div>
           </div>
         </div>
-        <!-- BACK -->
         <div class="fc-face fc-back">
           <div class="fc-back-left">
             <img id="fcImgBack" src="" alt="">
-            <div class="no-img" style="display:none">🖼️</div>
           </div>
           <div class="fc-back-right">
             <div class="fc-back-label">Nghĩa</div>
@@ -254,7 +247,7 @@
 </div>
 
 <script>
-const VOCAB = [
+var VOCAB = [
   {id:1,word:"insert sth into",meaning:"chèn / đưa cái gì vào",note:"insert A into B = đưa A vào B.",example:"She inserted the key into the lock.",image:"images/insertsthinto.png"},
   {id:2,word:"a cord",meaning:"dây điện, dây cáp",note:"power cord = dây nguồn.",example:"The cord is plugged into the outlet.",image:"images/acord.png"},
   {id:3,word:"an outlet",meaning:"ổ cắm điện",note:"Thường đi với plug, cord, cable.",example:"There is an outlet near the desk.",image:"images/anoutlet.png"},
@@ -286,147 +279,192 @@ const VOCAB = [
   {id:29,word:"a luggage rack",meaning:"kệ để hành lý",note:null,example:"She put her bag on the luggage rack.",image:"images/a_luggage_rack.png"}
 ];
 
-const TOTAL = VOCAB.length;
-let learned = new Set();
-let currentMode = 'cards';
-let fcIndex = 0;
-let fcFlipped = false;
-let quizQuestions=[], quizIndex=0, quizScore=0, quizAnswered=false;
-let matchPairs=[], matchSelected=null, matchedCount=0;
+var TOTAL = VOCAB.length;
+var learned = new Set();
+var currentMode = 'cards';
+var fcIndex = 0;
+var fcFlipped = false;
+var quizQuestions = [], quizIndex = 0, quizScore = 0, quizAnswered = false;
+var matchPairs = [], matchSelected = null, matchedCount = 0;
 
 var bestVoice = null;
-function loadVoice(){
-  var voices=window.speechSynthesis.getVoices();
-  var pref=['Google US English','Microsoft Aria Online','Microsoft Jenny Online','Samantha','Alex','Karen'];
-  for(var i=0;i<pref.length;i++){var f=voices.find(function(v){return v.name.indexOf(pref[i])!==-1;});if(f){bestVoice=f;break;}}
-  if(!bestVoice) bestVoice=voices.find(function(v){return v.lang==='en-US';})||voices[0]||null;
+function loadVoice() {
+  var voices = window.speechSynthesis.getVoices();
+  var pref = ['Google US English','Microsoft Aria Online','Samantha','Alex'];
+  for (var i = 0; i < pref.length; i++) {
+    var f = voices.find(function(v) { return v.name.indexOf(pref[i]) !== -1; });
+    if (f) { bestVoice = f; break; }
+  }
+  if (!bestVoice) bestVoice = voices.find(function(v) { return v.lang === 'en-US'; }) || voices[0] || null;
 }
-if(window.speechSynthesis){loadVoice();window.speechSynthesis.onvoiceschanged=loadVoice;}
+if (window.speechSynthesis) { loadVoice(); window.speechSynthesis.onvoiceschanged = loadVoice; }
 
-function cleanForSpeech(t){return t.replace(/\s*\/\s*.+$/,'').replace(/\s*\(.*?\)\s*/g,' ').replace(/\bsth\b/gi,'something').replace(/\bsb\b/gi,'somebody').trim();}
+function cleanForSpeech(t) {
+  return t.replace(/\s*\/\s*.+$/, '').replace(/\s*\(.*?\)\s*/g, ' ').replace(/\bsth\b/gi, 'something').replace(/\bsb\b/gi, 'somebody').trim();
+}
 
-function doSpeak(which){
-  if(!window.speechSynthesis)return;
+function doSpeak(which) {
+  if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
-  var v=VOCAB[fcIndex];
-  var text=which==='word'?cleanForSpeech(v.word):v.example;
-  var u=new SpeechSynthesisUtterance(text);
-  u.lang='en-US';u.rate=0.85;u.pitch=1;
-  if(bestVoice)u.voice=bestVoice;
+  var v = VOCAB[fcIndex];
+  var text = which === 'word' ? cleanForSpeech(v.word) : v.example;
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+  if (bestVoice) u.voice = bestVoice;
   window.speechSynthesis.speak(u);
 }
 
-function updateProgress(){
-  var n=learned.size;
-  document.getElementById('progressFill').style.width=(n/TOTAL*100)+'%';
-  document.getElementById('progressCount').textContent=n+' / '+TOTAL;
-  document.getElementById('statLearned').textContent=n;
-  document.getElementById('statLeft').textContent=TOTAL-n;
+function updateProgress() {
+  var n = learned.size;
+  document.getElementById('progressFill').style.width = (n / TOTAL * 100) + '%';
+  document.getElementById('progressCount').textContent = n + ' / ' + TOTAL;
+  document.getElementById('statLearned').textContent = n;
+  document.getElementById('statLeft').textContent = TOTAL - n;
 }
 
-function setImg(elId,src,alt){
-  var img=document.getElementById(elId);
-  var noImg=img.nextElementSibling;
-  img.style.display='';noImg.style.display='none';
-  img.src=src;img.alt=alt;
-  img.onerror=function(){this.style.display='none';noImg.style.display='flex';};
+function setImg(id, src) {
+  var img = document.getElementById(id);
+  img.src = src;
+  img.style.display = 'block';
+  img.onerror = function() { this.style.display = 'none'; };
 }
 
-function renderFC(){
-  var v=VOCAB[fcIndex];
-  var isLearned=learned.has(v.id);
-  document.getElementById('fcCounter').textContent=(fcIndex+1)+' / '+TOTAL;
-  document.getElementById('fcWord').textContent=v.word;
-  document.getElementById('fcMeaning').textContent=v.meaning;
-  var noteEl=document.getElementById('fcNote');
-  if(v.note){noteEl.textContent='[!] '+v.note;noteEl.style.display='';}else{noteEl.style.display='none';}
-  document.getElementById('fcExample').textContent='Vd: '+v.example;
-  setImg('fcImgFront',v.image,v.word);
-  setImg('fcImgBack',v.image,v.word);
-  document.getElementById('fcFront').classList.toggle('learned',isLearned);
-  document.getElementById('fcBadge').style.display=isLearned?'':'none';
-  var btn=document.getElementById('fcLearnedBtn');
-  btn.textContent=isLearned?'✕ Bỏ đánh dấu':'✓ Đã thuộc';
-  btn.className='fc-learned-btn '+(isLearned?'yes':'no');
-  document.getElementById('btnPrev').disabled=fcIndex===0;
-  document.getElementById('btnNext').disabled=fcIndex===TOTAL-1;
-  if(fcFlipped){fcFlipped=false;document.getElementById('fcScene').classList.remove('flipped');}
+function renderFC() {
+  var v = VOCAB[fcIndex];
+  var isLearned = learned.has(v.id);
+  document.getElementById('fcCounter').textContent = (fcIndex + 1) + ' / ' + TOTAL;
+  document.getElementById('fcWord').textContent = v.word;
+  document.getElementById('fcMeaning').textContent = v.meaning;
+  var noteEl = document.getElementById('fcNote');
+  noteEl.textContent = v.note ? '[!] ' + v.note : '';
+  noteEl.style.display = v.note ? '' : 'none';
+  document.getElementById('fcExample').textContent = 'Vd: ' + v.example;
+  setImg('fcImgFront', v.image);
+  setImg('fcImgBack', v.image);
+  document.getElementById('fcFront').classList.toggle('learned', isLearned);
+  document.getElementById('fcBadge').style.display = isLearned ? 'inline-block' : 'none';
+  var btn = document.getElementById('fcLearnedBtn');
+  btn.textContent = isLearned ? '✕ Bỏ đánh dấu' : '✓ Đã thuộc';
+  btn.className = 'fc-learned-btn ' + (isLearned ? 'yes' : 'no');
+  document.getElementById('btnPrev').disabled = fcIndex === 0;
+  document.getElementById('btnNext').disabled = fcIndex === TOTAL - 1;
+  if (fcFlipped) { fcFlipped = false; document.getElementById('fcScene').classList.remove('flipped'); }
 }
 
-function flipCard(){fcFlipped=!fcFlipped;document.getElementById('fcScene').classList.toggle('flipped',fcFlipped);}
-function goCard(dir){fcIndex=Math.max(0,Math.min(TOTAL-1,fcIndex+dir));renderFC();}
-function toggleLearnedFC(){
-  var v=VOCAB[fcIndex];
-  if(learned.has(v.id))learned.delete(v.id);else learned.add(v.id);
-  updateProgress();renderFC();
+function flipCard() { fcFlipped = !fcFlipped; document.getElementById('fcScene').classList.toggle('flipped', fcFlipped); }
+function goCard(dir) { fcIndex = Math.max(0, Math.min(TOTAL - 1, fcIndex + dir)); renderFC(); }
+function toggleLearnedFC() {
+  var v = VOCAB[fcIndex];
+  if (learned.has(v.id)) learned.delete(v.id); else learned.add(v.id);
+  updateProgress(); renderFC();
 }
 
-function buildQuizQuestions(){
-  var all=[...VOCAB].sort(function(){return Math.random()-.5;}).slice(0,10);
-  return all.map(function(v){
-    var wrongs=VOCAB.filter(function(x){return x.id!==v.id;}).sort(function(){return Math.random()-.5;}).slice(0,3).map(function(x){return x.meaning;});
-    var opts=[v.meaning,...wrongs].sort(function(){return Math.random()-.5;});
-    return{vocab:v,opts:opts,correct:v.meaning};
+// QUIZ
+function buildQuiz() {
+  var all = VOCAB.slice().sort(function() { return Math.random() - .5; }).slice(0, 10);
+  return all.map(function(v) {
+    var wrongs = VOCAB.filter(function(x) { return x.id !== v.id; })
+      .sort(function() { return Math.random() - .5; }).slice(0, 3).map(function(x) { return x.meaning; });
+    var opts = [v.meaning].concat(wrongs).sort(function() { return Math.random() - .5; });
+    return { vocab: v, opts: opts, correct: v.meaning };
   });
 }
-function renderQuiz(){quizQuestions=buildQuizQuestions();quizIndex=0;quizScore=0;quizAnswered=false;renderQuizQuestion();}
-function renderQuizQuestion(){
-  var container=document.getElementById('quizContainer');
-  if(quizIndex>=quizQuestions.length){
-    var pct=Math.round(quizScore/quizQuestions.length*100);
-    var emoji=pct>=90?'Xuất sắc!':pct>=70?'Tốt lắm!':pct>=50?'Cố lên!':'Ôn lại nhé!';
-    container.innerHTML='<div class="quiz-score-card"><div class="score-emoji">'+emoji+'</div><div class="score-num">'+quizScore+'/'+quizQuestions.length+'</div><div class="score-label">Điểm của bạn: '+pct+'%</div><button class="score-retry" onclick="renderQuiz()">Làm lại ↺</button></div>';
+
+function renderQuiz() {
+  quizQuestions = buildQuiz(); quizIndex = 0; quizScore = 0; quizAnswered = false;
+  renderQuizQ();
+}
+
+function renderQuizQ() {
+  var c = document.getElementById('quizContainer');
+  if (quizIndex >= quizQuestions.length) {
+    var pct = Math.round(quizScore / quizQuestions.length * 100);
+    var emoji = pct >= 90 ? 'Xuất sắc!' : pct >= 70 ? 'Tốt lắm!' : pct >= 50 ? 'Cố lên!' : 'Ôn lại nhé!';
+    c.innerHTML = '<div class="quiz-score-card"><div class="score-emoji">' + emoji + '</div><div class="score-num">' + quizScore + '/' + quizQuestions.length + '</div><div class="score-label">Điểm: ' + pct + '%</div><button class="score-retry" onclick="renderQuiz()">Làm lại ↺</button></div>';
     return;
   }
-  var q=quizQuestions[quizIndex];quizAnswered=false;
-  container.innerHTML='<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>Điểm: <strong>'+quizScore+'</strong></span></div><div class="quiz-card"><div class="quiz-prompt-label">Từ / Cụm từ</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div><div class="quiz-options" id="quizOpts">'+q.opts.map(function(opt){return'<button class="quiz-opt" onclick="selectQuizOpt(this,''+opt.replace(/'/g,"\\'")+'','+q.vocab.id+')">'+opt+'</button>';}).join('')+'</div><div class="quiz-feedback" id="quizFeedback"></div><button class="quiz-next-btn" id="quizNext" onclick="nextQuizQ()">'+(quizIndex+1<quizQuestions.length?'Câu tiếp →':'Xem kết quả →')+'</button>';
+  var q = quizQuestions[quizIndex];
+  quizAnswered = false;
+  var optsHtml = q.opts.map(function(opt, i) {
+    return '<button class="quiz-opt" id="qopt' + i + '" onclick="pickOpt(' + i + ',' + q.vocab.id + ')">' + opt + '</button>';
+  }).join('');
+  c.innerHTML = '<div class="quiz-header"><span class="quiz-q-num">' + (quizIndex + 1) + ' / ' + quizQuestions.length + '</span><span>Điểm: <strong>' + quizScore + '</strong></span></div>' +
+    '<div class="quiz-card"><div class="quiz-prompt-label">Từ / Cụm từ</div><div class="quiz-word">' + q.vocab.word + '</div><div class="quiz-example">' + q.vocab.example + '</div></div>' +
+    '<div class="quiz-options">' + optsHtml + '</div>' +
+    '<div class="quiz-feedback" id="quizFeedback"></div>' +
+    '<button class="quiz-next-btn" id="quizNext" onclick="nextQ()">' + (quizIndex + 1 < quizQuestions.length ? 'Câu tiếp →' : 'Xem kết quả →') + '</button>';
 }
-function selectQuizOpt(btn){var chosen=btn.getAttribute('data-ans');var vid=parseInt(btn.getAttribute('data-vid'));{
-  if(quizAnswered)return;quizAnswered=true;
-  var q=quizQuestions[quizIndex];
-  var fb=document.getElementById('quizFeedback');
-  document.querySelectorAll('.quiz-opt').forEach(function(b){b.disabled=true;});
-  if(chosen===q.correct){btn.classList.add('correct');quizScore++;fb.textContent='✓ Chính xác!';fb.className='quiz-feedback show correct';learned.add(vid);updateProgress();}
-  else{btn.classList.add('wrong');fb.textContent='✗ Sai rồi! Đáp án: '+q.correct;fb.className='quiz-feedback show wrong';document.querySelectorAll('.quiz-opt').forEach(function(b){if(b.textContent.trim()===q.correct)b.classList.add('correct');});}
+
+function pickOpt(i, vid) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+  var q = quizQuestions[quizIndex];
+  var chosen = q.opts[i];
+  var fb = document.getElementById('quizFeedback');
+  document.querySelectorAll('.quiz-opt').forEach(function(b) { b.disabled = true; });
+  if (chosen === q.correct) {
+    document.getElementById('qopt' + i).classList.add('correct');
+    quizScore++;
+    fb.textContent = '✓ Chính xác!';
+    fb.className = 'quiz-feedback show correct';
+    learned.add(vid); updateProgress();
+  } else {
+    document.getElementById('qopt' + i).classList.add('wrong');
+    fb.textContent = '✗ Sai rồi! Đáp án: ' + q.correct;
+    fb.className = 'quiz-feedback show wrong';
+    q.opts.forEach(function(opt, j) { if (opt === q.correct) document.getElementById('qopt' + j).classList.add('correct'); });
+  }
   document.getElementById('quizNext').classList.add('show');
 }
-function nextQuizQ(){quizIndex++;renderQuizQuestion();}
 
-function renderMatch(){
-  var vocab=[...VOCAB].sort(function(){return Math.random()-.5;}).slice(0,8);
-  matchPairs=vocab;matchSelected=null;matchedCount=0;
-  var words=[...vocab].sort(function(){return Math.random()-.5;});
-  var meanings=[...vocab].sort(function(){return Math.random()-.5;});
-  var container=document.getElementById('matchContainer');
-  container.innerHTML='<div class="match-header"><h3>Nối từ với nghĩa đúng</h3><p>Nhấn một từ rồi nhấn nghĩa tương ứng</p></div><div class="match-grid"><div class="match-col">'+words.map(function(v){return'<div class="match-item word" data-id="'+v.id+'" data-type="word" onclick="matchClick(this)">'+v.word+'</div>';}).join('')+'</div><div class="match-col">'+meanings.map(function(v){return'<div class="match-item meaning" data-id="'+v.id+'" data-type="meaning" onclick="matchClick(this)">'+v.meaning+'</div>';}).join('')+'</div></div><div class="match-complete" id="matchComplete"><h3>★ Hoàn thành!</h3><p>Bạn đã nối đúng tất cả!</p></div><div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">↺ Làm lại</button></div>';
+function nextQ() { quizIndex++; renderQuizQ(); }
+
+// MATCH
+function renderMatch() {
+  var vocab = VOCAB.slice().sort(function() { return Math.random() - .5; }).slice(0, 8);
+  matchPairs = vocab; matchSelected = null; matchedCount = 0;
+  var words = vocab.slice().sort(function() { return Math.random() - .5; });
+  var meanings = vocab.slice().sort(function() { return Math.random() - .5; });
+  var c = document.getElementById('matchContainer');
+  c.innerHTML = '<div class="match-header"><h3>Nối từ với nghĩa đúng</h3><p>Nhấn một từ rồi nhấn nghĩa tương ứng</p></div>' +
+    '<div class="match-grid"><div class="match-col">' +
+    words.map(function(v) { return '<div class="match-item word" data-id="' + v.id + '" data-type="word" onclick="matchClick(this)">' + v.word + '</div>'; }).join('') +
+    '</div><div class="match-col">' +
+    meanings.map(function(v) { return '<div class="match-item meaning" data-id="' + v.id + '" data-type="meaning" onclick="matchClick(this)">' + v.meaning + '</div>'; }).join('') +
+    '</div></div>' +
+    '<div class="match-complete" id="matchComplete"><h3>★ Hoàn thành!</h3><p>Bạn đã nối đúng tất cả!</p></div>' +
+    '<div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">↺ Làm lại</button></div>';
 }
-function matchClick(el){
-  if(el.classList.contains('matched'))return;
-  if(!matchSelected){document.querySelectorAll('.match-item.selected').forEach(function(e){e.classList.remove('selected');});el.classList.add('selected');matchSelected=el;}
-  else{
-    if(el===matchSelected){el.classList.remove('selected');matchSelected=null;return;}
-    var a=matchSelected,b=el;
-    var aId=parseInt(a.dataset.id),bId=parseInt(b.dataset.id);
-    if(aId===bId&&a.dataset.type!==b.dataset.type){
-      a.classList.remove('selected');a.classList.add('matched');b.classList.add('matched');
-      matchedCount++;learned.add(aId);updateProgress();
-      if(matchedCount===matchPairs.length){setTimeout(function(){document.getElementById('matchComplete').classList.add('show');},300);}
-    }else{
-      a.classList.add('wrong-flash');b.classList.add('wrong-flash');
-      setTimeout(function(){a.classList.remove('wrong-flash','selected');b.classList.remove('wrong-flash');},500);
+
+function matchClick(el) {
+  if (el.classList.contains('matched')) return;
+  if (!matchSelected) {
+    document.querySelectorAll('.match-item.selected').forEach(function(e) { e.classList.remove('selected'); });
+    el.classList.add('selected'); matchSelected = el;
+  } else {
+    if (el === matchSelected) { el.classList.remove('selected'); matchSelected = null; return; }
+    var a = matchSelected, b = el;
+    var aId = parseInt(a.dataset.id), bId = parseInt(b.dataset.id);
+    if (aId === bId && a.dataset.type !== b.dataset.type) {
+      a.classList.remove('selected'); a.classList.add('matched'); b.classList.add('matched');
+      matchedCount++; learned.add(aId); updateProgress();
+      if (matchedCount === matchPairs.length) setTimeout(function() { document.getElementById('matchComplete').classList.add('show'); }, 300);
+    } else {
+      a.classList.add('wrong-flash'); b.classList.add('wrong-flash');
+      setTimeout(function() { a.classList.remove('wrong-flash', 'selected'); b.classList.remove('wrong-flash'); }, 500);
     }
-    matchSelected=null;
+    matchSelected = null;
   }
 }
 
-function switchMode(mode){
-  currentMode=mode;
-  ['cards','quiz','match'].forEach(function(m){
-    document.getElementById('mode-'+m).style.display=m===mode?'block':'none';
-    document.getElementById('btn-'+m).classList.toggle('active',m===mode);
+function switchMode(mode) {
+  currentMode = mode;
+  ['cards', 'quiz', 'match'].forEach(function(m) {
+    document.getElementById('mode-' + m).style.display = m === mode ? 'block' : 'none';
+    document.getElementById('btn-' + m).classList.toggle('active', m === mode);
   });
-  if(mode==='cards')renderFC();
-  else if(mode==='quiz')renderQuiz();
+  if (mode === 'cards') renderFC();
+  else if (mode === 'quiz') renderQuiz();
   else renderMatch();
 }
 
