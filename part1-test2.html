@@ -379,9 +379,9 @@ function renderQuizQuestion(){
     return;
   }
   var q=quizQuestions[quizIndex];quizAnswered=false;
-  container.innerHTML='<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>Điểm: <strong>'+quizScore+'</strong></span></div><div class="quiz-card"><div class="quiz-prompt-label">Từ / Cụm từ</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div><div class="quiz-options" id="quizOpts">'+q.opts.map(function(opt){return'<button class="quiz-opt" onclick="selectQuizOpt(this,'+JSON.stringify(opt)+','+q.vocab.id+')">'+opt+'</button>';}).join('')+'</div><div class="quiz-feedback" id="quizFeedback"></div><button class="quiz-next-btn" id="quizNext" onclick="nextQuizQ()">'+(quizIndex+1<quizQuestions.length?'Câu tiếp →':'Xem kết quả →')+'</button>';
+  container.innerHTML='<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>Điểm: <strong>'+quizScore+'</strong></span></div><div class="quiz-card"><div class="quiz-prompt-label">Từ / Cụm từ</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div><div class="quiz-options" id="quizOpts">'+q.opts.map(function(opt){return'<button class="quiz-opt" onclick="selectQuizOpt(this,''+opt.replace(/'/g,"\\'")+'','+q.vocab.id+')">'+opt+'</button>';}).join('')+'</div><div class="quiz-feedback" id="quizFeedback"></div><button class="quiz-next-btn" id="quizNext" onclick="nextQuizQ()">'+(quizIndex+1<quizQuestions.length?'Câu tiếp →':'Xem kết quả →')+'</button>';
 }
-function selectQuizOpt(btn,chosen,vid){
+function selectQuizOpt(btn){var chosen=btn.getAttribute('data-ans');var vid=parseInt(btn.getAttribute('data-vid'));{
   if(quizAnswered)return;quizAnswered=true;
   var q=quizQuestions[quizIndex];
   var fb=document.getElementById('quizFeedback');
