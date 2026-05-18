@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOEIC Vocabulary - Unit 5 Who Where</title>
+<title>TOEIC Big Step – Unit 5: Who & Where</title>
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -14,116 +14,163 @@
     --red: #c92a2a; --red-bg: #fff5f5;
     --blue: #1971c2; --gray: #495057; --text: #212529;
     --radius: 14px; --radius-lg: 20px;
-    --shadow: 0 2px 12px rgba(232,89,12,0.08);
+    --shadow: 0 4px 20px rgba(232,89,12,0.12);
   }
-  body { font-family: 'Nunito', sans-serif; background: var(--orange-bg); color: var(--text); min-height: 100vh; padding: 0 0 60px; }
-  .header { background: linear-gradient(135deg, #e8590c 0%, #ff922b 100%); padding: 32px 24px 28px; text-align: center; position: relative; overflow: hidden; }
-  .header::before { content: ''; position: absolute; top: -40px; right: -40px; width: 200px; height: 200px; border-radius: 50%; background: rgba(255,255,255,0.08); }
-  .header h1 { font-size: 22px; font-weight: 800; color: #fff; letter-spacing: -0.3px; margin-bottom: 6px; }
-  .header p { font-size: 14px; color: rgba(255,255,255,0.85); font-weight: 600; }
-  .progress-wrap { background: #fff; padding: 14px 20px; border-bottom: 1px solid var(--orange-border); display: flex; align-items: center; gap: 14px; position: sticky; top: 0; z-index: 100; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-  .progress-label { font-size: 13px; font-weight: 700; color: var(--orange); white-space: nowrap; }
-  .progress-bar-bg { flex: 1; height: 8px; background: var(--orange-border); border-radius: 99px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; background: linear-gradient(90deg, #e8590c, #ff922b); border-radius: 99px; transition: width 0.4s ease; width: 0%; }
-  .progress-count { font-size: 13px; font-weight: 700; color: var(--gray); white-space: nowrap; }
-  .tabs-wrap { padding: 16px 16px 0; overflow-x: auto; display: flex; gap: 8px; scrollbar-width: none; }
-  .tabs-wrap::-webkit-scrollbar { display: none; }
-  .tab-btn { flex-shrink: 0; padding: 7px 14px; border-radius: 99px; border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray); cursor: pointer; transition: all 0.18s; white-space: nowrap; }
-  .tab-btn:hover { border-color: var(--orange-light); color: var(--orange); }
-  .tab-btn.active { background: var(--orange); border-color: var(--orange); color: #fff; }
-  .mode-bar { display: flex; gap: 8px; padding: 14px 16px 0; justify-content: center; }
-  .mode-btn { display: flex; align-items: center; gap: 6px; padding: 7px 16px; border-radius: 99px; border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 12px; font-weight: 700; color: var(--gray); cursor: pointer; transition: all 0.18s; }
-  .mode-btn svg { width: 16px; height: 16px; }
-  .mode-btn:hover { border-color: var(--orange-light); color: var(--orange); }
-  .mode-btn.active { background: var(--orange-bg); border-color: var(--orange); color: var(--orange); }
-  #mode-cards { display: block; } #mode-quiz, #mode-match { display: none; }
-  .cards-section { padding: 18px 16px; }
-  .group-title { font-size: 15px; font-weight: 800; color: var(--orange); margin-bottom: 14px; padding-left: 4px; display: flex; align-items: center; gap: 8px; }
-  .group-title::before { content: ''; display: inline-block; width: 5px; height: 18px; background: var(--orange); border-radius: 3px; }
-  .vocab-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 12px; margin-bottom: 24px; }
-  .card-wrap { perspective: 900px; cursor: pointer; }
-  .card-inner { position: relative; width: 100%; min-height: 170px; transform-style: preserve-3d; transition: transform 0.45s cubic-bezier(.4,0,.2,1); border-radius: var(--radius); }
-  .card-wrap.flipped .card-inner { transform: rotateY(180deg); }
-  .card-front, .card-back { position: absolute; inset: 0; backface-visibility: hidden; -webkit-backface-visibility: hidden; border-radius: var(--radius); padding: 18px; box-shadow: var(--shadow); }
-  .card-front { background: #fff; border: 1.5px solid var(--orange-border); display: flex; flex-direction: column; justify-content: space-between; }
-  .card-back { background: var(--orange-bg); border: 1.5px solid var(--orange); transform: rotateY(180deg); display: flex; flex-direction: column; gap: 8px; }
-  .card-word { font-size: 20px; font-weight: 800; color: var(--orange); line-height: 1.2; }
-  .card-hint { font-size: 12px; color: #adb5bd; font-weight: 600; margin-top: 4px; }
-  .card-flip-icon { text-align: right; font-size: 11px; font-weight: 700; color: #adb5bd; display: flex; align-items: center; gap: 4px; justify-content: flex-end; }
-  .card-flip-icon svg { width: 14px; height: 14px; opacity: .6; }
-  .back-label { font-size: 11px; font-weight: 700; color: var(--orange); text-transform: uppercase; letter-spacing: .5px; }
-  .back-meaning { font-size: 16px; font-weight: 700; color: var(--text); }
-  .back-note { font-size: 12px; color: var(--gray); font-weight: 600; background: #fff; border-radius: 8px; padding: 6px 10px; border-left: 3px solid var(--orange-light); }
-  .back-example { font-size: 13px; color: var(--blue); font-weight: 600; font-style: italic; }
-  .card-front.learned { border-color: var(--green); background: var(--green-bg); }
-  .card-front.learned .card-word { color: var(--green); }
-  .learned-badge { display: none; background: var(--green); color: #fff; font-size: 10px; font-weight: 800; padding: 2px 8px; border-radius: 99px; align-self: flex-start; letter-spacing: .5px; }
-  .card-front.learned .learned-badge { display: inline-block; }
-  .quiz-container { padding: 20px 16px; max-width: 600px; margin: 0 auto; }
-  .quiz-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; font-size: 13px; font-weight: 700; color: var(--gray); }
-  .quiz-q-num { background: var(--orange); color: #fff; padding: 4px 12px; border-radius: 99px; font-size: 12px; font-weight: 800; }
-  .quiz-card { background: #fff; border-radius: var(--radius-lg); padding: 28px 24px; box-shadow: var(--shadow); border: 1.5px solid var(--orange-border); margin-bottom: 20px; text-align: center; }
-  .quiz-prompt-label { font-size: 12px; font-weight: 700; color: #adb5bd; text-transform: uppercase; letter-spacing: .8px; margin-bottom: 10px; }
-  .quiz-word { font-size: 26px; font-weight: 800; color: var(--orange); margin-bottom: 6px; }
-  .quiz-example { font-size: 13px; color: var(--gray); font-style: italic; }
-  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 16px; }
-  .quiz-opt { padding: 13px 16px; border-radius: var(--radius); border: 1.5px solid var(--orange-border); background: #fff; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 700; color: var(--text); cursor: pointer; transition: all 0.15s; text-align: left; line-height: 1.3; }
-  .quiz-opt:hover:not(:disabled) { border-color: var(--orange-light); background: var(--orange-bg); }
-  .quiz-opt.correct { border-color: var(--green); background: var(--green-bg); color: var(--green); }
-  .quiz-opt.wrong { border-color: var(--red); background: var(--red-bg); color: var(--red); }
-  .quiz-opt:disabled { cursor: default; }
-  .quiz-feedback { text-align: center; font-size: 14px; font-weight: 700; padding: 10px 16px; border-radius: var(--radius); margin-bottom: 14px; display: none; }
-  .quiz-feedback.show { display: block; }
-  .quiz-feedback.correct { background: var(--green-bg); color: var(--green); }
-  .quiz-feedback.wrong { background: var(--red-bg); color: var(--red); }
-  .quiz-next-btn { width: 100%; padding: 13px; border-radius: var(--radius); border: none; background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; transition: background 0.15s; display: none; }
-  .quiz-next-btn.show { display: block; }
-  .quiz-next-btn:hover { background: var(--orange-dark); }
-  .quiz-score-card { background: #fff; border-radius: var(--radius-lg); padding: 36px 24px; text-align: center; box-shadow: var(--shadow); border: 1.5px solid var(--orange-border); }
-  .score-emoji { font-size: 22px; font-weight: 800; color: var(--orange); margin-bottom: 12px; padding: 10px 20px; background: var(--orange-bg); border-radius: 99px; display: inline-block; }
-  .score-num { font-size: 40px; font-weight: 800; color: var(--orange); }
-  .score-label { font-size: 15px; font-weight: 700; color: var(--gray); margin-bottom: 20px; }
-  .score-retry { padding: 12px 28px; border-radius: 99px; border: none; background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 800; cursor: pointer; }
-  .score-retry:hover { background: var(--orange-dark); }
-  .match-container { padding: 20px 16px; max-width: 700px; margin: 0 auto; }
-  .match-header { text-align: center; margin-bottom: 18px; }
-  .match-header h3 { font-size: 16px; font-weight: 800; color: var(--orange); margin-bottom: 4px; }
-  .match-header p { font-size: 13px; color: var(--gray); font-weight: 600; }
-  .match-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-  .match-col { display: flex; flex-direction: column; gap: 10px; }
-  .match-item { padding: 12px 14px; border-radius: var(--radius); border: 1.5px solid var(--orange-border); background: #fff; font-size: 14px; font-weight: 700; cursor: pointer; transition: all 0.15s; min-height: 52px; display: flex; align-items: center; line-height: 1.3; }
-  .match-item.word { color: var(--orange); font-size: 15px; }
-  .match-item.meaning { color: var(--text); font-size: 13px; }
-  .match-item:hover:not(.matched):not(.selected) { border-color: var(--orange-light); background: var(--orange-bg); }
-  .match-item.selected { border-color: var(--orange); background: var(--orange-bg); box-shadow: 0 0 0 2px rgba(232,89,12,0.18); }
-  .match-item.matched { border-color: var(--green); background: var(--green-bg); color: var(--green); cursor: default; opacity: .75; }
-  .match-item.wrong-flash { border-color: var(--red); background: var(--red-bg); }
-  .match-actions { margin-top: 20px; display: flex; gap: 10px; justify-content: center; }
-  .match-btn { padding: 10px 24px; border-radius: 99px; border: 1.5px solid var(--orange); background: var(--orange); color: #fff; font-family: 'Nunito', sans-serif; font-size: 14px; font-weight: 800; cursor: pointer; }
-  .match-btn.outline { background: #fff; color: var(--orange); }
-  .match-btn:hover { opacity: .88; }
-  .match-complete { text-align: center; padding: 28px; background: var(--green-bg); border-radius: var(--radius-lg); border: 1.5px solid var(--green); display: none; }
-  .match-complete.show { display: block; }
-  .match-complete h3 { font-size: 22px; font-weight: 800; color: var(--green); margin-bottom: 6px; }
-  .match-complete p { font-size: 14px; color: var(--gray); font-weight: 600; }
-  .stats-bar { background: #fff; border-top: 1px solid var(--orange-border); padding: 12px 20px; display: flex; gap: 20px; justify-content: center; position: fixed; bottom: 0; left: 0; right: 0; box-shadow: 0 -2px 10px rgba(0,0,0,0.06); z-index: 100; }
-  .stat-item { display: flex; flex-direction: column; align-items: center; gap: 1px; }
-  .stat-num { font-size: 17px; font-weight: 800; color: var(--orange); }
-  .stat-num.green { color: var(--green); }
-  .stat-label { font-size: 10px; font-weight: 700; color: #adb5bd; text-transform: uppercase; letter-spacing: .5px; }
-  @media (max-width: 520px) { .vocab-grid { grid-template-columns: 1fr; } .quiz-options { grid-template-columns: 1fr; } .match-grid { grid-template-columns: 1fr; } }
+  body { font-family: 'Nunito', sans-serif; background: var(--orange-bg); color: var(--text); min-height: 100vh; padding: 0 0 70px; }
+
+  .header { background: linear-gradient(135deg, #e8590c 0%, #ff922b 100%); padding: 24px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content:''; position:absolute; top:-40px; right:-40px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,0.08); }
+  .header h1 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .header p { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 600; }
+
+  .progress-wrap { background:#fff; padding:12px 20px; border-bottom:1px solid var(--orange-border); display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+  .progress-label { font-size:12px; font-weight:700; color:var(--orange); white-space:nowrap; }
+  .progress-bar-bg { flex:1; height:7px; background:var(--orange-border); border-radius:99px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background:linear-gradient(90deg,#e8590c,#ff922b); border-radius:99px; transition:width 0.4s ease; width:0%; }
+  .progress-count { font-size:12px; font-weight:700; color:var(--gray); white-space:nowrap; }
+
+  .mode-bar { display:flex; gap:8px; padding:14px 16px 0; justify-content:center; flex-wrap:wrap; }
+  .mode-btn { display:flex; align-items:center; gap:5px; padding:7px 16px; border-radius:99px; border:1.5px solid var(--orange-border); background:#fff; font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; color:var(--gray); cursor:pointer; transition:all 0.18s; }
+  .mode-btn svg { width:15px; height:15px; }
+  .mode-btn:hover { border-color:var(--orange-light); color:var(--orange); }
+  .mode-btn.active { background:var(--orange-bg); border-color:var(--orange); color:var(--orange); }
+
+  #mode-cards { display:block; }
+  #mode-quiz, #mode-match { display:none; }
+
+  .tabs-wrap { padding:12px 16px 0; overflow-x:auto; display:flex; gap:8px; scrollbar-width:none; }
+  .tabs-wrap::-webkit-scrollbar { display:none; }
+  .tab-btn { flex-shrink:0; padding:6px 14px; border-radius:99px; border:1.5px solid var(--orange-border); background:#fff; font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; color:var(--gray); cursor:pointer; transition:all 0.18s; white-space:nowrap; }
+  .tab-btn:hover { border-color:var(--orange-light); color:var(--orange); }
+  .tab-btn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
+
+  /* FLASHCARD */
+  .fc-container { padding:20px 16px; max-width:700px; margin:0 auto; }
+  .fc-counter { text-align:center; font-size:13px; color:var(--gray); margin-bottom:12px; font-weight:700; }
+  .fc-scene { perspective:1200px; width:100%; cursor:pointer; margin-bottom:18px; }
+  .fc-inner { position:relative; width:100%; height:260px; transform-style:preserve-3d; transition:transform 0.5s cubic-bezier(.4,0,.2,1); border-radius:var(--radius-lg); }
+  .fc-scene.flipped .fc-inner { transform:rotateY(180deg); }
+  .fc-face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius-lg); box-shadow:var(--shadow); display:flex; flex-direction:row; overflow:hidden; }
+
+  .fc-front { background:#fff; border:1.5px solid var(--orange-border); }
+  .fc-front.learned { border-color:var(--green); background:var(--green-bg); }
+  .fc-front-left { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:28px; gap:12px; min-width:0; }
+  .fc-front-right { width:240px; flex-shrink:0; background:#f8f9fa; display:flex; align-items:center; justify-content:center; border-left:1.5px solid var(--orange-border); overflow:hidden; }
+  .fc-front.learned .fc-front-right { border-left-color:var(--green); background:#d3f9d8; }
+  .fc-front-right img { width:100%; height:100%; object-fit:cover; display:none; }
+  .fc-front-right .no-img { font-size:48px; opacity:.15; }
+
+  .fc-learned-badge { background:var(--green); color:#fff; font-size:10px; font-weight:800; padding:3px 10px; border-radius:99px; letter-spacing:.5px; display:none; }
+  .fc-front.learned .fc-learned-badge { display:inline-block; }
+  .fc-word { font-size:22px; font-weight:800; color:var(--orange); line-height:1.2; word-break:break-word; }
+  .fc-front.learned .fc-word { color:var(--green); }
+  .fc-flip-hint { font-size:11px; color:#adb5bd; font-weight:700; display:flex; align-items:center; gap:4px; }
+  .fc-flip-hint svg { width:12px; height:12px; opacity:.6; }
+
+  .fc-back { background:var(--orange-bg); border:1.5px solid var(--orange); transform:rotateY(180deg); }
+  .fc-back-left { width:240px; flex-shrink:0; background:#fff3e8; display:flex; align-items:center; justify-content:center; border-right:1.5px solid var(--orange-border); overflow:hidden; }
+  .fc-back-left img { width:100%; height:100%; object-fit:cover; display:none; }
+  .fc-back-left .no-img { font-size:48px; opacity:.15; }
+  .fc-back-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px; gap:10px; overflow:hidden; min-width:0; }
+  .fc-back-label { font-size:10px; font-weight:800; color:var(--orange); text-transform:uppercase; letter-spacing:1px; }
+  .fc-meaning { font-size:18px; font-weight:800; color:var(--text); line-height:1.3; }
+  .fc-note { font-size:12px; color:var(--gray); font-weight:600; background:#fff; border-radius:8px; padding:6px 10px; border-left:3px solid var(--orange-light); }
+  .fc-example { font-size:13px; color:var(--blue); font-weight:600; font-style:italic; }
+  .fc-speak-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .fc-speak { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:3px 10px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; }
+  .fc-speak:hover { background:var(--orange-bg); border-color:var(--orange); }
+  .fc-speak svg { width:12px; height:12px; }
+  .fc-speak-front { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:4px 12px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; }
+  .fc-speak-front:hover { background:var(--orange-bg); border-color:var(--orange); }
+  .fc-speak-front svg { width:12px; height:12px; }
+
+  .fc-nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+  .fc-nav-btn { width:46px; height:46px; border-radius:50%; border:1.5px solid var(--orange-border); background:#fff; color:var(--orange); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; flex-shrink:0; font-weight:800; }
+  .fc-nav-btn:hover:not(:disabled) { background:var(--orange-bg); border-color:var(--orange); }
+  .fc-nav-btn:disabled { opacity:.3; cursor:default; }
+  .fc-learned-btn { flex:1; padding:11px; border-radius:99px; border:none; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; }
+  .fc-learned-btn.no { background:var(--green); color:#fff; }
+  .fc-learned-btn.yes { background:var(--red); color:#fff; }
+
+  /* QUIZ */
+  .quiz-container { padding:20px 16px; max-width:600px; margin:0 auto; }
+  .quiz-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:13px; font-weight:700; color:var(--gray); }
+  .quiz-q-num { background:var(--orange); color:#fff; padding:4px 12px; border-radius:99px; font-size:12px; font-weight:800; }
+  .quiz-card { background:#fff; border-radius:var(--radius-lg); padding:28px 24px; box-shadow:var(--shadow); border:1.5px solid var(--orange-border); margin-bottom:20px; text-align:center; }
+  .quiz-prompt-label { font-size:12px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.8px; margin-bottom:10px; }
+  .quiz-word { font-size:22px; font-weight:800; color:var(--orange); margin-bottom:6px; line-height:1.3; }
+  .quiz-example { font-size:13px; color:var(--gray); font-style:italic; }
+  .quiz-options { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .quiz-opt { padding:13px 16px; border-radius:var(--radius); border:1.5px solid var(--orange-border); background:#fff; font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--text); cursor:pointer; transition:all 0.15s; text-align:left; line-height:1.3; }
+  .quiz-opt:hover:not(:disabled) { border-color:var(--orange-light); background:var(--orange-bg); }
+  .quiz-opt.correct { border-color:var(--green); background:var(--green-bg); color:var(--green); }
+  .quiz-opt.wrong { border-color:var(--red); background:var(--red-bg); color:var(--red); }
+  .quiz-opt:disabled { cursor:default; }
+  .quiz-feedback { text-align:center; font-size:14px; font-weight:700; padding:10px 16px; border-radius:var(--radius); margin-bottom:14px; display:none; }
+  .quiz-feedback.show { display:block; }
+  .quiz-feedback.correct { background:var(--green-bg); color:var(--green); }
+  .quiz-feedback.wrong { background:var(--red-bg); color:var(--red); }
+  .quiz-next-btn { width:100%; padding:13px; border-radius:var(--radius); border:none; background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; cursor:pointer; display:none; }
+  .quiz-next-btn.show { display:block; }
+  .quiz-next-btn:hover { background:var(--orange-dark); }
+  .quiz-score-card { background:#fff; border-radius:var(--radius-lg); padding:36px 24px; text-align:center; box-shadow:var(--shadow); border:1.5px solid var(--orange-border); }
+  .score-emoji { font-size:20px; font-weight:800; color:var(--orange); margin-bottom:12px; padding:10px 20px; background:var(--orange-bg); border-radius:99px; display:inline-block; }
+  .score-num { font-size:40px; font-weight:800; color:var(--orange); }
+  .score-label { font-size:15px; font-weight:700; color:var(--gray); margin-bottom:20px; }
+  .score-retry { padding:12px 28px; border-radius:99px; border:none; background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; cursor:pointer; }
+  .score-retry:hover { background:var(--orange-dark); }
+
+  /* MATCH */
+  .match-container { padding:20px 16px; max-width:700px; margin:0 auto; }
+  .match-header { text-align:center; margin-bottom:18px; }
+  .match-header h3 { font-size:16px; font-weight:800; color:var(--orange); margin-bottom:4px; }
+  .match-header p { font-size:13px; color:var(--gray); font-weight:600; }
+  .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .match-col { display:flex; flex-direction:column; gap:10px; }
+  .match-item { padding:12px 14px; border-radius:var(--radius); border:1.5px solid var(--orange-border); background:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; min-height:52px; display:flex; align-items:center; line-height:1.3; }
+  .match-item.word { color:var(--orange); }
+  .match-item.meaning { color:var(--text); }
+  .match-item:hover:not(.matched):not(.selected) { border-color:var(--orange-light); background:var(--orange-bg); }
+  .match-item.selected { border-color:var(--orange); background:var(--orange-bg); box-shadow:0 0 0 2px rgba(232,89,12,0.18); }
+  .match-item.matched { border-color:var(--green); background:var(--green-bg); color:var(--green); cursor:default; opacity:.75; }
+  .match-item.wrong-flash { border-color:var(--red); background:var(--red-bg); }
+  .match-actions { margin-top:20px; display:flex; gap:10px; justify-content:center; }
+  .match-btn { padding:10px 24px; border-radius:99px; border:1.5px solid var(--orange); background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:14px; font-weight:800; cursor:pointer; }
+  .match-btn.outline { background:#fff; color:var(--orange); }
+  .match-btn:hover { opacity:.88; }
+  .match-complete { text-align:center; padding:28px; background:var(--green-bg); border-radius:var(--radius-lg); border:1.5px solid var(--green); display:none; margin-top:16px; }
+  .match-complete.show { display:block; }
+  .match-complete h3 { font-size:22px; font-weight:800; color:var(--green); margin-bottom:6px; }
+  .match-complete p { font-size:14px; color:var(--gray); font-weight:600; }
+
+  .stats-bar { background:#fff; border-top:1px solid var(--orange-border); padding:12px 20px; display:flex; gap:20px; justify-content:center; position:fixed; bottom:0; left:0; right:0; box-shadow:0 -2px 10px rgba(0,0,0,0.06); z-index:100; }
+  .stat-item { display:flex; flex-direction:column; align-items:center; gap:1px; }
+  .stat-num { font-size:17px; font-weight:800; color:var(--orange); }
+  .stat-num.green { color:var(--green); }
+  .stat-label { font-size:10px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.5px; }
+
+  @media (max-width:600px) {
+    .fc-inner { height:220px; }
+    .fc-front-right, .fc-back-left { width:130px; }
+    .fc-word { font-size:17px; }
+    .quiz-options { grid-template-columns:1fr; }
+    .match-grid { grid-template-columns:1fr; }
+  }
 </style>
 </head>
 <body>
+
 <div class="header">
-  <h1>TOEIC Big Step - Unit 5</h1>
+  <h1>TOEIC Big Step – Unit 5</h1>
   <p>Who &amp; Where Vocabulary</p>
 </div>
+
 <div class="progress-wrap">
-  <span class="progress-label">&#272;&#227; thu&#7897;c</span>
+  <span class="progress-label">Đã thuộc</span>
   <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-  <span class="progress-count" id="progressCount">0 / 48</span>
+  <span class="progress-count" id="progressCount">0 / 58</span>
 </div>
+
 <div class="mode-bar">
   <button class="mode-btn active" onclick="switchMode('cards')" id="btn-cards">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h12M6 13h8"/></svg>
@@ -131,246 +178,352 @@
   </button>
   <button class="mode-btn" onclick="switchMode('quiz')" id="btn-quiz">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
-    Tr&#7855;c nghi&#7879;m
+    Trắc nghiệm
   </button>
   <button class="mode-btn" onclick="switchMode('match')" id="btn-match">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
-    N&#7889;i t&#7915;
+    Nối từ
   </button>
 </div>
+
 <div class="tabs-wrap" id="groupTabs"></div>
-<div id="mode-cards"><div class="cards-section" id="cardsContainer"></div></div>
-<div id="mode-quiz"><div class="quiz-container" id="quizContainer"></div></div>
-<div id="mode-match"><div class="match-container" id="matchContainer"></div></div>
-<div class="stats-bar">
-  <div class="stat-item"><span class="stat-num" id="statTotal">48</span><span class="stat-label">T&#7893;ng t&#7915;</span></div>
-  <div class="stat-item"><span class="stat-num green" id="statLearned">0</span><span class="stat-label">&#272;&#227; thu&#7897;c</span></div>
-  <div class="stat-item"><span class="stat-num" id="statLeft">48</span><span class="stat-label">C&#242;n l&#7841;i</span></div>
+
+<div id="mode-cards">
+  <div class="fc-container">
+    <div class="fc-counter" id="fcCounter">1 / 58</div>
+    <div class="fc-scene" id="fcScene" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-face fc-front" id="fcFront">
+          <div class="fc-front-left">
+            <div class="fc-learned-badge" id="fcBadge">✓ ĐÃ THUỘC</div>
+            <div class="fc-word" id="fcWord"></div>
+            <button class="fc-speak-front" onclick="doSpeak('word');event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              Nghe
+            </button>
+            <div class="fc-flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+              Nhấn thẻ để xem nghĩa
+            </div>
+          </div>
+          <div class="fc-front-right">
+            <img id="fcImgFront" src="" alt="">
+            <span class="no-img" id="fcNoImgFront">🖼️</span>
+          </div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-back-left">
+            <img id="fcImgBack" src="" alt="">
+            <span class="no-img" id="fcNoImgBack">🖼️</span>
+          </div>
+          <div class="fc-back-right">
+            <div class="fc-back-label">Nghĩa</div>
+            <div class="fc-meaning" id="fcMeaning"></div>
+            <div class="fc-note" id="fcNote"></div>
+            <div class="fc-example" id="fcExample"></div>
+            <div class="fc-speak-row">
+              <button class="fc-speak" onclick="doSpeak('word');event.stopPropagation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Từ
+              </button>
+              <button class="fc-speak" onclick="doSpeak('ex');event.stopPropagation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Câu ví dụ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="fc-nav-btn" id="btnPrev" onclick="goCard(-1)">&#8592;</button>
+      <button class="fc-learned-btn no" id="fcLearnedBtn" onclick="toggleLearnedFC()">✓ Đã thuộc</button>
+      <button class="fc-nav-btn" id="btnNext" onclick="goCard(1)">&#8594;</button>
+    </div>
+  </div>
 </div>
+
+<div id="mode-quiz">
+  <div class="quiz-container" id="quizContainer"></div>
+</div>
+
+<div id="mode-match">
+  <div class="match-container" id="matchContainer"></div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num" id="statTotal">58</span><span class="stat-label">Tổng từ</span></div>
+  <div class="stat-item"><span class="stat-num green" id="statLearned">0</span><span class="stat-label">Đã thuộc</span></div>
+  <div class="stat-item"><span class="stat-num" id="statLeft">58</span><span class="stat-label">Còn lại</span></div>
+</div>
+
 <script>
+var BASE = 'https://raw.githubusercontent.com/sonlamtrandai-afk/Toeic-vocab/main/';
+
 var VOCAB = [
-  {id:1,group:1,groupName:"People & Positions (WHO)",word:"clients",meaning:"kh\u00e1ch h\u00e0ng",note:null,example:"The clients are waiting in the lobby."},
-  {id:2,group:1,groupName:"People & Positions (WHO)",word:"president",meaning:"ch\u1ee7 t\u1ecbch",note:"company president = ch\u1ee7 t\u1ecbch c\u00f4ng ty",example:"The president gave a speech."},
-  {id:3,group:1,groupName:"People & Positions (WHO)",word:"vice president",meaning:"ph\u00f3 ch\u1ee7 t\u1ecbch",note:null,example:"The vice president attended the meeting."},
-  {id:4,group:1,groupName:"People & Positions (WHO)",word:"architect",meaning:"ki\u1ebfn tr\u00fac s\u01b0",note:null,example:"The architect revised the building plan."},
-  {id:5,group:1,groupName:"People & Positions (WHO)",word:"supervisor",meaning:"gi\u00e1m s\u00e1t vi\u00ean",note:null,example:"The supervisor checked the work schedule."},
-  {id:6,group:1,groupName:"People & Positions (WHO)",word:"supervise",meaning:"gi\u00e1m s\u00e1t",note:"= manage = oversee",example:"She supervises the marketing team."},
-  {id:7,group:1,groupName:"People & Positions (WHO)",word:"mechanic",meaning:"th\u1ee3 s\u1eeda m\u00e1y / th\u1ee3 c\u01a1 kh\u00ed",note:null,example:"The mechanic repaired the car."},
-  {id:8,group:1,groupName:"People & Positions (WHO)",word:"cashier",meaning:"thu ng\u00e2n",note:null,example:"The cashier is helping a customer."},
-  {id:9,group:2,groupName:"Places & Locations (WHERE)",word:"conference room",meaning:"ph\u00f2ng h\u1edbp",note:null,example:"The meeting will be held in the conference room."},
-  {id:10,group:2,groupName:"Places & Locations (WHERE)",word:"building",meaning:"t\u00f2a nh\u00e0",note:null,example:"The office is located in a tall building."},
-  {id:11,group:2,groupName:"Places & Locations (WHERE)",word:"downtown",meaning:"trung t\u00e2m th\u00e0nh ph\u1ed1",note:null,example:"Their office is downtown."},
-  {id:12,group:2,groupName:"Places & Locations (WHERE)",word:"entrance",meaning:"l\u1ed1i v\u00e0o",note:null,example:"People gathered near the entrance."},
-  {id:13,group:2,groupName:"Places & Locations (WHERE)",word:"accounting office",meaning:"ph\u00f2ng k\u1ebf to\u00e1n",note:null,example:"The report was sent to the accounting office."},
-  {id:14,group:2,groupName:"Places & Locations (WHERE)",word:"airport",meaning:"s\u00e2n bay",note:null,example:"They arrived at the airport early."},
-  {id:15,group:2,groupName:"Places & Locations (WHERE)",word:"across the street",meaning:"b\u00ean kia \u0111\u01b0\u1eddng",note:null,example:"The restaurant is across the street."},
-  {id:16,group:3,groupName:"Meetings & Office Work",word:"announce",meaning:"th\u00f4ng b\u00e1o",note:null,example:"The manager announced the new policy."},
-  {id:17,group:3,groupName:"Meetings & Office Work",word:"meeting will be held",meaning:"cu\u1ed9c h\u1edbp s\u1ebd \u0111\u01b0\u1ee3c t\u1ed5 ch\u1ee9c",note:null,example:"The meeting will be held tomorrow morning."},
-  {id:18,group:3,groupName:"Meetings & Office Work",word:"took place",meaning:"\u0111\u00e3 di\u1ec5n ra",note:null,example:"The conference took place last week."},
-  {id:19,group:3,groupName:"Meetings & Office Work",word:"revise",meaning:"ch\u1ec9nh s\u1eeda",note:null,example:"She revised the document carefully."},
-  {id:20,group:3,groupName:"Meetings & Office Work",word:"revised annual report",meaning:"b\u00e1o c\u00e1o th\u01b0\u1eddng ni\u00ean \u0111\u00e3 \u0111\u01b0\u1ee3c ch\u1ec9nh s\u1eeda",note:null,example:"The revised annual report was submitted yesterday."},
-  {id:21,group:3,groupName:"Meetings & Office Work",word:"cancel",meaning:"h\u1ee7y b\u1ecf",note:null,example:"They canceled the appointment."},
-  {id:22,group:3,groupName:"Meetings & Office Work",word:"in charge of",meaning:"ph\u1ee5 tr\u00e1ch",note:null,example:"She is in charge of customer service."},
-  {id:23,group:3,groupName:"Meetings & Office Work",word:"be responsible for",meaning:"ch\u1ecbu tr\u00e1ch nhi\u1ec7m v\u1ec1",note:null,example:"He is responsible for the project."},
-  {id:24,group:3,groupName:"Meetings & Office Work",word:"chair the meeting",meaning:"ch\u1ee7 tr\u00ec cu\u1ed9c h\u1edbp",note:null,example:"The director chaired the meeting."},
-  {id:25,group:3,groupName:"Meetings & Office Work",word:"proposal",meaning:"\u0111\u1ec1 xu\u1ea5t",note:null,example:"They discussed the new proposal."},
-  {id:26,group:3,groupName:"Meetings & Office Work",word:"work on",meaning:"l\u00e0m vi\u1ec7c v\u1ec1 / x\u1eed l\u00fd",note:null,example:"The team is working on a new project."},
-  {id:27,group:3,groupName:"Meetings & Office Work",word:"project",meaning:"d\u1ef1 \u00e1n",note:null,example:"The project will start next month."},
-  {id:28,group:3,groupName:"Meetings & Office Work",word:"submit",meaning:"n\u1ed9p",note:null,example:"Please submit the form before Friday."},
-  {id:29,group:3,groupName:"Meetings & Office Work",word:"the revised schedule",meaning:"l\u1ecbch tr\u00ecnh \u0111\u00e3 ch\u1ec9nh s\u1eeda",note:null,example:"The revised schedule was emailed to everyone."},
-  {id:30,group:4,groupName:"Products, Money & Shopping",word:"product",meaning:"s\u1ea3n ph\u1ea9m",note:null,example:"The company launched a new product."},
-  {id:31,group:4,groupName:"Products, Money & Shopping",word:"production",meaning:"s\u1ef1 s\u1ea3n xu\u1ea5t",note:null,example:"Production increased this year."},
-  {id:32,group:4,groupName:"Products, Money & Shopping",word:"produce (v)",meaning:"s\u1ea3n xu\u1ea5t",note:null,example:"The factory produces office furniture."},
-  {id:33,group:4,groupName:"Products, Money & Shopping",word:"produce (n)",meaning:"n\u00f4ng s\u1ea3n",note:null,example:"Fresh produce is sold here."},
-  {id:34,group:4,groupName:"Products, Money & Shopping",word:"office supplies",meaning:"\u0111\u1ed3 d\u00f9ng v\u0103n ph\u00f2ng",note:null,example:"We need more office supplies."},
-  {id:35,group:4,groupName:"Products, Money & Shopping",word:"staplers",meaning:"m\u00e1y b\u1ea5m kim",note:null,example:"The staplers are in the drawer."},
-  {id:36,group:4,groupName:"Products, Money & Shopping",word:"pay for",meaning:"tr\u1ea3 ti\u1ec1n cho",note:null,example:"She paid for the tickets."},
-  {id:37,group:4,groupName:"Products, Money & Shopping",word:"cash register",meaning:"m\u00e1y t\u00ednh ti\u1ec1n",note:null,example:"The cashier used the cash register."},
-  {id:38,group:4,groupName:"Products, Money & Shopping",word:"purchase",meaning:"mua",note:"= buy, nh\u01b0ng trang tr\u1ecdng h\u01a1n",example:"They purchased new equipment."},
-  {id:39,group:4,groupName:"Products, Money & Shopping",word:"expense report",meaning:"b\u00e1o c\u00e1o chi ph\u00ed",note:null,example:"He submitted an expense report."},
-  {id:40,group:4,groupName:"Products, Money & Shopping",word:"pay in cash",meaning:"tr\u1ea3 b\u1eb1ng ti\u1ec1n m\u1eb7t",note:null,example:"Customers can pay in cash."},
-  {id:41,group:5,groupName:"Daily Objects & Miscellaneous",word:"suit",meaning:"b\u1ed9 vest",note:null,example:"He wore a black suit."},
-  {id:42,group:5,groupName:"Daily Objects & Miscellaneous",word:"suit you well",meaning:"h\u1ee3p v\u1edbi b\u1ea1n",note:null,example:"That jacket suits you well."},
-  {id:43,group:5,groupName:"Daily Objects & Miscellaneous",word:"necklace",meaning:"d\u00e2y chuy\u1ec1n",note:null,example:"She received a necklace as a gift."},
-  {id:44,group:5,groupName:"Daily Objects & Miscellaneous",word:"gift",meaning:"m\u00f3n qu\u00e0",note:null,example:"They bought a gift for their manager."},
-  {id:45,group:5,groupName:"Daily Objects & Miscellaneous",word:"retirement",meaning:"s\u1ef1 ngh\u1ec9 h\u01b0u",note:null,example:"They celebrated his retirement."},
-  {id:46,group:5,groupName:"Daily Objects & Miscellaneous",word:"leave",meaning:"r\u1eddi \u0111i / ngh\u1ec9 ph\u00e9p",note:null,example:"She is on sick leave today."},
-  {id:47,group:5,groupName:"Daily Objects & Miscellaneous",word:"almost",meaning:"g\u1ea7n nh\u01b0",note:null,example:"The work is almost finished."},
-  {id:48,group:5,groupName:"Daily Objects & Miscellaneous",word:"department",meaning:"ph\u00f2ng ban",note:null,example:"He works in the sales department."},
-  {id:49,group:5,groupName:"Daily Objects & Miscellaneous",word:"belong to",meaning:"thu\u1ed9c v\u1ec1",note:null,example:"This briefcase belongs to the manager."},
-  {id:50,group:5,groupName:"Daily Objects & Miscellaneous",word:"the copier",meaning:"m\u00e1y photocopy",note:null,example:"The copier is out of paper."},
-  {id:51,group:5,groupName:"Daily Objects & Miscellaneous",word:"briefcase",meaning:"c\u1eb7p t\u00e0i li\u1ec7u",note:null,example:"He carried a leather briefcase."},
-  {id:52,group:5,groupName:"Daily Objects & Miscellaneous",word:"ink cartridge",meaning:"h\u1ed9p m\u1ef1c",note:null,example:"The printer needs a new ink cartridge."},
-  {id:53,group:5,groupName:"Daily Objects & Miscellaneous",word:"plane",meaning:"m\u00e1y bay",note:null,example:"The plane arrived late."},
-  {id:54,group:5,groupName:"Daily Objects & Miscellaneous",word:"steak",meaning:"b\u00edt t\u1ebft",note:null,example:"He ordered a steak for dinner."},
-  {id:55,group:5,groupName:"Daily Objects & Miscellaneous",word:"place the order",meaning:"\u0111\u1eb7t h\u00e0ng",note:null,example:"She placed the order online."},
-  {id:56,group:5,groupName:"Daily Objects & Miscellaneous",word:"booklet",meaning:"cu\u1ed1n s\u1ed5 nh\u1ecf / t\u00e0i li\u1ec7u nh\u1ecf",note:null,example:"The booklet contains important information."},
-  {id:57,group:5,groupName:"Daily Objects & Miscellaneous",word:"enough",meaning:"\u0111\u1ee7",note:null,example:"We have enough chairs for everyone."},
-  {id:58,group:5,groupName:"Daily Objects & Miscellaneous",word:"pay phone",meaning:"\u0111i\u1ec7n tho\u1ea1i c\u00f4ng c\u1ed9ng",note:null,example:"He used a pay phone outside the station."}
+  {id:1,group:1,groupName:"People & Positions (WHO)",word:"clients",meaning:"khách hàng",note:null,example:"The clients are waiting in the lobby.",image:BASE+"clients.png"},
+  {id:2,group:1,groupName:"People & Positions (WHO)",word:"president",meaning:"chủ tịch",note:"company president = chủ tịch công ty",example:"The president gave a speech.",image:BASE+"president.png"},
+  {id:3,group:1,groupName:"People & Positions (WHO)",word:"vice president",meaning:"phó chủ tịch",note:null,example:"The vice president attended the meeting.",image:BASE+"vice_president.png"},
+  {id:4,group:1,groupName:"People & Positions (WHO)",word:"architect",meaning:"kiến trúc sư",note:null,example:"The architect revised the building plan.",image:BASE+"architect.png"},
+  {id:5,group:1,groupName:"People & Positions (WHO)",word:"supervisor",meaning:"giám sát viên",note:null,example:"The supervisor checked the work schedule.",image:BASE+"supervisor.png"},
+  {id:6,group:1,groupName:"People & Positions (WHO)",word:"supervise",meaning:"giám sát",note:"= manage = oversee",example:"She supervises the marketing team.",image:BASE+"supervise.png"},
+  {id:7,group:1,groupName:"People & Positions (WHO)",word:"mechanic",meaning:"thợ sửa máy / thợ cơ khí",note:null,example:"The mechanic repaired the car.",image:BASE+"mechanic.png"},
+  {id:8,group:1,groupName:"People & Positions (WHO)",word:"cashier",meaning:"thu ngân",note:null,example:"The cashier is helping a customer.",image:BASE+"cashier.png"},
+  {id:9,group:2,groupName:"Places & Locations (WHERE)",word:"conference room",meaning:"phòng họp",note:null,example:"The meeting will be held in the conference room.",image:BASE+"conference_room.png"},
+  {id:10,group:2,groupName:"Places & Locations (WHERE)",word:"building",meaning:"tòa nhà",note:null,example:"The office is located in a tall building.",image:BASE+"building.png"},
+  {id:11,group:2,groupName:"Places & Locations (WHERE)",word:"downtown",meaning:"trung tâm thành phố",note:null,example:"Their office is downtown.",image:BASE+"downtown.png"},
+  {id:12,group:2,groupName:"Places & Locations (WHERE)",word:"entrance",meaning:"lối vào",note:null,example:"People gathered near the entrance.",image:BASE+"entrance.png"},
+  {id:13,group:2,groupName:"Places & Locations (WHERE)",word:"accounting office",meaning:"phòng kế toán",note:null,example:"The report was sent to the accounting office.",image:BASE+"accounting_office.png"},
+  {id:14,group:2,groupName:"Places & Locations (WHERE)",word:"airport",meaning:"sân bay",note:null,example:"They arrived at the airport early.",image:BASE+"airport.png"},
+  {id:15,group:2,groupName:"Places & Locations (WHERE)",word:"across the street",meaning:"bên kia đường",note:null,example:"The restaurant is across the street.",image:BASE+"across_the_street.png"},
+  {id:16,group:3,groupName:"Meetings & Office Work",word:"announce",meaning:"thông báo",note:null,example:"The manager announced the new policy.",image:BASE+"announce.png"},
+  {id:17,group:3,groupName:"Meetings & Office Work",word:"meeting will be held",meaning:"cuộc họp sẽ được tổ chức",note:null,example:"The meeting will be held tomorrow morning.",image:BASE+"meeting_will_be_held.png"},
+  {id:18,group:3,groupName:"Meetings & Office Work",word:"took place",meaning:"đã diễn ra",note:null,example:"The conference took place last week.",image:BASE+"took_place.png"},
+  {id:19,group:3,groupName:"Meetings & Office Work",word:"revise",meaning:"chỉnh sửa",note:null,example:"She revised the document carefully.",image:BASE+"revise.png"},
+  {id:20,group:3,groupName:"Meetings & Office Work",word:"revised annual report",meaning:"báo cáo thường niên đã được chỉnh sửa",note:null,example:"The revised annual report was submitted yesterday.",image:BASE+"revised_annual_report.png"},
+  {id:21,group:3,groupName:"Meetings & Office Work",word:"cancel",meaning:"hủy bỏ",note:null,example:"They canceled the appointment.",image:BASE+"cancel.png"},
+  {id:22,group:3,groupName:"Meetings & Office Work",word:"in charge of",meaning:"phụ trách",note:null,example:"She is in charge of customer service.",image:BASE+"in_charge_of.png"},
+  {id:23,group:3,groupName:"Meetings & Office Work",word:"be responsible for",meaning:"chịu trách nhiệm về",note:null,example:"He is responsible for the project.",image:BASE+"be_responsible_for.png"},
+  {id:24,group:3,groupName:"Meetings & Office Work",word:"chair the meeting",meaning:"chủ trì cuộc họp",note:null,example:"The director chaired the meeting.",image:BASE+"chair_the_meeting.png"},
+  {id:25,group:3,groupName:"Meetings & Office Work",word:"proposal",meaning:"đề xuất",note:null,example:"They discussed the new proposal.",image:BASE+"proposal.png"},
+  {id:26,group:3,groupName:"Meetings & Office Work",word:"work on",meaning:"làm việc về / xử lý",note:null,example:"The team is working on a new project.",image:BASE+"work_on.png"},
+  {id:27,group:3,groupName:"Meetings & Office Work",word:"project",meaning:"dự án",note:null,example:"The project will start next month.",image:BASE+"project.png"},
+  {id:28,group:3,groupName:"Meetings & Office Work",word:"submit",meaning:"nộp",note:null,example:"Please submit the form before Friday.",image:BASE+"submit.png"},
+  {id:29,group:3,groupName:"Meetings & Office Work",word:"the revised schedule",meaning:"lịch trình đã chỉnh sửa",note:null,example:"The revised schedule was emailed to everyone.",image:BASE+"the_revised_schedule.png"},
+  {id:30,group:4,groupName:"Products, Money & Shopping",word:"product",meaning:"sản phẩm",note:null,example:"The company launched a new product.",image:BASE+"product.png"},
+  {id:31,group:4,groupName:"Products, Money & Shopping",word:"production",meaning:"sự sản xuất",note:null,example:"Production increased this year.",image:BASE+"production.png"},
+  {id:32,group:4,groupName:"Products, Money & Shopping",word:"produce (v)",meaning:"sản xuất",note:null,example:"The factory produces office furniture.",image:BASE+"produce_v.png"},
+  {id:33,group:4,groupName:"Products, Money & Shopping",word:"produce (n)",meaning:"nông sản",note:null,example:"Fresh produce is sold here.",image:BASE+"produce_n.png"},
+  {id:34,group:4,groupName:"Products, Money & Shopping",word:"office supplies",meaning:"đồ dùng văn phòng",note:null,example:"We need more office supplies.",image:BASE+"office_supplies.png"},
+  {id:35,group:4,groupName:"Products, Money & Shopping",word:"staplers",meaning:"máy bấm kim",note:null,example:"The staplers are in the drawer.",image:BASE+"staplers.png"},
+  {id:36,group:4,groupName:"Products, Money & Shopping",word:"pay for",meaning:"trả tiền cho",note:null,example:"She paid for the tickets.",image:BASE+"pay_for.png"},
+  {id:37,group:4,groupName:"Products, Money & Shopping",word:"cash register",meaning:"máy tính tiền",note:null,example:"The cashier used the cash register.",image:BASE+"cash_register.png"},
+  {id:38,group:4,groupName:"Products, Money & Shopping",word:"purchase",meaning:"mua",note:"= buy, nhưng trang trọng hơn",example:"They purchased new equipment.",image:BASE+"purchase.png"},
+  {id:39,group:4,groupName:"Products, Money & Shopping",word:"expense report",meaning:"báo cáo chi phí",note:null,example:"He submitted an expense report.",image:BASE+"expense_report.png"},
+  {id:40,group:4,groupName:"Products, Money & Shopping",word:"pay in cash",meaning:"trả bằng tiền mặt",note:null,example:"Customers can pay in cash.",image:BASE+"pay_in_cash.png"},
+  {id:41,group:5,groupName:"Daily Objects & Miscellaneous",word:"suit",meaning:"bộ vest",note:null,example:"He wore a black suit.",image:BASE+"suit.png"},
+  {id:42,group:5,groupName:"Daily Objects & Miscellaneous",word:"suit you well",meaning:"hợp với bạn",note:null,example:"That jacket suits you well.",image:BASE+"suit_you_well.png"},
+  {id:43,group:5,groupName:"Daily Objects & Miscellaneous",word:"necklace",meaning:"dây chuyền",note:null,example:"She received a necklace as a gift.",image:BASE+"necklace.png"},
+  {id:44,group:5,groupName:"Daily Objects & Miscellaneous",word:"gift",meaning:"món quà",note:null,example:"They bought a gift for their manager.",image:BASE+"gift.png"},
+  {id:45,group:5,groupName:"Daily Objects & Miscellaneous",word:"retirement",meaning:"sự nghỉ hưu",note:null,example:"They celebrated his retirement.",image:BASE+"retirement.png"},
+  {id:46,group:5,groupName:"Daily Objects & Miscellaneous",word:"leave",meaning:"rời đi / nghỉ phép",note:null,example:"She is on sick leave today.",image:BASE+"leave.png"},
+  {id:47,group:5,groupName:"Daily Objects & Miscellaneous",word:"almost",meaning:"gần như",note:null,example:"The work is almost finished.",image:BASE+"almost.png"},
+  {id:48,group:5,groupName:"Daily Objects & Miscellaneous",word:"department",meaning:"phòng ban",note:null,example:"He works in the sales department.",image:BASE+"department.png"},
+  {id:49,group:5,groupName:"Daily Objects & Miscellaneous",word:"belong to",meaning:"thuộc về",note:null,example:"This briefcase belongs to the manager.",image:BASE+"belong_to.png"},
+  {id:50,group:5,groupName:"Daily Objects & Miscellaneous",word:"the copier",meaning:"máy photocopy",note:null,example:"The copier is out of paper.",image:BASE+"the_copier.png"},
+  {id:51,group:5,groupName:"Daily Objects & Miscellaneous",word:"briefcase",meaning:"cặp tài liệu",note:null,example:"He carried a leather briefcase.",image:BASE+"briefcase.png"},
+  {id:52,group:5,groupName:"Daily Objects & Miscellaneous",word:"ink cartridge",meaning:"hộp mực",note:null,example:"The printer needs a new ink cartridge.",image:BASE+"ink_cartridge.png"},
+  {id:53,group:5,groupName:"Daily Objects & Miscellaneous",word:"plane",meaning:"máy bay",note:null,example:"The plane arrived late.",image:BASE+"plane.png"},
+  {id:54,group:5,groupName:"Daily Objects & Miscellaneous",word:"steak",meaning:"bít tết",note:null,example:"He ordered a steak for dinner.",image:BASE+"steak.png"},
+  {id:55,group:5,groupName:"Daily Objects & Miscellaneous",word:"place the order",meaning:"đặt hàng",note:null,example:"She placed the order online.",image:BASE+"place_the_order.png"},
+  {id:56,group:5,groupName:"Daily Objects & Miscellaneous",word:"booklet",meaning:"cuốn sổ nhỏ / tài liệu nhỏ",note:null,example:"The booklet contains important information.",image:BASE+"booklet.png"},
+  {id:57,group:5,groupName:"Daily Objects & Miscellaneous",word:"enough",meaning:"đủ",note:null,example:"We have enough chairs for everyone.",image:BASE+"enough.png"},
+  {id:58,group:5,groupName:"Daily Objects & Miscellaneous",word:"pay phone",meaning:"điện thoại công cộng",note:null,example:"He used a pay phone outside the station.",image:BASE+"pay_phone.png"}
 ];
 
 var TOTAL = VOCAB.length;
 var learned = new Set();
-var currentGroup = 0;
 var currentMode = 'cards';
+var currentGroup = 0;
+var fcIndex = 0;
+var fcFlipped = false;
 var quizQuestions = [], quizIndex = 0, quizScore = 0, quizAnswered = false;
 var matchPairs = [], matchSelected = null, matchedCount = 0;
 
+function filteredVocab() {
+  return currentGroup === 0 ? VOCAB : VOCAB.filter(function(v) { return v.group === currentGroup; });
+}
+
+// TTS
+var bestVoice = null;
+function loadVoice() {
+  var voices = window.speechSynthesis.getVoices();
+  var pref = ['Google US English','Microsoft Aria Online','Samantha','Alex'];
+  for (var i = 0; i < pref.length; i++) {
+    var f = voices.find(function(v) { return v.name.indexOf(pref[i]) !== -1; });
+    if (f) { bestVoice = f; break; }
+  }
+  if (!bestVoice) bestVoice = voices.find(function(v) { return v.lang === 'en-US'; }) || voices[0] || null;
+}
+if (window.speechSynthesis) { loadVoice(); window.speechSynthesis.onvoiceschanged = loadVoice; }
+
+function cleanForSpeech(t) {
+  return t.replace(/\s*\(.*?\)\s*/g,' ').replace(/\bsth\b/gi,'something').replace(/\bsb\b/gi,'somebody').trim();
+}
+function doSpeak(which) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  var v = filteredVocab()[fcIndex] || VOCAB[0];
+  var text = which === 'word' ? cleanForSpeech(v.word) : v.example;
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+  if (bestVoice) u.voice = bestVoice;
+  window.speechSynthesis.speak(u);
+}
+
 function updateProgress() {
   var n = learned.size;
-  document.getElementById('progressFill').style.width = (n/TOTAL*100)+'%';
+  document.getElementById('progressFill').style.width = (n / TOTAL * 100) + '%';
   document.getElementById('progressCount').textContent = n + ' / ' + TOTAL;
   document.getElementById('statLearned').textContent = n;
   document.getElementById('statLeft').textContent = TOTAL - n;
-  document.getElementById('statTotal').textContent = TOTAL;
 }
+
+function setImg(imgId, noImgId, src) {
+  var img = document.getElementById(imgId);
+  var noImg = document.getElementById(noImgId);
+  img.src = src;
+  img.style.display = 'block';
+  noImg.style.display = 'none';
+  img.onerror = function() { this.style.display = 'none'; noImg.style.display = 'block'; };
+}
+
+// TABS
 function getGroups() {
   var gMap = {};
-  VOCAB.forEach(function(v) { if(!gMap[v.group]) gMap[v.group] = v.groupName; });
-  return Object.entries(gMap).map(function(e) { return {id:parseInt(e[0]),name:e[1]}; });
+  VOCAB.forEach(function(v) { if (!gMap[v.group]) gMap[v.group] = v.groupName; });
+  return Object.entries(gMap).map(function(e) { return {id:parseInt(e[0]), name:e[1]}; });
 }
 function buildTabs() {
   var tabs = document.getElementById('groupTabs');
   tabs.innerHTML = '';
   var btn0 = document.createElement('button');
-  btn0.className = 'tab-btn active';
-  btn0.textContent = 'T\u1ea5t c\u1ea3';
-  btn0.onclick = function() { selectGroup(0); };
-  btn0.setAttribute('data-g','0');
+  btn0.className = 'tab-btn active'; btn0.textContent = 'Tất cả';
+  btn0.setAttribute('data-g','0'); btn0.onclick = function() { selectGroup(0); };
   tabs.appendChild(btn0);
   getGroups().forEach(function(g) {
     var btn = document.createElement('button');
-    btn.className = 'tab-btn';
-    btn.textContent = g.name;
-    btn.onclick = function() { selectGroup(g.id); };
-    btn.setAttribute('data-g', g.id);
+    btn.className = 'tab-btn'; btn.textContent = g.name;
+    btn.setAttribute('data-g', g.id); btn.onclick = function() { selectGroup(g.id); };
     tabs.appendChild(btn);
   });
 }
 function selectGroup(gid) {
-  currentGroup = gid;
+  currentGroup = gid; fcIndex = 0;
   document.querySelectorAll('.tab-btn').forEach(function(b) {
     b.classList.toggle('active', parseInt(b.getAttribute('data-g')) === gid);
   });
-  renderCurrentMode();
+  if (currentMode === 'cards') renderFC();
+  else if (currentMode === 'quiz') renderQuiz();
+  else renderMatch();
 }
-function filteredVocab() {
-  return currentGroup === 0 ? VOCAB : VOCAB.filter(function(v) { return v.group === currentGroup; });
+
+// FLASHCARD
+function renderFC() {
+  var vocab = filteredVocab();
+  if (!vocab.length) return;
+  if (fcIndex >= vocab.length) fcIndex = 0;
+  var v = vocab[fcIndex];
+  var isLearned = learned.has(v.id);
+  document.getElementById('fcCounter').textContent = (fcIndex + 1) + ' / ' + vocab.length;
+  document.getElementById('fcWord').textContent = v.word;
+  document.getElementById('fcMeaning').textContent = v.meaning;
+  var noteEl = document.getElementById('fcNote');
+  noteEl.textContent = v.note ? '[!] ' + v.note : '';
+  noteEl.style.display = v.note ? '' : 'none';
+  document.getElementById('fcExample').textContent = 'Vd: ' + v.example;
+  setImg('fcImgFront', 'fcNoImgFront', v.image);
+  setImg('fcImgBack', 'fcNoImgBack', v.image);
+  document.getElementById('fcFront').classList.toggle('learned', isLearned);
+  document.getElementById('fcBadge').style.display = isLearned ? 'inline-block' : 'none';
+  var btn = document.getElementById('fcLearnedBtn');
+  btn.textContent = isLearned ? '✕ Bỏ đánh dấu' : '✓ Đã thuộc';
+  btn.className = 'fc-learned-btn ' + (isLearned ? 'yes' : 'no');
+  document.getElementById('btnPrev').disabled = fcIndex === 0;
+  document.getElementById('btnNext').disabled = fcIndex === vocab.length - 1;
+  if (fcFlipped) { fcFlipped = false; document.getElementById('fcScene').classList.remove('flipped'); }
 }
-function renderCards() {
-  var container = document.getElementById('cardsContainer');
-  container.innerHTML = '';
-  var byGroup = {};
-  filteredVocab().forEach(function(v) {
-    if(!byGroup[v.group]) byGroup[v.group] = {name:v.groupName, items:[]};
-    byGroup[v.group].items.push(v);
-  });
-  Object.values(byGroup).forEach(function(g) {
-    var sec = document.createElement('div');
-    var title = document.createElement('div');
-    title.className = 'group-title';
-    title.textContent = g.name;
-    sec.appendChild(title);
-    var grid = document.createElement('div');
-    grid.className = 'vocab-grid';
-    g.items.forEach(function(v) { grid.appendChild(makeCard(v)); });
-    sec.appendChild(grid);
-    container.appendChild(sec);
-  });
+function flipCard() { fcFlipped = !fcFlipped; document.getElementById('fcScene').classList.toggle('flipped', fcFlipped); }
+function goCard(dir) {
+  var vocab = filteredVocab();
+  fcIndex = Math.max(0, Math.min(vocab.length - 1, fcIndex + dir));
+  renderFC();
 }
-function makeCard(v) {
-  var wrap = document.createElement('div');
-  wrap.className = 'card-wrap'; wrap.id = 'card-'+v.id;
-  var inner = document.createElement('div');
-  inner.className = 'card-inner';
-  var front = document.createElement('div');
-  front.className = 'card-front' + (learned.has(v.id) ? ' learned' : '');
-  front.innerHTML = '<div><div class="learned-badge">\u2713 \u0110\u00c3 THU\u1ed8C</div><div class="card-word">'+v.word+'</div><div class="card-hint">Nh\u1ea5n \u0111\u1ec3 xem ngh\u0129a</div></div><div class="card-flip-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>l\u1eadt th\u1ebb</div>';
-  var back = document.createElement('div');
-  back.className = 'card-back';
-  var noteHtml = v.note ? '<div class="back-note">[!] '+v.note+'</div>' : '';
-  var btnBg = learned.has(v.id) ? '#c92a2a' : '#2f9e44';
-  var btnTxt = learned.has(v.id) ? '\u2715 B\u1ecf \u0111\u00e1nh d\u1ea5u' : '\u2713 \u0110\u00e3 thu\u1ed9c';
-  back.innerHTML = '<div class="back-label">Ngh\u0129a</div><div class="back-meaning">'+v.meaning+'</div>'+noteHtml+'<div class="back-example">Vd: '+v.example+'</div><button onclick="toggleLearned(event,'+v.id+')" style="margin-top:4px;padding:7px 14px;border-radius:99px;border:none;background:'+btnBg+';color:#fff;font-family:Nunito,sans-serif;font-size:12px;font-weight:800;cursor:pointer;align-self:flex-start;">'+btnTxt+'</button>';
-  inner.appendChild(front); inner.appendChild(back); wrap.appendChild(inner);
-  wrap.onclick = function(e) { if(e.target.tagName === 'BUTTON') return; wrap.classList.toggle('flipped'); };
-  return wrap;
+function toggleLearnedFC() {
+  var v = filteredVocab()[fcIndex];
+  if (learned.has(v.id)) learned.delete(v.id); else learned.add(v.id);
+  updateProgress(); renderFC();
 }
-function toggleLearned(e, id) {
-  e.stopPropagation();
-  if(learned.has(id)) learned.delete(id); else learned.add(id);
-  updateProgress(); renderCards();
-}
-function buildQuizQuestions(vocab) {
-  var all = vocab.slice().sort(function() { return Math.random()-.5; }).slice(0, Math.min(vocab.length, 10));
+
+// QUIZ
+function buildQuiz() {
+  var vocab = filteredVocab();
+  var all = vocab.slice().sort(function() { return Math.random() - .5; }).slice(0, Math.min(vocab.length, 10));
   return all.map(function(v) {
-    var wrongs = VOCAB.filter(function(x) { return x.id !== v.id; }).sort(function() { return Math.random()-.5; }).slice(0,3).map(function(x) { return x.meaning; });
-    var opts = [v.meaning].concat(wrongs).sort(function() { return Math.random()-.5; });
-    return {vocab:v, opts:opts, correct:v.meaning};
+    var wrongs = VOCAB.filter(function(x) { return x.id !== v.id; })
+      .sort(function() { return Math.random() - .5; }).slice(0, 3).map(function(x) { return x.meaning; });
+    var opts = [v.meaning].concat(wrongs).sort(function() { return Math.random() - .5; });
+    return { vocab: v, opts: opts, correct: v.meaning };
   });
 }
 function renderQuiz() {
-  quizQuestions = buildQuizQuestions(filteredVocab());
-  quizIndex = 0; quizScore = 0; quizAnswered = false;
-  renderQuizQuestion();
+  quizQuestions = buildQuiz(); quizIndex = 0; quizScore = 0; quizAnswered = false;
+  renderQuizQ();
 }
-function renderQuizQuestion() {
-  var container = document.getElementById('quizContainer');
-  if(quizIndex >= quizQuestions.length) {
-    var pct = Math.round(quizScore/quizQuestions.length*100);
-    var label = pct >= 90 ? 'Xu\u1ea5t s\u1eafc!' : pct >= 70 ? 'T\u1ed1t l\u1eafm!' : pct >= 50 ? 'C\u1ed1 l\u00ean!' : '\u00d4n l\u1ea1i nh\u00e9!';
-    container.innerHTML = '<div class="quiz-score-card"><div class="score-emoji">'+label+'</div><div class="score-num">'+quizScore+'/'+quizQuestions.length+'</div><div class="score-label">\u0110i\u1ec3m c\u1ee7a b\u1ea1n: '+pct+'%</div><button class="score-retry" onclick="renderQuiz()">L\u00e0m l\u1ea1i</button></div>';
+function renderQuizQ() {
+  var c = document.getElementById('quizContainer');
+  if (quizIndex >= quizQuestions.length) {
+    var pct = Math.round(quizScore / quizQuestions.length * 100);
+    var emoji = pct >= 90 ? 'Xuất sắc!' : pct >= 70 ? 'Tốt lắm!' : pct >= 50 ? 'Cố lên!' : 'Ôn lại nhé!';
+    c.innerHTML = '<div class="quiz-score-card"><div class="score-emoji">'+emoji+'</div><div class="score-num">'+quizScore+'/'+quizQuestions.length+'</div><div class="score-label">Điểm: '+pct+'%</div><button class="score-retry" onclick="renderQuiz()">Làm lại ↺</button></div>';
     return;
   }
   var q = quizQuestions[quizIndex]; quizAnswered = false;
-  var optsHtml = q.opts.map(function(opt) {
-    return '<button class="quiz-opt" onclick="selectQuizOpt(this,'+JSON.stringify(opt)+','+q.vocab.id+')">'+opt+'</button>';
+  var optsHtml = q.opts.map(function(opt, i) {
+    return '<button class="quiz-opt" id="qopt'+i+'" onclick="pickOpt('+i+','+q.vocab.id+')">'+opt+'</button>';
   }).join('');
-  var nextTxt = quizIndex+1 < quizQuestions.length ? 'C\u00e2u ti\u1ebfp \u2192' : 'Xem k\u1ebft qu\u1ea3 \u2192';
-  container.innerHTML = '<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>\u0110i\u1ec3m: <strong>'+quizScore+'</strong></span></div><div class="quiz-card"><div class="quiz-prompt-label">T\u1eeb / C\u1ee5m t\u1eeb</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div><div class="quiz-options" id="quizOpts">'+optsHtml+'</div><div class="quiz-feedback" id="quizFeedback"></div><button class="quiz-next-btn" id="quizNext" onclick="nextQuizQ()">'+nextTxt+'</button>';
+  c.innerHTML = '<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>Điểm: <strong>'+quizScore+'</strong></span></div>'+
+    '<div class="quiz-card"><div class="quiz-prompt-label">Từ / Cụm từ</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div>'+
+    '<div class="quiz-options">'+optsHtml+'</div>'+
+    '<div class="quiz-feedback" id="quizFeedback"></div>'+
+    '<button class="quiz-next-btn" id="quizNext" onclick="nextQ()">'+(quizIndex+1 < quizQuestions.length ? 'Câu tiếp →' : 'Xem kết quả →')+'</button>';
 }
-function selectQuizOpt(btn, chosen, vid) {
-  if(quizAnswered) return; quizAnswered = true;
+function pickOpt(i, vid) {
+  if (quizAnswered) return; quizAnswered = true;
   var q = quizQuestions[quizIndex];
   var fb = document.getElementById('quizFeedback');
   document.querySelectorAll('.quiz-opt').forEach(function(b) { b.disabled = true; });
-  if(chosen === q.correct) {
-    btn.classList.add('correct'); quizScore++;
-    fb.textContent = '\u2713 Ch\u00ednh x\u00e1c!';
-    fb.className = 'quiz-feedback show correct';
+  if (q.opts[i] === q.correct) {
+    document.getElementById('qopt'+i).classList.add('correct'); quizScore++;
+    fb.textContent = '✓ Chính xác!'; fb.className = 'quiz-feedback show correct';
     learned.add(vid); updateProgress();
   } else {
-    btn.classList.add('wrong');
-    fb.textContent = '\u2715 Sai r\u1ed3i! \u0110\u00e1p \u00e1n: ' + q.correct;
-    fb.className = 'quiz-feedback show wrong';
-    document.querySelectorAll('.quiz-opt').forEach(function(b) { if(b.textContent.trim() === q.correct) b.classList.add('correct'); });
+    document.getElementById('qopt'+i).classList.add('wrong');
+    fb.textContent = '✗ Sai rồi! Đáp án: '+q.correct; fb.className = 'quiz-feedback show wrong';
+    q.opts.forEach(function(opt, j) { if (opt === q.correct) document.getElementById('qopt'+j).classList.add('correct'); });
   }
   document.getElementById('quizNext').classList.add('show');
 }
-function nextQuizQ() { quizIndex++; renderQuizQuestion(); }
+function nextQ() { quizIndex++; renderQuizQ(); }
+
+// MATCH
 function renderMatch() {
-  var vocab = filteredVocab().slice().sort(function() { return Math.random()-.5; }).slice(0,8);
+  var vocab = filteredVocab().slice().sort(function() { return Math.random() - .5; }).slice(0, 8);
   matchPairs = vocab; matchSelected = null; matchedCount = 0;
-  var container = document.getElementById('matchContainer');
-  var words = vocab.slice().sort(function() { return Math.random()-.5; });
-  var meanings = vocab.slice().sort(function() { return Math.random()-.5; });
-  var wordsHtml = words.map(function(v) { return '<div class="match-item word" data-id="'+v.id+'" data-type="word" onclick="matchClick(this)">'+v.word+'</div>'; }).join('');
-  var meaningsHtml = meanings.map(function(v) { return '<div class="match-item meaning" data-id="'+v.id+'" data-type="meaning" onclick="matchClick(this)">'+v.meaning+'</div>'; }).join('');
-  container.innerHTML = '<div class="match-header"><h3>N\u1ed1i t\u1eeb v\u1edbi ngh\u0129a \u0111\u00fang</h3><p>Nh\u1ea5n m\u1ed9t t\u1eeb r\u1ed3i nh\u1ea5n ngh\u0129a t\u01b0\u01a1ng \u1ee9ng</p></div><div class="match-grid"><div class="match-col" id="matchWords">'+wordsHtml+'</div><div class="match-col" id="matchMeanings">'+meaningsHtml+'</div></div><div class="match-complete" id="matchComplete"><h3>\u2605 Ho\u00e0n th\u00e0nh!</h3><p>B\u1ea1n \u0111\u00e3 n\u1ed1i \u0111\u00fang t\u1ea5t c\u1ea3 c\u00e1c t\u1eeb!</p></div><div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">L\u00e0m l\u1ea1i</button></div>';
+  var words = vocab.slice().sort(function() { return Math.random() - .5; });
+  var meanings = vocab.slice().sort(function() { return Math.random() - .5; });
+  var c = document.getElementById('matchContainer');
+  c.innerHTML = '<div class="match-header"><h3>Nối từ với nghĩa đúng</h3><p>Nhấn một từ rồi nhấn nghĩa tương ứng</p></div>'+
+    '<div class="match-grid"><div class="match-col">'+
+    words.map(function(v) { return '<div class="match-item word" data-id="'+v.id+'" data-type="word" onclick="matchClick(this)">'+v.word+'</div>'; }).join('')+
+    '</div><div class="match-col">'+
+    meanings.map(function(v) { return '<div class="match-item meaning" data-id="'+v.id+'" data-type="meaning" onclick="matchClick(this)">'+v.meaning+'</div>'; }).join('')+
+    '</div></div><div class="match-complete" id="matchComplete"><h3>★ Hoàn thành!</h3><p>Bạn đã nối đúng tất cả!</p></div>'+
+    '<div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">↺ Làm lại</button></div>';
 }
 function matchClick(el) {
-  if(el.classList.contains('matched')) return;
-  if(!matchSelected) {
+  if (el.classList.contains('matched')) return;
+  if (!matchSelected) {
     document.querySelectorAll('.match-item.selected').forEach(function(e) { e.classList.remove('selected'); });
     el.classList.add('selected'); matchSelected = el;
   } else {
-    if(el === matchSelected) { el.classList.remove('selected'); matchSelected=null; return; }
+    if (el === matchSelected) { el.classList.remove('selected'); matchSelected = null; return; }
     var a = matchSelected, b = el;
-    var aId = parseInt(a.getAttribute('data-id')), bId = parseInt(b.getAttribute('data-id'));
-    if(aId === bId && a.getAttribute('data-type') !== b.getAttribute('data-type')) {
+    var aId = parseInt(a.dataset.id), bId = parseInt(b.dataset.id);
+    if (aId === bId && a.dataset.type !== b.dataset.type) {
       a.classList.remove('selected'); a.classList.add('matched'); b.classList.add('matched');
       matchedCount++; learned.add(aId); updateProgress();
-      if(matchedCount === matchPairs.length) setTimeout(function() { document.getElementById('matchComplete').classList.add('show'); }, 300);
+      if (matchedCount === matchPairs.length) setTimeout(function() { document.getElementById('matchComplete').classList.add('show'); }, 300);
     } else {
       a.classList.add('wrong-flash'); b.classList.add('wrong-flash');
       setTimeout(function() { a.classList.remove('wrong-flash','selected'); b.classList.remove('wrong-flash'); }, 500);
@@ -378,20 +531,19 @@ function matchClick(el) {
     matchSelected = null;
   }
 }
+
 function switchMode(mode) {
-  currentMode = mode;
+  currentMode = mode; fcIndex = 0;
   ['cards','quiz','match'].forEach(function(m) {
-    document.getElementById('mode-'+m).style.display = m===mode ? 'block' : 'none';
-    document.getElementById('btn-'+m).classList.toggle('active', m===mode);
+    document.getElementById('mode-'+m).style.display = m === mode ? 'block' : 'none';
+    document.getElementById('btn-'+m).classList.toggle('active', m === mode);
   });
-  renderCurrentMode();
+  if (mode === 'cards') renderFC();
+  else if (mode === 'quiz') renderQuiz();
+  else renderMatch();
 }
-function renderCurrentMode() {
-  if(currentMode==='cards') renderCards();
-  else if(currentMode==='quiz') renderQuiz();
-  else if(currentMode==='match') renderMatch();
-}
-buildTabs(); renderCards(); updateProgress();
+
+buildTabs(); renderFC(); updateProgress();
 </script>
 </body>
 </html>
