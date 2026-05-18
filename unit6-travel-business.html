@@ -387,6 +387,7 @@ function selectTab(gid, el) {
   else renderMatch();
 }
 
+function isMobile(){return window.innerWidth<=600;}
 function renderFC() {
   var vocab = filteredVocab();
   if (!vocab.length) return;
@@ -417,7 +418,6 @@ function renderFC() {
   document.getElementById('btnNext').disabled = fcIndex === vocab.length - 1;
 }
 
-function isMobile(){return window.innerWidth<=600;}
 function flipCard(){
   var scene=document.getElementById('fcScene');
   scene.classList.toggle('flipped');
