@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Test 3 – Part 2</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #eef3f8;
+    color: #1a2a3a;
+    padding-bottom: 60px;
+  }
+
+  /* AUDIO */
+  .audio-wrap {
+    background: #1a2535;
+    padding: 14px 24px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .audio-wrap audio { width: 100%; height: 40px; }
+
+  /* MAIN */
+  .main { max-width: 700px; margin: 0 auto; padding: 32px 20px; }
+
+  .part-title {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #3a5a7a;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+
+  /* QUESTION ROW */
+  .q-row { margin-bottom: 20px; }
+
+  .q-num {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #1a2a3a;
+    margin-bottom: 10px;
+  }
+
+  .options-row {
+    display: flex;
+    gap: 32px;
+    align-items: center;
+    padding-left: 4px;
+  }
+
+  .radio-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #1a2a3a;
+    user-select: none;
+  }
+
+  .radio-label input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid #8aaac0;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .radio-label input[type="radio"]:checked {
+    border-color: #2a6aad;
+    background: #2a6aad;
+    box-shadow: inset 0 0 0 3px #eef3f8;
+  }
+
+  /* After submit */
+  .radio-label.correct-choice { color: #1a7a42; font-weight: 600; }
+  .radio-label.correct-choice input[type="radio"] {
+    border-color: #27ae60 !important;
+    background: #27ae60 !important;
+    box-shadow: inset 0 0 0 3px #eef3f8;
+  }
+  .radio-label.wrong-choice { color: #c02020; }
+  .radio-label.wrong-choice input[type="radio"] {
+    border-color: #e03030 !important;
+    background: #e03030 !important;
+    box-shadow: inset 0 0 0 3px #eef3f8;
+  }
+  .radio-label.show-correct { color: #1a7a42; font-weight: 600; }
+  .radio-label.show-correct input[type="radio"] {
+    border-color: #27ae60 !important;
+    background: #27ae60 !important;
+    box-shadow: inset 0 0 0 3px #eef3f8;
+  }
+
+  /* SCRIPT REVEAL */
+  .script-box {
+    display: none;
+    margin-top: 12px;
+    background: #fff;
+    border-left: 4px solid #2a6aad;
+    border-radius: 0 8px 8px 0;
+    padding: 14px 16px;
+  }
+  .script-box.show { display: block; }
+
+  .script-line { font-size: 0.9rem; line-height: 1.6; color: #1a2a3a; }
+  .speaker { color: #2a6aad; font-weight: 600; }
+  .script-vi { font-size: 0.85rem; color: #6a8aaa; font-style: italic; margin-top: 2px; margin-bottom: 8px; }
+
+  .explain-box {
+    margin-top: 10px;
+    background: #fffbf0;
+    border-left: 4px solid #f0a800;
+    border-radius: 0 6px 6px 0;
+    padding: 10px 14px;
+    font-size: 0.87rem;
+    line-height: 1.65;
+    color: #5a4010;
+  }
+  .explain-box strong { color: #c07800; }
+
+  .vocab-line {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: #5a7a9a;
+  }
+  .vocab-line em { color: #2a6aad; font-style: normal; font-weight: 500; }
+
+  .divider { border: none; border-top: 1px solid #ccd8e4; margin: 4px 0 20px; }
+
+  /* SUBMIT */
+  .submit-wrap { margin-top: 36px; text-align: center; }
+  .btn-submit {
+    background: #2a6aad;
+    color: #fff;
+    border: none;
+    padding: 13px 44px;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-submit:hover { background: #1a5090; }
+  .btn-submit:disabled { background: #aabccc; cursor: default; }
+
+  /* RESULT */
+  #result-panel {
+    display: none;
+    margin-top: 36px;
+    background: #fff;
+    border: 2px solid #2a6aad;
+    border-radius: 12px;
+    padding: 28px 24px;
+    text-align: center;
+  }
+  #result-panel.show { display: block; }
+  #result-panel h2 { font-size: 1rem; color: #3a5a7a; margin-bottom: 10px; text-transform: uppercase; letter-spacing: 1px; }
+  .score-big { font-size: 3rem; font-weight: 700; color: #1a2a3a; line-height: 1; }
+  .score-big span { color: #2a6aad; font-size: 1.5rem; }
+  #result-msg { margin-top: 12px; color: #5a7a9a; font-size: 0.95rem; }
+</style>
+</head>
+<body>
+
+<div class="audio-wrap">
+  <!-- Thay src thành URL file audio trên Moodle -->
+  <audio controls>
+    <source src="PART_2_-_TEST_3.mp3" type="audio/mpeg">
+  </audio>
+</div>
+
+<div class="main">
+  <div class="part-title">Part 2 &nbsp;·&nbsp; Test 3 &nbsp;·&nbsp; Questions 7–31</div>
+  <div id="quiz"></div>
+
+  <div class="submit-wrap">
+    <button class="btn-submit" id="btn-submit" onclick="submitAll()">Nộp bài &amp; Xem đáp án</button>
+  </div>
+
+  <div id="result-panel">
+    <h2>Kết quả</h2>
+    <div class="score-big" id="final-score">— <span>/ 25</span></div>
+    <p id="result-msg"></p>
+  </div>
+</div>
+
+<script>
+const questions = [
+  { num:7, ans:0, script:{q_en:"M-Au: Why is there no flour on the shelf?",q_vi:"Tại sao không có bột mì trên kệ?",a_en:"W-Br: (A) Because it's out of stock.",a_vi:"(A) Vì nó đã hết hàng rồi."}, explanation:"<strong>(A) ✓</strong> Câu hỏi <em>Why</em> → \"hết hàng\" trả lời trực tiếp lý do.<br>(B) Sai: \"roses\" bẫy phát âm flour ↔ flower.<br>(C) Sai: Why không trả lời bằng Yes/No.", vocab:"flour 밀가루 | shelf 선반 | out of stock 품절" },
+  { num:8, ans:0, script:{q_en:"M-Au: When will the catering company arrive?",q_vi:"Công ty phục vụ ăn uống sẽ đến khi nào?",a_en:"W-Am: (A) At four o'clock.",a_vi:"(A) Lúc 4 giờ."}, explanation:"<strong>(A) ✓</strong> <em>When</em> → thời gian cụ thể \"At four o'clock\".<br>(B) Sai: \"delicious\" liên tưởng \"catering\".<br>(C) Sai: \"vegetarian\" liên tưởng \"catering\".", vocab:"catering 출장 연회 | vegetarian 채식주의자 | flavor 맛, 풍미" },
+  { num:9, ans:2, script:{q_en:"M-Au: When's the meeting scheduled to start?",q_vi:"Cuộc họp dự kiến bắt đầu lúc mấy giờ?",a_en:"M-Cn: (C) Right after lunch.",a_vi:"(C) Ngay sau bữa trưa."}, explanation:"<strong>(C) ✓</strong> <em>When</em> → \"Right after lunch\" là thời điểm hợp lý.<br>(A) Sai: networking trả lời Where.<br>(B) Sai: \"started\" bẫy phái sinh từ \"start\".", vocab:"be scheduled to ~할 예정이다 | networking 인맥 형성" },
+  { num:10, ans:1, script:{q_en:"W-Am: How much will the repairs cost?",q_vi:"Chi phí sửa chữa sẽ là bao nhiêu?",a_en:"M-Cn: (B) Around 200 dollars.",a_vi:"(B) Khoảng 200 đô la."}, explanation:"<strong>(B) ✓</strong> <em>How much</em> → số tiền cụ thể \"200 dollars\".<br>(A) Sai: \"pairs\" bẫy phát âm gần \"repairs\".<br>(C) Sai: không liên quan.", vocab:"repairs 수리 | pair 쌍, 짝" },
+  { num:11, ans:1, script:{q_en:"M-Au: You went to the dentist this morning, didn't you?",q_vi:"Bạn đã đi gặp nha sĩ sáng nay, phải không?",a_en:"W-Br: (B) Yes, for an annual checkup.",a_vi:"(B) Đúng, để khám sức khỏe định kỳ hàng năm."}, explanation:"<strong>(B) ✓</strong> Câu hỏi đuôi → Yes + thông tin bổ sung liên quan.<br>(A) Sai: \"breakfast\" bẫy liên tưởng \"morning\".<br>(C) Sai: không liên quan.", vocab:"dentist 치과 의사 | annual 연례 | checkup 검진" },
+  { num:12, ans:0, script:{q_en:"W-Am: Where should we put the new printer?",q_vi:"Chúng ta nên đặt máy in mới ở đâu?",a_en:"M-Cn: (A) In the corner by the stairs.",a_vi:"(A) Ở góc bên cạnh cầu thang."}, explanation:"<strong>(A) ✓</strong> <em>Where</em> → địa điểm cụ thể \"In the corner by the stairs\".<br>(B) Sai: không trả lời vị trí.<br>(C) Sai: ink cartridge liên tưởng printer nhưng sai.", vocab:"reusable 재사용할 수 있는 | document 문서 | cartridge 카트리지" },
+  { num:13, ans:2, script:{q_en:"M-Cn: What type of plant do you have in your office?",q_vi:"Bạn có loại cây nào trong văn phòng?",a_en:"W-Am: (C) One that doesn't require much water.",a_vi:"(C) Loại không cần nhiều nước."}, explanation:"<strong>(C) ✓</strong> <em>What type</em> → mô tả đặc điểm loại cây phù hợp.<br>(A) Sai: \"desk\" liên tưởng \"office\".<br>(B) Sai: không nêu loại cây.", vocab:"plant 식물 | require 필요로 하다 | whenever ~할 때마다" },
+  { num:14, ans:1, script:{q_en:"M-Au: There was a sale at the furniture store.",q_vi:"Cửa hàng nội thất đã có đợt giảm giá.",a_en:"W-Am: (B) Did you buy anything?",a_vi:"(B) Bạn có mua gì không?"}, explanation:"<strong>(B) ✓</strong> Câu thông báo → hỏi lại tự nhiên \"có mua gì không?\".<br>(A) Sai: \"storage\" bẫy phát âm gần \"store\".<br>(C) Sai: không hợp logic.", vocab:"furniture 가구 | storage 보관소 | receipt 영수증" },
+  { num:15, ans:0, script:{q_en:"M-Au: Can you show me how to submit a tech help ticket?",q_vi:"Bạn có thể chỉ cho tôi cách nộp phiếu hỗ trợ kỹ thuật không?",a_en:"W-Br: (A) Let me send you the link.",a_vi:"(A) Để tôi gửi link cho bạn."}, explanation:"<strong>(A) ✓</strong> Yêu cầu hỗ trợ → gửi link là cách giải quyết gián tiếp nhưng hợp lý.<br>(B) Sai: \"broken\" liên tưởng \"tech\".<br>(C) Sai: không liên quan.", vocab:"submit 제출하다 | broken 고장 난 | tech help ticket 기술 지원 티켓" },
+  { num:16, ans:0, script:{q_en:"M-Cn: Where is the power button on this device?",q_vi:"Nút nguồn trên thiết bị này ở đâu?",a_en:"M-Au: (A) I've never used that model before.",a_vi:"(A) Tôi chưa bao giờ dùng model đó trước đây."}, explanation:"<strong>(A) ✓</strong> Chưa dùng model đó → không biết vị trí → gián tiếp hợp lý.<br>(B) Sai: How much hỏi giá tiền.<br>(C) Sai: không liên quan.", vocab:"device 장치 | charge 청구하다 | model 모델" },
+  { num:17, ans:1, script:{q_en:"W-Am: Do you want to take a walk now, or would later be better?",q_vi:"Bạn muốn đi dạo ngay bây giờ, hay sau này tiện hơn?",a_en:"W-Br: (B) I'm free to walk now.",a_vi:"(B) Tôi rảnh để đi dạo ngay bây giờ."}, explanation:"<strong>(B) ✓</strong> Câu hỏi lựa chọn A or B → chọn \"now\" + xác nhận \"I'm free\".<br>(A) Sai: \"lake\" liên tưởng \"take a walk\".<br>(C) Sai: \"fitness tracker\" liên tưởng \"walk\".", vocab:"take a walk 산책하다 | nearby 인근 | fitness tracker 건강 지표 추적기" },
+  { num:18, ans:1, script:{q_en:"M-Cn: I ordered some new equipment for the factory.",q_vi:"Tôi đã đặt một số thiết bị mới cho nhà máy.",a_en:"W-Am: (B) Great—I can't wait to use it.",a_vi:"(B) Tuyệt! Tôi không thể chờ để dùng nó."}, explanation:"<strong>(B) ✓</strong> Thông báo tích cực → phản hồi hào hứng \"Great\" rất tự nhiên.<br>(A) Sai: \"new\" bẫy phát âm gần \"news\".<br>(C) Sai: không liên quan.", vocab:"equipment 장비 | car dealership 자동차 영업소" },
+  { num:19, ans:0, script:{q_en:"M-Cn: There's a nice place to rent on Mercer Street.",q_vi:"Có một chỗ khá tốt để thuê trên phố Mercer.",a_en:"W-Am: (A) I just renewed my current lease.",a_vi:"(A) Tôi vừa gia hạn hợp đồng thuê hiện tại."}, explanation:"<strong>(A) ✓</strong> Vừa gia hạn hợp đồng → không cần chỗ mới → phản hồi hợp lý.<br>(B) Sai: \"great\" liên tưởng \"nice\".<br>(C) Sai: \"rental\" bẫy phái sinh từ \"rent\".", vocab:"rent 임대하다 | renew 갱신하다 | lease 임대차 계약 | rental application 임대 신청서" },
+  { num:20, ans:2, script:{q_en:"W-Br: Is the heating system working?",q_vi:"Hệ thống sưởi có hoạt động không?",a_en:"M-Cn: (C) I just called maintenance.",a_vi:"(C) Tôi vừa gọi cho bộ phận bảo trì."}, explanation:"<strong>(C) ✓</strong> Gián tiếp cho biết hệ thống có vấn đề → đã gọi bảo trì.<br>(A) Sai: \"Web site\" không liên quan.<br>(B) Sai: không liên quan.", vocab:"heating system 난방 장치 | maintenance 유지보수" },
+  { num:21, ans:2, script:{q_en:"M-Au: Isn't the roadwork in front of city hall finished yet?",q_vi:"Công trình đường phố phía trước tòa thị chính chưa xong à?",a_en:"M-Cn: (C) No, they still have another month to go.",a_vi:"(C) Chưa, họ vẫn còn một tháng nữa mới xong."}, explanation:"<strong>(C) ✓</strong> Câu phủ định → No + giải thích còn một tháng nữa → rất tự nhiên.<br>(A) Sai: \"finished\" lặp từ sai ngữ cảnh.<br>(B) Sai: \"traffic\" bẫy liên tưởng \"roadwork\".", vocab:"roadwork 도로 공사 | city hall 시청 | traffic 교통(량)" },
+  { num:22, ans:0, script:{q_en:"W-Br: Who will lead the new-employee training today?",q_vi:"Ai sẽ dẫn dắt buổi đào tạo nhân viên mới hôm nay?",a_en:"M-Au: (A) We're using a recorded video.",a_vi:"(A) Chúng tôi sẽ dùng video đã được ghi sẵn."}, explanation:"<strong>(A) ✓</strong> Who hỏi người dẫn → dùng video = không có người dẫn → gián tiếp hợp lý.<br>(B) Sai: Yes/No không hợp với Who.<br>(C) Sai: Classroom trả lời Where.", vocab:"recorded 녹화된 | lead 진행하다 | training 교육" },
+  { num:23, ans:2, script:{q_en:"M-Au: Is the safety inspection scheduled for this month or next month?",q_vi:"Kiểm tra an toàn được lên lịch tháng này hay tháng sau?",a_en:"W-Br: (C) It's this Wednesday.",a_vi:"(C) Là thứ Tư tuần này."}, explanation:"<strong>(C) ✓</strong> Câu hỏi lựa chọn tháng → trả lời ngày cụ thể trong tháng này → tự nhiên.<br>(A) Sai: \"saved\" bẫy phát âm gần \"safety\".<br>(B) Sai: \"supervisor\" liên tưởng \"safety inspection\".", vocab:"safety inspection 안전 점검 | be scheduled for ~로 예정되다 | supervisor 감독관" },
+  { num:24, ans:0, script:{q_en:"W-Br: When is the harvest festival taking place?",q_vi:"Lễ hội thu hoạch sẽ diễn ra khi nào?",a_en:"M-Au: (A) It's a week from tomorrow.",a_vi:"(A) Một tuần kể từ ngày mai."}, explanation:"<strong>(A) ✓</strong> <em>When</em> → mốc thời gian cụ thể \"a week from tomorrow\".<br>(B) Sai: \"Sure\" là dạng Yes, không hợp với When.<br>(C) Sai: Where hỏi địa điểm.", vocab:"harvest 수확, 추수 | take place 열리다 | art museum 미술관" },
+  { num:25, ans:1, script:{q_en:"M-Cn: Was your new laptop expensive?",q_vi:"Laptop mới của bạn có đắt không?",a_en:"M-Au: (B) I had a discount coupon.",a_vi:"(B) Tôi có phiếu giảm giá."}, explanation:"<strong>(B) ✓</strong> Be động từ hỏi giá → \"có coupon\" gián tiếp cho biết không đắt.<br>(A) Sai: \"new password\" liên tưởng \"new laptop\".<br>(C) Sai: không liên quan.", vocab:"expensive 비싼 | password 비밀번호 | discount 할인" },
+  { num:26, ans:2, script:{q_en:"W-Br: Why don't we go on our camping trip next weekend?",q_vi:"Sao chúng ta không đi cắm trại vào cuối tuần tới?",a_en:"W-Am: (C) I have a performance scheduled with my band.",a_vi:"(C) Tôi có buổi biểu diễn đã lên lịch với ban nhạc."}, explanation:"<strong>(C) ✓</strong> Đề xuất đi cắm trại → từ chối bằng lý do có lịch biểu diễn.<br>(A) Sai: \"table lamp\" không liên quan.<br>(B) Sai: lặp \"go\" – bẫy phái sinh.", vocab:"performance 공연 | scheduled 예정된 | camping trip 캠핑 여행" },
+  { num:27, ans:1, script:{q_en:"M-Cn: The workshop for this afternoon was postponed, wasn't it?",q_vi:"Workshop chiều nay đã bị hoãn, phải không?",a_en:"M-Au: (B) I haven't checked my e-mail.",a_vi:"(B) Tôi chưa kiểm tra email."}, explanation:"<strong>(B) ✓</strong> Câu hỏi đuôi → chưa biết vì chưa check email → rất tự nhiên.<br>(A) Sai: \"post office\" bẫy phát âm gần \"postponed\".<br>(C) Sai: \"ticket\" liên tưởng \"workshop\".", vocab:"postpone 연기하다 | workshop 워크숍 | post office 우체국" },
+  { num:28, ans:2, script:{q_en:"W-Am: How were our production figures last month?",q_vi:"Số liệu sản xuất tháng trước của chúng ta như thế nào?",a_en:"M-Au: (C) We were closed down for a week.",a_vi:"(C) Chúng tôi đã phải đóng cửa trong một tuần."}, explanation:"<strong>(C) ✓</strong> <em>How</em> hỏi tình hình → \"đóng cửa 1 tuần\" giải thích sản xuất kém.<br>(A) Sai: \"produce\" bẫy phái sinh \"production\".<br>(B) Sai: When hỏi thời gian.", vocab:"production 생산(량) | figure 수치 | electric car 전기차 | be closed down 폐쇄되다" },
+  { num:29, ans:2, script:{q_en:"W-Br: When can I see the speech therapist?",q_vi:"Khi nào tôi có thể gặp chuyên gia trị liệu ngôn ngữ?",a_en:"M-Cn: (C) How about tomorrow afternoon?",a_vi:"(C) Ngày mai buổi chiều thì sao?"}, explanation:"<strong>(C) ✓</strong> <em>When</em> → đề xuất thời gian cụ thể \"tomorrow afternoon\".<br>(A) Sai: \"session\" liên tưởng \"speech\".<br>(B) Sai: \"microphone\" liên tưởng \"speech\".", vocab:"speech therapist 언어 치료사 | session 세션 | microphone 마이크" },
+  { num:30, ans:1, script:{q_en:"W-Am: Aren't you picking up the clients from the airport?",q_vi:"Bạn không đón khách hàng từ sân bay à?",a_en:"M-Cn: (B) No, I believe Tomoko is doing that.",a_vi:"(B) Không, tôi nghĩ Tomoko sẽ làm việc đó."}, explanation:"<strong>(B) ✓</strong> Câu phủ định → No + giải thích người khác sẽ đón.<br>(A) Sai: \"demonstration\" không liên quan.<br>(C) Sai: \"He\" không có người được đề cập trước.", vocab:"pick up ~을 차에 태우러 가다 | client 고객 | demonstration 설명, 시연 | aisle 통로" },
+  { num:31, ans:2, script:{q_en:"W-Am: How was your morning client meeting?",q_vi:"Cuộc họp khách hàng buổi sáng của bạn như thế nào?",a_en:"M-Au: (C) The contract is now officially signed.",a_vi:"(C) Hợp đồng bây giờ đã được ký kết chính thức."}, explanation:"<strong>(C) ✓</strong> <em>How</em> hỏi kết quả → \"hợp đồng đã ký\" cho biết cuộc họp thành công.<br>(A) Sai: \"meet\" bẫy liên tưởng \"meeting\".<br>(B) Sai: Yes/No không hợp với How.", vocab:"conference room 회의실 | officially 공식적으로 | sign a contract 계약을 맺다" }
+];
+
+let submitted = false;
+
+function renderQuiz() {
+  const container = document.getElementById('quiz');
+  questions.forEach((q, i) => {
+    const div = document.createElement('div');
+    div.className = 'q-row';
+    div.id = `qrow-${i}`;
+    div.innerHTML = `
+      <div class="q-num">${i + 1}.</div>
+      <div class="options-row">
+        ${['A','B','C'].map((letter, j) => `
+          <label class="radio-label" id="lbl-${i}-${j}">
+            <input type="radio" name="q${i}" value="${j}"> ${letter}
+          </label>`).join('')}
+      </div>
+      <div class="script-box" id="script-${i}">
+        <div class="script-line"><span class="speaker">Q:</span> ${q.script.q_en}</div>
+        <div class="script-vi">${q.script.q_vi}</div>
+        <div class="script-line"><span class="speaker">A:</span> ${q.script.a_en}</div>
+        <div class="script-vi">${q.script.a_vi}</div>
+        <div class="vocab-line">📚 <em>Vocab:</em> ${q.vocab}</div>
+        <div class="explain-box" style="margin-top:10px">${q.explanation}</div>
+      </div>`;
+    container.appendChild(div);
+    if (i < questions.length - 1) {
+      const hr = document.createElement('hr');
+      hr.className = 'divider';
+      container.appendChild(hr);
+    }
+  });
+}
+
+function submitAll() {
+  if (submitted) return;
+
+  const unanswered = questions.filter((_, i) =>
+    !Array.from(document.querySelectorAll(`input[name="q${i}"]`)).some(r => r.checked)
+  ).length;
+
+  if (unanswered > 0 && !confirm(`Bạn còn ${unanswered} câu chưa trả lời. Vẫn nộp bài?`)) return;
+
+  submitted = true;
+  document.getElementById('btn-submit').disabled = true;
+
+  let correct = 0;
+  questions.forEach((q, i) => {
+    const radios = document.querySelectorAll(`input[name="q${i}"]`);
+    let selected = null;
+    radios.forEach((r, j) => { if (r.checked) selected = j; r.disabled = true; });
+
+    for (let j = 0; j < 3; j++) {
+      const lbl = document.getElementById(`lbl-${i}-${j}`);
+      if (j === selected && selected === q.ans) { lbl.classList.add('correct-choice'); correct++; }
+      else if (j === selected && selected !== q.ans) { lbl.classList.add('wrong-choice'); }
+      else if (j === q.ans && selected !== q.ans) { lbl.classList.add('show-correct'); }
+    }
+
+    document.getElementById(`script-${i}`).classList.add('show');
+  });
+
+  const panel = document.getElementById('result-panel');
+  panel.classList.add('show');
+  document.getElementById('final-score').innerHTML = `${correct} <span>/ 25</span>`;
+  const pct = Math.round(correct / 25 * 100);
+  document.getElementById('result-msg').textContent =
+    pct >= 88 ? '🏆 Xuất sắc! Gần như hoàn hảo!' :
+    pct >= 72 ? '👍 Khá tốt! Ôn lại các câu sai nhé.' :
+    pct >= 50 ? '📚 Cần luyện thêm – đọc kỹ phần giải thích!' :
+    '💪 Hãy nghe lại audio và đọc script để nắm vững hơn.';
+  panel.scrollIntoView({ behavior:'smooth', block:'center' });
+}
+
+renderQuiz();
+</script>
+</body>
+</html>
