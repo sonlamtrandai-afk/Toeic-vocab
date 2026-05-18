@@ -147,9 +147,23 @@
   .stat-label { font-size:10px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.5px; }
 
   @media (max-width:600px) {
-    .fc-inner { height:220px; }
-    .fc-front-right, .fc-back-left { width:130px; }
-    .fc-word { font-size:17px; }
+    .fc-scene { perspective: none; }
+    .fc-inner { height: auto !important; transform: none !important; transition: none !important; transform-style: flat !important; }
+    .fc-scene.flipped .fc-inner { transform: none !important; }
+    .fc-face { position: relative !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; flex-direction: column; border-radius: var(--radius-lg); box-shadow: var(--shadow); width: 100%; }
+    .fc-front { display: flex; }
+    .fc-back { display: none !important; transform: none !important; position: relative !important; }
+    .fc-scene.flipped .fc-front { display: none !important; }
+    .fc-scene.flipped .fc-back { display: flex !important; }
+    .fc-front-left { order:2; padding:16px 18px 18px; align-items:center; text-align:center; }
+    .fc-front-right { order:1; width:100%; height:180px; border-left:none; border-bottom:1.5px solid var(--orange-border); background:#f8f9fa; }
+    .fc-front-right img, .fc-back-left img { object-fit: contain !important; padding: 8px; }
+    .fc-front.learned .fc-front-right { border-bottom-color:var(--green); }
+    .fc-back-left { width:100%; height:180px; border-right:none; border-bottom:1.5px solid var(--orange-border); }
+    .fc-back-right { padding:16px 18px 18px; align-items:center; text-align:center; }
+    .fc-speak-row { justify-content:center; }
+    .fc-word { font-size: 22px; }
+    .fc-meaning { font-size: 17px; }
     .quiz-options { grid-template-columns:1fr; }
     .match-grid { grid-template-columns:1fr; }
   }
@@ -376,6 +390,10 @@ function renderFC() {
   var v = vocab[fcIndex];
   var scene = document.getElementById('fcScene');
   scene.classList.remove('flipped');
+  if(isMobile()){
+    document.getElementById('fcFront').style.display='flex';
+    document.getElementById('fcBack').style.display='none';
+  }
   document.getElementById('fcCounter').textContent = (fcIndex+1) + ' / ' + vocab.length;
   document.getElementById('fcWord').textContent = v.word;
   var front = document.getElementById('fcFront');
@@ -391,7 +409,16 @@ function renderFC() {
   document.getElementById('btnNext').disabled = fcIndex === vocab.length - 1;
 }
 
-function flipCard() { document.getElementById('fcScene').classList.toggle('flipped'); }
+function isMobile(){return window.innerWidth<=600;}
+function flipCard(){
+  var scene=document.getElementById('fcScene');
+  scene.classList.toggle('flipped');
+  var flipped=scene.classList.contains('flipped');
+  if(isMobile()){
+    document.getElementById('fcFront').style.display=flipped?'none':'flex';
+    document.getElementById('fcBack').style.display=flipped?'flex':'none';
+  }
+}
 function goCard(dir) {
   var vocab = filteredVocab();
   fcIndex = Math.max(0, Math.min(vocab.length - 1, fcIndex + dir));
@@ -405,7 +432,10 @@ function toggleLearnedFC() {
 
 function buildQuiz() {
   var vocab = filteredVocab();
-  var all = vocab.slice().sort(function() { return Math.random() - .5; }).slice(0, Math.min(vocab.length, 10));
+  var unlearned = vocab.filter(function(v){return !learned.has(v.id);}).sort(function(){return Math.random()-.5;});
+  var learnedList = vocab.filter(function(v){return learned.has(v.id);}).sort(function(){return Math.random()-.5;});
+  var all = unlearned.concat(learnedList).slice(0, Math.min(vocab.length, 10));
+  if(all.length===0) all = vocab.slice().sort(function(){return Math.random()-.5;}).slice(0,10);
   return all.map(function(v) {
     var wrongs = VOCAB.filter(function(x) { return x.id !== v.id; })
       .sort(function() { return Math.random() - .5; }).slice(0, 3).map(function(x) { return x.meaning; });
