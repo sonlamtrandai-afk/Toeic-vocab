@@ -203,15 +203,16 @@
     .fc-scene { perspective: none; }
     .fc-inner { height: auto !important; transform: none !important; transition: none !important; transform-style: flat !important; }
     .fc-scene.flipped .fc-inner { transform: none !important; }
-    .fc-face { position: relative !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; flex-direction: column; border-radius: var(--radius-lg); box-shadow: var(--shadow); }
+    .fc-face { position: relative !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; flex-direction: column; border-radius: var(--radius-lg); box-shadow: var(--shadow); width: 100%; }
+    .fc-inner { position: relative; }
     .fc-front { display: flex; }
     .fc-back { display: none !important; transform: none !important; position: relative !important; }
     .fc-scene.flipped .fc-front { display: none !important; }
     .fc-scene.flipped .fc-back { display: flex !important; }
     .fc-front-left { order:2; padding:16px 18px 18px; align-items:center; text-align:center; }
-    .fc-front-right { order:1; width:100%; height:170px; border-left:none; border-bottom:1.5px solid var(--orange-border); }
+    .fc-front-right { order:1; width:100%; height:130px; border-left:none; border-bottom:1.5px solid var(--orange-border); }
     .fc-front.learned .fc-front-right { border-bottom-color:var(--green); }
-    .fc-back-left { width:100%; height:170px; border-right:none; border-bottom:1.5px solid var(--orange-border); }
+    .fc-back-left { width:100%; height:130px; border-right:none; border-bottom:1.5px solid var(--orange-border); }
     .fc-back-right { padding:16px 18px 18px; align-items:center; text-align:center; }
     .fc-speak-row { justify-content:center; }
     .fc-word { font-size: 22px; }
@@ -428,9 +429,21 @@ function renderFC(){
   document.getElementById('btnPrev').disabled=fcIndex===0;
   document.getElementById('btnNext').disabled=fcIndex===TOTAL-1;
   if(fcFlipped){fcFlipped=false;document.getElementById('fcScene').classList.remove('flipped');}
+  if(isMobile()){
+    document.getElementById('fcFront').style.display='flex';
+    document.getElementById('fcBack').style.display='none';
+  }
 }
 
-function flipCard(){fcFlipped=!fcFlipped;document.getElementById('fcScene').classList.toggle('flipped',fcFlipped);}
+function isMobile(){return window.innerWidth<=600;}
+function flipCard(){
+  fcFlipped=!fcFlipped;
+  document.getElementById('fcScene').classList.toggle('flipped',fcFlipped);
+  if(isMobile()){
+    document.getElementById('fcFront').style.display = fcFlipped ? 'none' : 'flex';
+    document.getElementById('fcBack').style.display  = fcFlipped ? 'flex' : 'none';
+  }
+}
 function goCard(dir){fcIndex=Math.max(0,Math.min(TOTAL-1,fcIndex+dir));renderFC();}
 function toggleLearnedFC(){
   var v=VOCAB[fcIndex];
