@@ -303,6 +303,37 @@ var quizQuestions = [], quizIndex = 0, quizScore = 0, quizAnswered = false;
 var matchPairs = [], matchSelected = null, matchedCount = 0;
 var currentSpeakWord = '', currentSpeakEx = '';
 
+var bestVoice = null;
+function loadVoice() {
+  var voices = window.speechSynthesis.getVoices();
+  var pref = ['Google US English','Microsoft Aria Online','Samantha','Alex'];
+  for (var i = 0; i < pref.length; i++) {
+    var f = voices.find(function(v) { return v.name.indexOf(pref[i]) !== -1; });
+    if (f) { bestVoice = f; break; }
+  }
+  if (!bestVoice) bestVoice = voices.find(function(v) { return v.lang === 'en-US'; }) || voices[0] || null;
+}
+if (window.speechSynthesis) { loadVoice(); window.speechSynthesis.onvoiceschanged = loadVoice; }
+
+function cleanForSpeech(t) {
+  return t.replace(/\s*\(.*?\)\s*/g,' ').replace(/\bsth\b/gi,'something').replace(/\bsb\b/gi,'somebody').trim();
+}
+
+function setImg(imgId, noImgId, src) {
+  var img = document.getElementById(imgId);
+  var noImg = document.getElementById(noImgId);
+  if (src) {
+    img.src = src;
+    img.style.display = 'block';
+    noImg.style.display = 'none';
+    img.onerror = function() { img.style.display='none'; noImg.style.display='block'; };
+    img.onload = function() { img.style.display='block'; noImg.style.display='none'; };
+  } else {
+    img.style.display = 'none';
+    noImg.style.display = 'block';
+  }
+}
+
 function filteredVocab() {
   if (currentTab === 0) return VOCAB;
   return VOCAB.filter(function(v) { return v.group === currentTab; });
@@ -360,18 +391,8 @@ function renderFC() {
   document.getElementById('fcNote').style.display = v.note ? 'block' : 'none';
   document.getElementById('fcExample').textContent = v.example || '';
 
-  var imgF = document.getElementById('fcImgFront'), noImgF = document.getElementById('fcNoImgFront');
-  var imgB = document.getElementById('fcImgBack'), noImgB = document.getElementById('fcNoImgBack');
-  if (v.image) {
-    imgF.src = v.image; imgF.style.display='block'; noImgF.style.display='none';
-    imgB.src = v.image; imgB.style.display='block'; noImgB.style.display='none';
-    imgF.onerror = function() { imgF.style.display='none'; noImgF.style.display='block'; };
-    imgB.onerror = function() { imgB.style.display='none'; noImgB.style.display='block'; };
-  } else {
-    imgF.style.display='none'; noImgF.style.display='block';
-    imgB.style.display='none'; noImgB.style.display='block';
-  }
-
+  setImg('fcImgFront', 'fcNoImgFront', v.image);
+  setImg('fcImgBack', 'fcNoImgBack', v.image);
   currentSpeakWord = v.word; currentSpeakEx = v.example || '';
   document.getElementById('btnPrev').disabled = fcIndex === 0;
   document.getElementById('btnNext').disabled = fcIndex === vocab.length - 1;
@@ -379,12 +400,14 @@ function renderFC() {
 
 function flipCard() { document.getElementById('fcScene').classList.toggle('flipped'); }
 
-function doSpeak(type) {
-  var txt = type === 'word' ? currentSpeakWord : currentSpeakEx;
-  if (!txt) return;
-  var u = new SpeechSynthesisUtterance(txt);
-  u.lang = 'en-US'; u.rate = 0.9;
+function doSpeak(which) {
+  if (!window.speechSynthesis) return;
   window.speechSynthesis.cancel();
+  var v = filteredVocab()[fcIndex] || VOCAB[0];
+  var text = which === 'word' ? cleanForSpeech(v.word) : v.example;
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+  if (bestVoice) u.voice = bestVoice;
   window.speechSynthesis.speak(u);
 }
 
