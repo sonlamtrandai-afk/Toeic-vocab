@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEIC Big Step – Unit 8: Documents, Jobs & Office</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --orange: #e8590c; --orange-light: #ff922b; --orange-bg: #fff8f2;
+    --orange-border: #ffd0b5; --orange-dark: #b94608;
+    --green: #2f9e44; --green-bg: #ebfbee;
+    --red: #c92a2a; --red-bg: #fff5f5;
+    --blue: #1971c2; --gray: #495057; --text: #212529;
+    --radius: 14px; --radius-lg: 20px;
+    --shadow: 0 4px 20px rgba(232,89,12,0.12);
+  }
+  body { font-family: 'Nunito', sans-serif; background: var(--orange-bg); color: var(--text); min-height: 100vh; padding: 0 0 70px; }
+  .header { background: linear-gradient(135deg, #e8590c 0%, #ff922b 100%); padding: 24px; text-align: center; position: relative; overflow: hidden; }
+  .header::before { content:''; position:absolute; top:-40px; right:-40px; width:160px; height:160px; border-radius:50%; background:rgba(255,255,255,0.08); }
+  .header h1 { font-size: 20px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .header p { font-size: 13px; color: rgba(255,255,255,0.85); font-weight: 600; }
+  .progress-wrap { background:#fff; padding:12px 20px; border-bottom:1px solid var(--orange-border); display:flex; align-items:center; gap:12px; position:sticky; top:0; z-index:100; box-shadow:0 2px 8px rgba(0,0,0,0.06); }
+  .progress-label { font-size:12px; font-weight:700; color:var(--orange); white-space:nowrap; }
+  .progress-bar-bg { flex:1; height:7px; background:var(--orange-border); border-radius:99px; overflow:hidden; }
+  .progress-bar-fill { height:100%; background:linear-gradient(90deg,#e8590c,#ff922b); border-radius:99px; transition:width 0.4s ease; width:0%; }
+  .progress-count { font-size:12px; font-weight:700; color:var(--gray); white-space:nowrap; }
+  .mode-bar { display:flex; gap:8px; padding:14px 16px 0; justify-content:center; flex-wrap:wrap; }
+  .mode-btn { display:flex; align-items:center; gap:5px; padding:7px 16px; border-radius:99px; border:1.5px solid var(--orange-border); background:#fff; font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; color:var(--gray); cursor:pointer; transition:all 0.18s; }
+  .mode-btn svg { width:15px; height:15px; }
+  .mode-btn:hover { border-color:var(--orange-light); color:var(--orange); }
+  .mode-btn.active { background:var(--orange-bg); border-color:var(--orange); color:var(--orange); }
+  #mode-cards { display:block; } #mode-quiz, #mode-match { display:none; }
+  .tabs-wrap { padding:12px 16px 0; overflow-x:auto; display:flex; gap:8px; scrollbar-width:none; }
+  .tabs-wrap::-webkit-scrollbar { display:none; }
+  .tab-btn { flex-shrink:0; padding:6px 14px; border-radius:99px; border:1.5px solid var(--orange-border); background:#fff; font-family:'Nunito',sans-serif; font-size:12px; font-weight:700; color:var(--gray); cursor:pointer; transition:all 0.18s; white-space:nowrap; }
+  .tab-btn:hover { border-color:var(--orange-light); color:var(--orange); }
+  .tab-btn.active { background:var(--orange); border-color:var(--orange); color:#fff; }
+  .fc-container { padding:20px 16px; max-width:700px; margin:0 auto; }
+  .fc-counter { text-align:center; font-size:13px; color:var(--gray); margin-bottom:12px; font-weight:700; }
+  .fc-scene { perspective:1200px; width:100%; cursor:pointer; margin-bottom:18px; }
+  .fc-inner { position:relative; width:100%; height:260px; transform-style:preserve-3d; transition:transform 0.5s cubic-bezier(.4,0,.2,1); border-radius:var(--radius-lg); }
+  .fc-scene.flipped .fc-inner { transform:rotateY(180deg); }
+  .fc-face { position:absolute; inset:0; backface-visibility:hidden; -webkit-backface-visibility:hidden; border-radius:var(--radius-lg); box-shadow:var(--shadow); display:flex; flex-direction:row; overflow:hidden; }
+  .fc-front { background:#fff; border:1.5px solid var(--orange-border); }
+  .fc-front.learned { border-color:var(--green); background:var(--green-bg); }
+  .fc-front-left { flex:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; padding:28px; gap:12px; min-width:0; }
+  .fc-front-right { width:240px; flex-shrink:0; background:#f8f9fa; display:flex; align-items:center; justify-content:center; border-left:1.5px solid var(--orange-border); overflow:hidden; }
+  .fc-front.learned .fc-front-right { border-left-color:var(--green); background:#d3f9d8; }
+  .fc-front-right img { width:100%; height:100%; object-fit:cover; display:none; }
+  .fc-front-right .no-img { font-size:48px; opacity:.15; }
+  .fc-learned-badge { background:var(--green); color:#fff; font-size:10px; font-weight:800; padding:3px 10px; border-radius:99px; letter-spacing:.5px; display:none; }
+  .fc-front.learned .fc-learned-badge { display:inline-block; }
+  .fc-word { font-size:20px; font-weight:800; color:var(--orange); line-height:1.2; word-break:break-word; }
+  .fc-front.learned .fc-word { color:var(--green); }
+  .fc-flip-hint { font-size:11px; color:#adb5bd; font-weight:700; display:flex; align-items:center; gap:4px; }
+  .fc-flip-hint svg { width:12px; height:12px; opacity:.6; }
+  .fc-back { background:var(--orange-bg); border:1.5px solid var(--orange); transform:rotateY(180deg); }
+  .fc-back-left { width:240px; flex-shrink:0; background:#fff3e8; display:flex; align-items:center; justify-content:center; border-right:1.5px solid var(--orange-border); overflow:hidden; }
+  .fc-back-left img { width:100%; height:100%; object-fit:cover; display:none; }
+  .fc-back-left .no-img { font-size:48px; opacity:.15; }
+  .fc-back-right { flex:1; display:flex; flex-direction:column; justify-content:center; padding:24px; gap:10px; overflow:hidden; min-width:0; }
+  .fc-back-label { font-size:10px; font-weight:800; color:var(--orange); text-transform:uppercase; letter-spacing:1px; }
+  .fc-meaning { font-size:17px; font-weight:800; color:var(--text); line-height:1.3; }
+  .fc-note { font-size:12px; color:var(--gray); font-weight:600; background:#fff; border-radius:8px; padding:6px 10px; border-left:3px solid var(--orange-light); }
+  .fc-example { font-size:13px; color:var(--blue); font-weight:600; font-style:italic; }
+  .fc-speak-row { display:flex; gap:8px; flex-wrap:wrap; }
+  .fc-speak { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:3px 10px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; }
+  .fc-speak:hover { background:var(--orange-bg); border-color:var(--orange); }
+  .fc-speak svg { width:12px; height:12px; }
+  .fc-speak-front { display:inline-flex; align-items:center; gap:4px; background:none; border:1.5px solid var(--orange-border); border-radius:99px; padding:4px 12px; font-family:'Nunito',sans-serif; font-size:11px; font-weight:700; color:var(--orange); cursor:pointer; }
+  .fc-speak-front:hover { background:var(--orange-bg); border-color:var(--orange); }
+  .fc-speak-front svg { width:12px; height:12px; }
+  .fc-nav { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+  .fc-nav-btn { width:46px; height:46px; border-radius:50%; border:1.5px solid var(--orange-border); background:#fff; color:var(--orange); font-size:20px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all 0.15s; flex-shrink:0; font-weight:800; }
+  .fc-nav-btn:hover:not(:disabled) { background:var(--orange-bg); border-color:var(--orange); }
+  .fc-nav-btn:disabled { opacity:.3; cursor:default; }
+  .fc-learned-btn { flex:1; padding:11px; border-radius:99px; border:none; font-family:'Nunito',sans-serif; font-size:13px; font-weight:800; cursor:pointer; }
+  .fc-learned-btn.no { background:var(--green); color:#fff; }
+  .fc-learned-btn.yes { background:var(--red); color:#fff; }
+  .quiz-container { padding:20px 16px; max-width:600px; margin:0 auto; }
+  .quiz-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:20px; font-size:13px; font-weight:700; color:var(--gray); }
+  .quiz-q-num { background:var(--orange); color:#fff; padding:4px 12px; border-radius:99px; font-size:12px; font-weight:800; }
+  .quiz-card { background:#fff; border-radius:var(--radius-lg); padding:28px 24px; box-shadow:var(--shadow); border:1.5px solid var(--orange-border); margin-bottom:20px; text-align:center; }
+  .quiz-prompt-label { font-size:12px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.8px; margin-bottom:10px; }
+  .quiz-word { font-size:20px; font-weight:800; color:var(--orange); margin-bottom:6px; line-height:1.3; }
+  .quiz-example { font-size:13px; color:var(--gray); font-style:italic; }
+  .quiz-options { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:16px; }
+  .quiz-opt { padding:13px 16px; border-radius:var(--radius); border:1.5px solid var(--orange-border); background:#fff; font-family:'Nunito',sans-serif; font-size:13px; font-weight:700; color:var(--text); cursor:pointer; transition:all 0.15s; text-align:left; line-height:1.3; }
+  .quiz-opt:hover:not(:disabled) { border-color:var(--orange-light); background:var(--orange-bg); }
+  .quiz-opt.correct { border-color:var(--green); background:var(--green-bg); color:var(--green); }
+  .quiz-opt.wrong { border-color:var(--red); background:var(--red-bg); color:var(--red); }
+  .quiz-opt:disabled { cursor:default; }
+  .quiz-feedback { text-align:center; font-size:14px; font-weight:700; padding:10px 16px; border-radius:var(--radius); margin-bottom:14px; display:none; }
+  .quiz-feedback.show { display:block; }
+  .quiz-feedback.correct { background:var(--green-bg); color:var(--green); }
+  .quiz-feedback.wrong { background:var(--red-bg); color:var(--red); }
+  .quiz-next-btn { width:100%; padding:13px; border-radius:var(--radius); border:none; background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; cursor:pointer; display:none; }
+  .quiz-next-btn.show { display:block; }
+  .quiz-next-btn:hover { background:var(--orange-dark); }
+  .quiz-score-card { background:#fff; border-radius:var(--radius-lg); padding:36px 24px; text-align:center; box-shadow:var(--shadow); border:1.5px solid var(--orange-border); }
+  .score-emoji { font-size:20px; font-weight:800; color:var(--orange); margin-bottom:12px; padding:10px 20px; background:var(--orange-bg); border-radius:99px; display:inline-block; }
+  .score-num { font-size:40px; font-weight:800; color:var(--orange); }
+  .score-label { font-size:15px; font-weight:700; color:var(--gray); margin-bottom:20px; }
+  .score-retry { padding:12px 28px; border-radius:99px; border:none; background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:15px; font-weight:800; cursor:pointer; }
+  .score-retry:hover { background:var(--orange-dark); }
+  .match-container { padding:20px 16px; max-width:700px; margin:0 auto; }
+  .match-header { text-align:center; margin-bottom:18px; }
+  .match-header h3 { font-size:16px; font-weight:800; color:var(--orange); margin-bottom:4px; }
+  .match-header p { font-size:13px; color:var(--gray); font-weight:600; }
+  .match-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+  .match-col { display:flex; flex-direction:column; gap:10px; }
+  .match-item { padding:12px 14px; border-radius:var(--radius); border:1.5px solid var(--orange-border); background:#fff; font-size:13px; font-weight:700; cursor:pointer; transition:all 0.15s; min-height:52px; display:flex; align-items:center; line-height:1.3; }
+  .match-item.word { color:var(--orange); }
+  .match-item.meaning { color:var(--text); }
+  .match-item:hover:not(.matched):not(.selected) { border-color:var(--orange-light); background:var(--orange-bg); }
+  .match-item.selected { border-color:var(--orange); background:var(--orange-bg); box-shadow:0 0 0 2px rgba(232,89,12,0.18); }
+  .match-item.matched { border-color:var(--green); background:var(--green-bg); color:var(--green); cursor:default; opacity:.75; }
+  .match-item.wrong-flash { border-color:var(--red); background:var(--red-bg); }
+  .match-actions { margin-top:20px; display:flex; gap:10px; justify-content:center; }
+  .match-btn { padding:10px 24px; border-radius:99px; border:1.5px solid var(--orange); background:var(--orange); color:#fff; font-family:'Nunito',sans-serif; font-size:14px; font-weight:800; cursor:pointer; }
+  .match-btn.outline { background:#fff; color:var(--orange); }
+  .match-btn:hover { opacity:.88; }
+  .match-complete { text-align:center; padding:28px; background:var(--green-bg); border-radius:var(--radius-lg); border:1.5px solid var(--green); display:none; margin-top:16px; }
+  .match-complete.show { display:block; }
+  .match-complete h3 { font-size:22px; font-weight:800; color:var(--green); margin-bottom:6px; }
+  .match-complete p { font-size:14px; color:var(--gray); font-weight:600; }
+  .stats-bar { background:#fff; border-top:1px solid var(--orange-border); padding:12px 20px; display:flex; gap:20px; justify-content:center; position:fixed; bottom:0; left:0; right:0; box-shadow:0 -2px 10px rgba(0,0,0,0.06); z-index:100; }
+  .stat-item { display:flex; flex-direction:column; align-items:center; gap:1px; }
+  .stat-num { font-size:17px; font-weight:800; color:var(--orange); }
+  .stat-num.green { color:var(--green); }
+  .stat-label { font-size:10px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.5px; }
+  @media (max-width:600px) {
+    .fc-inner { height:220px; }
+    .fc-front-right, .fc-back-left { width:130px; }
+    .fc-word { font-size:15px; }
+    .quiz-options { grid-template-columns:1fr; }
+    .match-grid { grid-template-columns:1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>TOEIC Big Step – Unit 8</h1>
+  <p>Documents, Jobs &amp; Office</p>
+</div>
+
+<div class="progress-wrap">
+  <span class="progress-label">Đã thuộc</span>
+  <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
+  <span class="progress-count" id="progressCount">0 / 34</span>
+</div>
+
+<div class="mode-bar">
+  <button class="mode-btn active" onclick="switchMode('cards')" id="btn-cards">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><rect x="2" y="5" width="20" height="14" rx="3"/><path d="M6 9h12M6 13h8"/></svg>
+    Flashcard
+  </button>
+  <button class="mode-btn" onclick="switchMode('quiz')" id="btn-quiz">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3M12 17h.01"/></svg>
+    Trắc nghiệm
+  </button>
+  <button class="mode-btn" onclick="switchMode('match')" id="btn-match">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg>
+    Nối từ
+  </button>
+</div>
+
+<div class="tabs-wrap" id="groupTabs"></div>
+
+<div id="mode-cards">
+  <div class="fc-container">
+    <div class="fc-counter" id="fcCounter">1 / 34</div>
+    <div class="fc-scene" id="fcScene" onclick="flipCard()">
+      <div class="fc-inner">
+        <div class="fc-face fc-front" id="fcFront">
+          <div class="fc-front-left">
+            <div class="fc-learned-badge" id="fcBadge">✓ ĐÃ THUỘC</div>
+            <div class="fc-word" id="fcWord"></div>
+            <button class="fc-speak-front" onclick="doSpeak('word');event.stopPropagation()">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+              Nghe
+            </button>
+            <div class="fc-flip-hint">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6"/><path d="M23 20v-6h-6"/><path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10m22 4-4.64 4.36A9 9 0 0 1 3.51 15"/></svg>
+              Nhấn thẻ để xem nghĩa
+            </div>
+          </div>
+          <div class="fc-front-right">
+            <img id="fcImgFront" src="" alt="">
+            <span class="no-img" id="fcNoImgFront">🖼️</span>
+          </div>
+        </div>
+        <div class="fc-face fc-back">
+          <div class="fc-back-left">
+            <img id="fcImgBack" src="" alt="">
+            <span class="no-img" id="fcNoImgBack">🖼️</span>
+          </div>
+          <div class="fc-back-right">
+            <div class="fc-back-label">Nghĩa</div>
+            <div class="fc-meaning" id="fcMeaning"></div>
+            <div class="fc-note" id="fcNote"></div>
+            <div class="fc-example" id="fcExample"></div>
+            <div class="fc-speak-row">
+              <button class="fc-speak" onclick="doSpeak('word');event.stopPropagation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Từ
+              </button>
+              <button class="fc-speak" onclick="doSpeak('ex');event.stopPropagation()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+                Câu ví dụ
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fc-nav">
+      <button class="fc-nav-btn" id="btnPrev" onclick="goCard(-1)">&#8592;</button>
+      <button class="fc-learned-btn no" id="fcLearnedBtn" onclick="toggleLearnedFC()">✓ Đã thuộc</button>
+      <button class="fc-nav-btn" id="btnNext" onclick="goCard(1)">&#8594;</button>
+    </div>
+  </div>
+</div>
+
+<div id="mode-quiz">
+  <div class="quiz-container" id="quizContainer"></div>
+</div>
+
+<div id="mode-match">
+  <div class="match-container" id="matchContainer"></div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item"><span class="stat-num" id="statTotal">34</span><span class="stat-label">Tổng từ</span></div>
+  <div class="stat-item"><span class="stat-num green" id="statLearned">0</span><span class="stat-label">Đã thuộc</span></div>
+  <div class="stat-item"><span class="stat-num" id="statLeft">34</span><span class="stat-label">Còn lại</span></div>
+</div>
+
+<script>
+var ROOT = 'https://raw.githubusercontent.com/sonlamtrandai-afk/Toeic-vocab/main/';
+
+var VOCAB = [
+  // GROUP 1 - Documents, Orders & Delivery
+  {id:1,group:1,groupName:"Documents, Orders & Delivery",word:"booklet",meaning:"cuốn sổ nhỏ / tài liệu nhỏ",note:"thường là tài liệu hướng dẫn, thông tin hoặc quảng cáo ngắn.",example:"The booklet contains information about the new product.",image:ROOT+"booklet.png"},
+  {id:2,group:1,groupName:"Documents, Orders & Delivery",word:"distribute",meaning:"phân phát, phân phối",note:"thường dùng với brochures, booklets, products, documents.",example:"The staff distributed booklets to all visitors.",image:ROOT+"distribute.png"},
+  {id:3,group:1,groupName:"Documents, Orders & Delivery",word:"place the order",meaning:"đặt hàng",note:"= make an order, thường dùng trong mua hàng / văn phòng.",example:"She placed the order online yesterday.",image:ROOT+"place_the_order.png"},
+  {id:4,group:1,groupName:"Documents, Orders & Delivery",word:"shipment",meaning:"lô hàng, việc giao hàng",note:"shipment = freight trong một số ngữ cảnh vận chuyển.",example:"The shipment arrived two days late.",image:ROOT+"shipment.png"},
+  {id:5,group:1,groupName:"Documents, Orders & Delivery",word:"freight",meaning:"hàng hóa vận chuyển / vận tải hàng hóa",note:"hay gặp trong chủ đề shipping, delivery, warehouse.",example:"The freight will be delivered by truck.",image:ROOT+"freight.png"},
+  {id:6,group:1,groupName:"Documents, Orders & Delivery",word:"receipt",meaning:"hóa đơn, biên nhận",note:"keep a receipt = giữ hóa đơn.",example:"Please keep your receipt after purchase.",image:ROOT+"receipt.png"},
+  {id:7,group:1,groupName:"Documents, Orders & Delivery",word:"the invitation",meaning:"lời mời / thiệp mời",note:"thường đi với send, receive, accept, decline.",example:"She received the invitation yesterday.",image:ROOT+"the_invitation.png"},
+  // GROUP 2 - Business, Projects & Finance
+  {id:8,group:2,groupName:"Business, Projects & Finance",word:"financial problems",meaning:"vấn đề tài chính",note:"thường dùng khi công ty hoặc cá nhân gặp khó khăn về tiền bạc.",example:"The company is facing financial problems.",image:ROOT+"financial_problems.png"},
+  {id:9,group:2,groupName:"Business, Projects & Finance",word:"contractor",meaning:"nhà thầu",note:"thường gặp trong xây dựng, sửa chữa, dự án.",example:"The contractor will repair the office next week.",image:ROOT+"contractor.png"},
+  {id:10,group:2,groupName:"Business, Projects & Finance",word:"project",meaning:"dự án",note:"thường đi với work on, manage, complete, start.",example:"The project will begin next month.",image:ROOT+"project.png"},
+  {id:11,group:2,groupName:"Business, Projects & Finance",word:"estimate",meaning:"ước tính / bản ước tính",note:"vừa là động từ vừa là danh từ.",example:"We need an estimate for the repair cost.",image:ROOT+"estimate.png"},
+  {id:12,group:2,groupName:"Business, Projects & Finance",word:"cooperation",meaning:"sự hợp tác",note:"thường dùng trong email lịch sự: Thank you for your cooperation.",example:"We appreciate your cooperation.",image:ROOT+"cooperation.png"},
+  {id:13,group:2,groupName:"Business, Projects & Finance",word:"the revised plan",meaning:"kế hoạch đã được chỉnh sửa",note:"revised = đã được sửa / điều chỉnh.",example:"The revised plan was approved by the manager.",image:ROOT+"the_revised_plan.png"},
+  {id:14,group:2,groupName:"Business, Projects & Finance",word:"offer",meaning:"lời đề nghị; đề nghị, cung cấp",note:"có thể là danh từ hoặc động từ.",example:"The company made him a job offer.",image:ROOT+"offer.png"},
+  {id:15,group:2,groupName:"Business, Projects & Finance",word:"decline",meaning:"từ chối",note:"trang trọng hơn refuse. Thường gặp: decline an offer, decline an invitation.",example:"He declined the invitation politely.",image:ROOT+"decline.png"},
+  // GROUP 3 - Jobs, Employment & Workplace
+  {id:16,group:3,groupName:"Jobs, Employment & Workplace",word:"seek",meaning:"tìm kiếm",note:"trang trọng hơn look for. Thường gặp: seek a job, seek advice, seek information.",example:"The company is seeking new employees.",image:ROOT+"seek.png"},
+  {id:17,group:3,groupName:"Jobs, Employment & Workplace",word:"openings",meaning:"vị trí tuyển dụng",note:"openings = vacancies.",example:"There are several job openings in the sales department.",image:ROOT+"openings.png"},
+  {id:18,group:3,groupName:"Jobs, Employment & Workplace",word:"vacancies",meaning:"vị trí còn trống / vị trí tuyển dụng",note:"đồng nghĩa với job openings.",example:"The hotel has several vacancies this month.",image:ROOT+"vacancies.png"},
+  {id:19,group:3,groupName:"Jobs, Employment & Workplace",word:"available",meaning:"có sẵn, còn trống, rảnh",note:"dùng cho người, phòng, sản phẩm, thời gian.",example:"The meeting room is available at 3 p.m.",image:ROOT+"available.png"},
+  {id:20,group:3,groupName:"Jobs, Employment & Workplace",word:"retire",meaning:"nghỉ hưu",note:"động từ. Danh từ là retirement.",example:"He will retire next year.",image:ROOT+"retire.png"},
+  {id:21,group:3,groupName:"Jobs, Employment & Workplace",word:"retirement",meaning:"sự nghỉ hưu",note:"retirement party = tiệc nghỉ hưu.",example:"They celebrated his retirement last Friday.",image:ROOT+"retirement.png"},
+  {id:22,group:3,groupName:"Jobs, Employment & Workplace",word:"resign",meaning:"từ chức, nghỉ việc",note:"động từ. Danh từ là resignation.",example:"She decided to resign from her position.",image:ROOT+"resign.png"},
+  {id:23,group:3,groupName:"Jobs, Employment & Workplace",word:"resignation",meaning:"sự từ chức / đơn xin nghỉ việc",note:"submit a resignation = nộp đơn nghỉ việc.",example:"He submitted his resignation yesterday.",image:ROOT+"resignation.png"},
+  // GROUP 4 - Office, Reception & Appointments
+  {id:24,group:4,groupName:"Office, Reception & Appointments",word:"reception",meaning:"tiệc chiêu đãi / quầy tiếp tân / sự đón tiếp",note:"trong 'formal reception', reception = buổi tiệc trang trọng.",example:"The reception will begin at 6 p.m.",image:ROOT+"reception.png"},
+  {id:25,group:4,groupName:"Office, Reception & Appointments",word:"receptionist",meaning:"nhân viên lễ tân",note:"người làm ở quầy tiếp tân.",example:"The receptionist answered the phone.",image:ROOT+"receptionist.png"},
+  {id:26,group:4,groupName:"Office, Reception & Appointments",word:"appointment",meaning:"cuộc hẹn",note:"make/schedule/cancel an appointment.",example:"I have an appointment with the manager at 2 p.m.",image:ROOT+"appointment.png"},
+  {id:27,group:4,groupName:"Office, Reception & Appointments",word:"branch",meaning:"chi nhánh",note:"branch office = văn phòng chi nhánh.",example:"The company opened a new branch downtown.",image:ROOT+"branch.png"},
+  {id:28,group:4,groupName:"Office, Reception & Appointments",word:"transfer",meaning:"chuyển, điều chuyển",note:"transfer to another department/branch.",example:"He was transferred to the Tokyo branch.",image:ROOT+"transfer.png"},
+  {id:29,group:4,groupName:"Office, Reception & Appointments",word:"furniture",meaning:"đồ nội thất",note:"danh từ không đếm được, không dùng 'furnitures'.",example:"The office needs new furniture.",image:ROOT+"furniture.png"},
+  {id:30,group:4,groupName:"Office, Reception & Appointments",word:"toner",meaning:"mực máy in / hộp mực",note:"thường dùng với printer, copier, cartridge.",example:"The printer is out of toner.",image:ROOT+"toner.png"},
+  // GROUP 5 - Food, Kitchen & Public Places
+  {id:31,group:5,groupName:"Food, Kitchen & Public Places",word:"bottled water",meaning:"nước đóng chai",note:"bottled = được đóng chai.",example:"Bottled water is available near the entrance.",image:ROOT+"bottled_water.png"},
+  {id:32,group:5,groupName:"Food, Kitchen & Public Places",word:"steak",meaning:"bít tết",note:"thường gặp trong ngữ cảnh nhà hàng.",example:"He ordered a steak for dinner.",image:ROOT+"steak.png"},
+  {id:33,group:5,groupName:"Food, Kitchen & Public Places",word:"cook",meaning:"nấu ăn; đầu bếp",note:"có thể là động từ hoặc danh từ.",example:"The cook prepared dinner for the guests.",image:ROOT+"cook.png"},
+  {id:34,group:5,groupName:"Food, Kitchen & Public Places",word:"kitchen counter",meaning:"mặt bếp / quầy bếp",note:"counter = mặt bàn dài dùng để chuẩn bị đồ ăn hoặc phục vụ khách.",example:"The dishes are on the kitchen counter.",image:ROOT+"kitchen_counter.png"},
+  {id:35,group:5,groupName:"Food, Kitchen & Public Places",word:"national museum",meaning:"bảo tàng quốc gia",note:"thường gặp trong chủ đề du lịch / địa điểm công cộng.",example:"The tour starts at the national museum.",image:ROOT+"national_museum.png"},
+  {id:36,group:5,groupName:"Food, Kitchen & Public Places",word:"charity",meaning:"tổ chức từ thiện / hoạt động từ thiện",note:"charity event = sự kiện từ thiện.",example:"They organized a charity event last weekend.",image:ROOT+"charity.png"},
+  // GROUP 6 - Useful Adjectives, Adverbs & Phrases
+  {id:37,group:6,groupName:"Useful Adjectives, Adverbs & Phrases",word:"enough / adequate / sufficient",meaning:"đủ",note:"adequate và sufficient trang trọng hơn enough.",example:"We have enough chairs for everyone.",image:ROOT+"enough.png"},
+  {id:38,group:6,groupName:"Useful Adjectives, Adverbs & Phrases",word:"along the wall",meaning:"dọc theo bức tường",note:"dùng 'along' khi vật/người nằm hoặc di chuyển theo chiều dài của một đường/bề mặt.",example:"Several chairs are placed along the wall.",image:ROOT+"along_the_wall.png"},
+  {id:39,group:6,groupName:"Useful Adjectives, Adverbs & Phrases",word:"completely",meaning:"hoàn toàn",note:"dùng để nhấn mạnh mức độ 100%.",example:"The room is completely empty.",image:ROOT+"completely.png"},
+  {id:40,group:6,groupName:"Useful Adjectives, Adverbs & Phrases",word:"fortunately",meaning:"may mắn thay",note:"dùng để giới thiệu một kết quả tích cực.",example:"Fortunately, the shipment arrived on time.",image:ROOT+"fortunately.png"},
+  {id:41,group:6,groupName:"Useful Adjectives, Adverbs & Phrases",word:"seems",meaning:"có vẻ như",note:"cấu trúc: It seems that... hoặc S + seems + adjective.",example:"It seems that the meeting has been canceled.",image:ROOT+"seems.png"},
+  {id:42,group:6,groupName:"Useful Adjectives, Adverbs & Phrases",word:"the newly released movies",meaning:"những bộ phim mới được phát hành",note:"newly released = mới được phát hành / công bố.",example:"The newly released movies attracted many viewers.",image:ROOT+"newly_released_movies.png"}
+];
+
+var learned = new Set();
+var fcIndex = 0;
+var currentTab = 0;
+var currentMode = 'cards';
+var quizQuestions = [], quizIndex = 0, quizScore = 0, quizAnswered = false;
+var matchPairs = [], matchSelected = null, matchedCount = 0;
+
+var bestVoice = null;
+function loadVoice() {
+  var voices = window.speechSynthesis.getVoices();
+  var pref = ['Google US English','Microsoft Aria Online','Samantha','Alex'];
+  for (var i = 0; i < pref.length; i++) {
+    var f = voices.find(function(v) { return v.name.indexOf(pref[i]) !== -1; });
+    if (f) { bestVoice = f; break; }
+  }
+  if (!bestVoice) bestVoice = voices.find(function(v) { return v.lang === 'en-US'; }) || voices[0] || null;
+}
+if (window.speechSynthesis) { loadVoice(); window.speechSynthesis.onvoiceschanged = loadVoice; }
+
+function cleanForSpeech(t) {
+  return t.replace(/\s*\(.*?\)\s*/g,' ').replace(/\bsth\b/gi,'something').replace(/\bsb\b/gi,'somebody').replace(/\s*\/.*$/,'').trim();
+}
+function doSpeak(which) {
+  if (!window.speechSynthesis) return;
+  window.speechSynthesis.cancel();
+  var v = filteredVocab()[fcIndex] || VOCAB[0];
+  var text = which === 'word' ? cleanForSpeech(v.word) : v.example;
+  var u = new SpeechSynthesisUtterance(text);
+  u.lang = 'en-US'; u.rate = 0.85; u.pitch = 1;
+  if (bestVoice) u.voice = bestVoice;
+  window.speechSynthesis.speak(u);
+}
+
+function setImg(imgId, noImgId, src) {
+  var img = document.getElementById(imgId);
+  var noImg = document.getElementById(noImgId);
+  if (src) {
+    img.src = src; img.style.display = 'block'; noImg.style.display = 'none';
+    img.onerror = function() { img.style.display='none'; noImg.style.display='block'; };
+    img.onload = function() { img.style.display='block'; noImg.style.display='none'; };
+  } else { img.style.display = 'none'; noImg.style.display = 'block'; }
+}
+
+function filteredVocab() {
+  if (currentTab === 0) return VOCAB;
+  return VOCAB.filter(function(v) { return v.group === currentTab; });
+}
+
+function updateProgress() {
+  var total = VOCAB.length, count = learned.size;
+  var pct = total > 0 ? (count / total * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressCount').textContent = count + ' / ' + total;
+  document.getElementById('statTotal').textContent = total;
+  document.getElementById('statLearned').textContent = count;
+  document.getElementById('statLeft').textContent = total - count;
+}
+
+function buildTabs() {
+  var groups = [], seen = {};
+  VOCAB.forEach(function(v) { if (!seen[v.group]) { seen[v.group]=true; groups.push({id:v.group,name:v.groupName}); } });
+  var html = '<button class="tab-btn active" onclick="selectTab(0,this)">Tất cả</button>';
+  groups.forEach(function(g) { html += '<button class="tab-btn" onclick="selectTab('+g.id+',this)">'+g.name+'</button>'; });
+  document.getElementById('groupTabs').innerHTML = html;
+}
+
+function selectTab(gid, el) {
+  currentTab = gid; fcIndex = 0;
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  el.classList.add('active');
+  if (currentMode==='cards') renderFC(); else if (currentMode==='quiz') renderQuiz(); else renderMatch();
+}
+
+function renderFC() {
+  var vocab = filteredVocab();
+  if (!vocab.length) return;
+  var v = vocab[fcIndex];
+  document.getElementById('fcScene').classList.remove('flipped');
+  document.getElementById('fcCounter').textContent = (fcIndex+1) + ' / ' + vocab.length;
+  document.getElementById('fcWord').textContent = v.word;
+  var front = document.getElementById('fcFront');
+  if (learned.has(v.id)) { front.classList.add('learned'); document.getElementById('fcLearnedBtn').textContent='✗ Bỏ đánh dấu'; document.getElementById('fcLearnedBtn').className='fc-learned-btn yes'; }
+  else { front.classList.remove('learned'); document.getElementById('fcLearnedBtn').textContent='✓ Đã thuộc'; document.getElementById('fcLearnedBtn').className='fc-learned-btn no'; }
+  document.getElementById('fcMeaning').textContent = v.meaning;
+  document.getElementById('fcNote').textContent = v.note || '';
+  document.getElementById('fcNote').style.display = v.note ? 'block' : 'none';
+  document.getElementById('fcExample').textContent = v.example || '';
+  setImg('fcImgFront','fcNoImgFront',v.image);
+  setImg('fcImgBack','fcNoImgBack',v.image);
+  document.getElementById('btnPrev').disabled = fcIndex === 0;
+  document.getElementById('btnNext').disabled = fcIndex === vocab.length - 1;
+}
+
+function flipCard() { document.getElementById('fcScene').classList.toggle('flipped'); }
+function goCard(dir) {
+  var vocab = filteredVocab();
+  fcIndex = Math.max(0, Math.min(vocab.length-1, fcIndex+dir));
+  renderFC();
+}
+function toggleLearnedFC() {
+  var v = filteredVocab()[fcIndex];
+  if (learned.has(v.id)) learned.delete(v.id); else learned.add(v.id);
+  updateProgress(); renderFC();
+}
+
+function buildQuiz() {
+  var vocab = filteredVocab();
+  var all = vocab.slice().sort(function(){return Math.random()-.5;}).slice(0,Math.min(vocab.length,10));
+  return all.map(function(v) {
+    var wrongs = VOCAB.filter(function(x){return x.id!==v.id;}).sort(function(){return Math.random()-.5;}).slice(0,3).map(function(x){return x.meaning;});
+    var opts = [v.meaning].concat(wrongs).sort(function(){return Math.random()-.5;});
+    return {vocab:v,opts:opts,correct:v.meaning};
+  });
+}
+function renderQuiz() { quizQuestions=buildQuiz(); quizIndex=0; quizScore=0; quizAnswered=false; renderQuizQ(); }
+function renderQuizQ() {
+  var c = document.getElementById('quizContainer');
+  if (quizIndex >= quizQuestions.length) {
+    var pct = Math.round(quizScore/quizQuestions.length*100);
+    var emoji = pct>=90?'Xuất sắc!':pct>=70?'Tốt lắm!':pct>=50?'Cố lên!':'Ôn lại nhé!';
+    c.innerHTML='<div class="quiz-score-card"><div class="score-emoji">'+emoji+'</div><div class="score-num">'+quizScore+'/'+quizQuestions.length+'</div><div class="score-label">Điểm: '+pct+'%</div><button class="score-retry" onclick="renderQuiz()">Làm lại ↺</button></div>';
+    return;
+  }
+  var q = quizQuestions[quizIndex]; quizAnswered=false;
+  var optsHtml = q.opts.map(function(opt,i){return '<button class="quiz-opt" id="qopt'+i+'" onclick="pickOpt('+i+','+q.vocab.id+')">'+opt+'</button>';}).join('');
+  c.innerHTML='<div class="quiz-header"><span class="quiz-q-num">'+(quizIndex+1)+' / '+quizQuestions.length+'</span><span>Điểm: <strong>'+quizScore+'</strong></span></div>'+
+    '<div class="quiz-card"><div class="quiz-prompt-label">Từ / Cụm từ</div><div class="quiz-word">'+q.vocab.word+'</div><div class="quiz-example">'+q.vocab.example+'</div></div>'+
+    '<div class="quiz-options">'+optsHtml+'</div><div class="quiz-feedback" id="quizFeedback"></div>'+
+    '<button class="quiz-next-btn" id="quizNext" onclick="nextQ()">'+(quizIndex+1<quizQuestions.length?'Câu tiếp →':'Xem kết quả →')+'</button>';
+}
+function pickOpt(i,vid) {
+  if (quizAnswered) return; quizAnswered=true;
+  var q=quizQuestions[quizIndex], fb=document.getElementById('quizFeedback');
+  document.querySelectorAll('.quiz-opt').forEach(function(b){b.disabled=true;});
+  if (q.opts[i]===q.correct) {
+    document.getElementById('qopt'+i).classList.add('correct'); quizScore++;
+    fb.textContent='✓ Chính xác!'; fb.className='quiz-feedback show correct';
+    learned.add(vid); updateProgress();
+  } else {
+    document.getElementById('qopt'+i).classList.add('wrong');
+    fb.textContent='✗ Sai rồi! Đáp án: '+q.correct; fb.className='quiz-feedback show wrong';
+    q.opts.forEach(function(opt,j){if(opt===q.correct)document.getElementById('qopt'+j).classList.add('correct');});
+  }
+  document.getElementById('quizNext').classList.add('show');
+}
+function nextQ() { quizIndex++; renderQuizQ(); }
+
+function renderMatch() {
+  var vocab=filteredVocab().slice().sort(function(){return Math.random()-.5;}).slice(0,8);
+  matchPairs=vocab; matchSelected=null; matchedCount=0;
+  var words=vocab.slice().sort(function(){return Math.random()-.5;});
+  var meanings=vocab.slice().sort(function(){return Math.random()-.5;});
+  var c=document.getElementById('matchContainer');
+  c.innerHTML='<div class="match-header"><h3>Nối từ với nghĩa đúng</h3><p>Nhấn một từ rồi nhấn nghĩa tương ứng</p></div>'+
+    '<div class="match-grid"><div class="match-col">'+words.map(function(v){return '<div class="match-item word" data-id="'+v.id+'" data-type="word" onclick="matchClick(this)">'+v.word+'</div>';}).join('')+
+    '</div><div class="match-col">'+meanings.map(function(v){return '<div class="match-item meaning" data-id="'+v.id+'" data-type="meaning" onclick="matchClick(this)">'+v.meaning+'</div>';}).join('')+
+    '</div></div><div class="match-complete" id="matchComplete"><h3>★ Hoàn thành!</h3><p>Bạn đã nối đúng tất cả!</p></div>'+
+    '<div class="match-actions"><button class="match-btn outline" onclick="renderMatch()">↺ Làm lại</button></div>';
+}
+function matchClick(el) {
+  if (el.classList.contains('matched')) return;
+  if (!matchSelected) {
+    document.querySelectorAll('.match-item.selected').forEach(function(e){e.classList.remove('selected');});
+    el.classList.add('selected'); matchSelected=el;
+  } else {
+    if (el===matchSelected){el.classList.remove('selected');matchSelected=null;return;}
+    var a=matchSelected,b=el,aId=parseInt(a.dataset.id),bId=parseInt(b.dataset.id);
+    if (aId===bId&&a.dataset.type!==b.dataset.type) {
+      a.classList.remove('selected');a.classList.add('matched');b.classList.add('matched');
+      matchedCount++;learned.add(aId);updateProgress();
+      if(matchedCount===matchPairs.length)setTimeout(function(){document.getElementById('matchComplete').classList.add('show');},300);
+    } else {
+      a.classList.add('wrong-flash');b.classList.add('wrong-flash');
+      setTimeout(function(){a.classList.remove('wrong-flash','selected');b.classList.remove('wrong-flash');},500);
+    }
+    matchSelected=null;
+  }
+}
+
+function switchMode(mode) {
+  currentMode=mode; fcIndex=0;
+  ['cards','quiz','match'].forEach(function(m){
+    document.getElementById('mode-'+m).style.display=m===mode?'block':'none';
+    document.getElementById('btn-'+m).classList.toggle('active',m===mode);
+  });
+  if(mode==='cards')renderFC();else if(mode==='quiz')renderQuiz();else renderMatch();
+}
+
+buildTabs(); renderFC(); updateProgress();
+</script>
+</body>
+</html>
