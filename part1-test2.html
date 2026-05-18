@@ -143,9 +143,23 @@
   .stat-label { font-size:10px; font-weight:700; color:#adb5bd; text-transform:uppercase; letter-spacing:.5px; }
 
   @media (max-width:600px) {
-    .fc-inner { height:220px; }
-    .fc-front-right, .fc-back-left { width:130px; }
-    .fc-word { font-size:18px; }
+    .fc-scene { perspective: none; }
+    .fc-inner { height: auto !important; transform: none !important; transition: none !important; transform-style: flat !important; }
+    .fc-scene.flipped .fc-inner { transform: none !important; }
+    .fc-face { position: relative !important; backface-visibility: visible !important; -webkit-backface-visibility: visible !important; flex-direction: column; border-radius: var(--radius-lg); box-shadow: var(--shadow); width: 100%; }
+    .fc-front { display: flex; }
+    .fc-back { display: none !important; transform: none !important; position: relative !important; }
+    .fc-scene.flipped .fc-front { display: none !important; }
+    .fc-scene.flipped .fc-back { display: flex !important; }
+    .fc-front-left { order:2; padding:16px 18px 18px; align-items:center; text-align:center; }
+    .fc-front-right { order:1; width:100%; height:180px; border-left:none; border-bottom:1.5px solid var(--orange-border); background:#f8f9fa; }
+    .fc-front-right img, .fc-back-left img { object-fit: contain !important; padding: 8px; }
+    .fc-front.learned .fc-front-right { border-bottom-color:var(--green); }
+    .fc-back-left { width:100%; height:180px; border-right:none; border-bottom:1.5px solid var(--orange-border); }
+    .fc-back-right { padding:16px 18px 18px; align-items:center; text-align:center; }
+    .fc-speak-row { justify-content:center; }
+    .fc-word { font-size: 22px; }
+    .fc-meaning { font-size: 17px; }
     .quiz-options { grid-template-columns:1fr; }
     .match-grid { grid-template-columns:1fr; }
   }
@@ -161,7 +175,7 @@
 <div class="progress-wrap">
   <span class="progress-label">Đã thuộc</span>
   <div class="progress-bar-bg"><div class="progress-bar-fill" id="progressFill"></div></div>
-  <span class="progress-count" id="progressCount">0 / 29</span>
+  <span class="progress-count" id="progressCount">0 / 37</span>
 </div>
 
 <div class="mode-bar">
@@ -241,7 +255,7 @@
 </div>
 
 <div class="stats-bar">
-  <div class="stat-item"><span class="stat-num" id="statTotal">29</span><span class="stat-label">Tổng từ</span></div>
+  <div class="stat-item"><span class="stat-num" id="statTotal">37</span><span class="stat-label">Tổng từ</span></div>
   <div class="stat-item"><span class="stat-num green" id="statLearned">0</span><span class="stat-label">Đã thuộc</span></div>
   <div class="stat-item"><span class="stat-num" id="statLeft">29</span><span class="stat-label">Còn lại</span></div>
 </div>
@@ -276,7 +290,15 @@ var VOCAB = [
   {id:26,word:"stack",meaning:"xếp chồng",note:"stacked neatly, stacked in piles.",example:"The chairs were stacked in the corner.",image:"images/stack.png"},
   {id:27,word:"an escalator",meaning:"thang cuốn",note:"escalator = thang cuốn, elevator = thang máy.",example:"They took the escalator upstairs.",image:"images/an_escalator.png"},
   {id:28,word:"suitcase",meaning:"va li",note:null,example:"She carried a large suitcase.",image:"images/suitcase.png"},
-  {id:29,word:"a luggage rack",meaning:"kệ để hành lý",note:null,example:"She put her bag on the luggage rack.",image:"images/a_luggage_rack.png"}
+  {id:29,word:"a luggage rack",meaning:"kệ để hành lý",note:null,example:"She put her bag on the luggage rack.",image:"images/a_luggage_rack.png"},
+  {id:30,word:"window shutters",meaning:"cánh cửa chớp, tấm chắn cửa sổ",note:"Thường là các tấm gỗ hoặc nhựa gắn hai bên cửa sổ, có thể đóng mở.",example:"The window shutters were closed during the storm.",image:"window_shutters.png"},
+  {id:31,word:"utensil",meaning:"dụng cụ nhà bếp, đồ dùng",note:"Thường dùng số nhiều: kitchen utensils. Chỉ dao, muỗng, nĩa, chảo...",example:"Cooking utensils are hanging on the wall.",image:"utensil.png"},
+  {id:32,word:"be emptied into a sink",meaning:"được đổ/trút vào bồn rửa",note:"Dạng bị động thường gặp trong Part 1 khi mô tả hành động đổ nước/chất lỏng.",example:"The bucket is being emptied into the sink.",image:"emptied_into_sink.png"},
+  {id:33,word:"counter",meaning:"quầy, mặt bàn bếp",note:"Có thể là quầy thu ngân (checkout counter) hoặc mặt bàn bếp (kitchen counter).",example:"She placed the groceries on the kitchen counter.",image:"counter.png"},
+  {id:34,word:"pile (v)",meaning:"xếp chồng, chất đống",note:"pile up = chất đống. Khác stack ở chỗ pile thường lộn xộn hơn.",example:"Books were piled on the desk.",image:"pile_v.png"},
+  {id:35,word:"fence",meaning:"hàng rào, rào chắn",note:"Thường xuất hiện trong ảnh sân vườn, bãi đỗ xe, khu dân cư.",example:"A wooden fence surrounds the yard.",image:"fence.png"},
+  {id:36,word:"canopy",meaning:"mái che, tán lọng",note:"Có thể là mái hiên vải bạt trước cửa hàng hoặc tán cây trong rừng.",example:"A canopy was set up over the outdoor tables.",image:"canopy.png"},
+  {id:37,word:"lift (v)",meaning:"nhấc lên, nâng lên",note:"Thường dùng trong Part 1: lifting boxes/bags/objects.",example:"The worker is lifting a heavy box.",image:"lift_v.png"}
 ];
 
 var TOTAL = VOCAB.length;
@@ -349,9 +371,21 @@ function renderFC() {
   document.getElementById('btnPrev').disabled = fcIndex === 0;
   document.getElementById('btnNext').disabled = fcIndex === TOTAL - 1;
   if (fcFlipped) { fcFlipped = false; document.getElementById('fcScene').classList.remove('flipped'); }
+  if(isMobile()){
+    document.getElementById('fcFront').style.display='flex';
+    document.getElementById('fcBack').style.display='none';
+  }
 }
 
-function flipCard() { fcFlipped = !fcFlipped; document.getElementById('fcScene').classList.toggle('flipped', fcFlipped); }
+function isMobile(){return window.innerWidth<=600;}
+function flipCard(){
+  fcFlipped=!fcFlipped;
+  document.getElementById('fcScene').classList.toggle('flipped',fcFlipped);
+  if(isMobile()){
+    document.getElementById('fcFront').style.display=fcFlipped?'none':'flex';
+    document.getElementById('fcBack').style.display=fcFlipped?'flex':'none';
+  }
+}
 function goCard(dir) { fcIndex = Math.max(0, Math.min(TOTAL - 1, fcIndex + dir)); renderFC(); }
 function toggleLearnedFC() {
   var v = VOCAB[fcIndex];
@@ -361,12 +395,14 @@ function toggleLearnedFC() {
 
 // QUIZ
 function buildQuiz() {
-  var all = VOCAB.slice().sort(function() { return Math.random() - .5; }).slice(0, 10);
-  return all.map(function(v) {
-    var wrongs = VOCAB.filter(function(x) { return x.id !== v.id; })
-      .sort(function() { return Math.random() - .5; }).slice(0, 3).map(function(x) { return x.meaning; });
-    var opts = [v.meaning].concat(wrongs).sort(function() { return Math.random() - .5; });
-    return { vocab: v, opts: opts, correct: v.meaning };
+  var unlearned=VOCAB.filter(function(v){return !learned.has(v.id);}).sort(function(){return Math.random()-.5;});
+  var learnedList=VOCAB.filter(function(v){return learned.has(v.id);}).sort(function(){return Math.random()-.5;});
+  var all=unlearned.concat(learnedList).slice(0,10);
+  if(all.length===0) all=VOCAB.slice().sort(function(){return Math.random()-.5;}).slice(0,10);
+  return all.map(function(v){
+    var wrongs=VOCAB.filter(function(x){return x.id!==v.id;}).sort(function(){return Math.random()-.5;}).slice(0,3).map(function(x){return x.meaning;});
+    var opts=[v.meaning].concat(wrongs).sort(function(){return Math.random()-.5;});
+    return{vocab:v,opts:opts,correct:v.meaning};
   });
 }
 
