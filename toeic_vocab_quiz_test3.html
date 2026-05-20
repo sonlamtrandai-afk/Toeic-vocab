@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>TOEIC Listening Part 2 – Test 3 Vocabulary Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --orange: #e6512e;
+    --orange-light: #fde6d6;
+    --orange-mid: #ff6b1a;
+    --bg: #fbf8f4;
+    --card-bg: #fffaf6;
+    --border: #f3b28f;
+    --text: #2b2b2b;
+    --muted: #7a6f67;
+    --green: #2d7a3a;
+    --green-bg: #e6f5ea;
+    --green-border: #7fc98a;
+    --red: #a32020;
+    --red-bg: #fdeaea;
+    --red-border: #e08080;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--orange);
+    padding: 28px 24px 22px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .header::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 180px; height: 180px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.07);
+  }
+  .header::after {
+    content: '';
+    position: absolute;
+    bottom: -30px; left: -20px;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.05);
+  }
+  .header-label {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.7);
+    margin-bottom: 6px;
+  }
+  .header-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 26px;
+    color: #fff;
+    line-height: 1.2;
+    margin-bottom: 4px;
+  }
+  .header-sub {
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
+  }
+
+  /* PROGRESS */
+  .progress-wrap {
+    padding: 18px 20px 0;
+  }
+  .progress-meta {
+    display: flex;
+    justify-content: space-between;
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .progress-meta span:last-child { color: var(--orange); font-weight: 600; }
+  .progress-bar {
+    height: 6px;
+    background: #edd9cc;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: var(--orange);
+    border-radius: 3px;
+    transition: width 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  /* CATEGORY BADGE */
+  .category-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--orange-light);
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 20px;
+    margin: 14px 20px 0;
+    letter-spacing: 0.3px;
+  }
+
+  /* QUESTION CARD */
+  .q-card {
+    margin: 10px 20px 0;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 22px 20px 18px;
+  }
+  .q-num {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .sentence {
+    font-size: 17px;
+    line-height: 1.85;
+    color: var(--text);
+  }
+  .blank {
+    display: inline-block;
+    min-width: 80px;
+    border-bottom: 2.5px solid var(--orange);
+    color: var(--orange);
+    font-weight: 600;
+    text-align: center;
+    padding: 0 6px;
+    transition: all 0.3s;
+  }
+  .blank.filled {
+    border-bottom-color: var(--green);
+    color: var(--green);
+    background: var(--green-bg);
+    border-radius: 4px;
+    padding: 1px 8px;
+  }
+
+  /* OPTIONS */
+  .options {
+    padding: 14px 20px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+  }
+  .opt {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 12px 14px;
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  }
+  .opt:hover:not(:disabled) {
+    background: var(--orange-light);
+    border-color: var(--orange);
+  }
+  .opt:active:not(:disabled) { transform: scale(0.98); }
+  .opt-letter {
+    width: 26px; height: 26px;
+    border-radius: 50%;
+    background: var(--orange-light);
+    color: var(--orange);
+    font-size: 12px;
+    font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+    transition: background 0.15s, color 0.15s;
+  }
+  .opt.correct {
+    background: var(--green-bg);
+    border-color: var(--green-border);
+    color: var(--green);
+  }
+  .opt.correct .opt-letter {
+    background: var(--green);
+    color: #fff;
+  }
+  .opt.wrong {
+    background: var(--red-bg);
+    border-color: var(--red-border);
+    color: var(--red);
+  }
+  .opt.wrong .opt-letter {
+    background: var(--red);
+    color: #fff;
+  }
+  .opt:disabled { cursor: default; }
+
+  /* FEEDBACK */
+  .feedback {
+    margin: 12px 20px 0;
+    border-radius: var(--radius-sm);
+    padding: 13px 15px;
+    font-size: 14px;
+    line-height: 1.65;
+    display: none;
+    animation: fadeUp 0.25s ease;
+  }
+  .feedback.show { display: block; }
+  .feedback.correct {
+    background: var(--green-bg);
+    border: 1px solid var(--green-border);
+    color: var(--green);
+  }
+  .feedback.wrong {
+    background: var(--red-bg);
+    border: 1px solid var(--red-border);
+    color: var(--red);
+  }
+  .feedback-icon { font-size: 16px; margin-right: 4px; }
+  .feedback strong { font-weight: 600; }
+
+  /* NOTE BOX */
+  .note-box {
+    margin: 10px 20px 0;
+    background: #fff8f2;
+    border-left: 4px solid var(--orange);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 11px 14px;
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.6;
+    display: none;
+  }
+  .note-box.show { display: block; animation: fadeUp 0.3s ease; }
+  .note-box strong { color: var(--orange); }
+
+  /* NEXT BTN */
+  .next-wrap {
+    padding: 14px 20px 24px;
+  }
+  .next-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    display: none;
+    transition: background 0.15s, transform 0.1s;
+    letter-spacing: 0.2px;
+  }
+  .next-btn.show { display: block; animation: fadeUp 0.2s ease; }
+  .next-btn:hover { background: #c93f25; }
+  .next-btn:active { transform: scale(0.98); }
+
+  /* RESULT SCREEN */
+  #result-screen {
+    display: none;
+    padding: 30px 20px 40px;
+    text-align: center;
+    animation: fadeUp 0.4s ease;
+  }
+  #result-screen.show { display: block; }
+  .result-circle {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    background: var(--orange-light);
+    border: 3px solid var(--orange);
+    margin: 0 auto 16px;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+  }
+  .result-num {
+    font-family: 'DM Serif Display', serif;
+    font-size: 36px;
+    color: var(--orange);
+    line-height: 1;
+  }
+  .result-denom {
+    font-size: 13px;
+    color: var(--muted);
+    font-weight: 500;
+  }
+  .result-title {
+    font-family: 'DM Serif Display', serif;
+    font-size: 24px;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .result-msg {
+    font-size: 15px;
+    color: var(--muted);
+    line-height: 1.65;
+    margin-bottom: 24px;
+    padding: 0 10px;
+  }
+  .result-bars {
+    background: var(--card-bg);
+    border: 1.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 16px;
+    margin-bottom: 20px;
+    text-align: left;
+  }
+  .result-bars-title {
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 12px;
+  }
+  .cat-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 9px;
+    font-size: 13px;
+  }
+  .cat-name { width: 130px; color: var(--text); font-weight: 500; flex-shrink: 0; }
+  .cat-bar-wrap { flex: 1; height: 6px; background: #edd9cc; border-radius: 3px; overflow: hidden; }
+  .cat-bar { height: 100%; background: var(--orange); border-radius: 3px; }
+  .cat-score { width: 36px; text-align: right; color: var(--orange); font-weight: 600; flex-shrink: 0; }
+  .retry-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--orange);
+    color: #fff;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 15px;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .retry-btn:hover { background: #c93f25; }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div class="header-label">TOEIC Listening · Part 2</div>
+  <div class="header-title">Test 3 Vocabulary Quiz</div>
+  <div class="header-sub">Fill in the blank – choose the correct word</div>
+</div>
+
+<div id="quiz-screen">
+  <div class="progress-wrap">
+    <div class="progress-meta">
+      <span id="q-count">Question 1 / 22</span>
+      <span id="q-score">0 correct</span>
+    </div>
+    <div class="progress-bar"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+  </div>
+
+  <div class="category-badge" id="cat-badge">📂 Category</div>
+
+  <div class="q-card">
+    <div class="q-num" id="q-num">QUESTION 01</div>
+    <div class="sentence" id="sentence"></div>
+  </div>
+
+  <div class="options" id="options"></div>
+  <div class="feedback" id="feedback"></div>
+  <div class="note-box" id="note-box"></div>
+
+  <div class="next-wrap">
+    <button class="next-btn" id="next-btn">Next →</button>
+  </div>
+</div>
+
+<div id="result-screen">
+  <div class="result-circle">
+    <div class="result-num" id="final-num"></div>
+    <div class="result-denom" id="final-denom"></div>
+  </div>
+  <div class="result-title" id="result-title"></div>
+  <div class="result-msg" id="result-msg"></div>
+  <div class="result-bars">
+    <div class="result-bars-title">By category</div>
+    <div id="cat-results"></div>
+  </div>
+  <button class="retry-btn" onclick="startQuiz()">Try again ↺</button>
+</div>
+
+<script>
+const questions = [
+  // Food & Restaurant
+  { cat: "🍽 Food & Restaurant", word: "flour", sentence: "We need to order more ___ before the bakery opens tomorrow.", answer: "flour", options: ["flour","sugar","salt","butter"], note: "<strong>Flour</strong> (n): bột mì – danh từ không đếm được, dùng trong nấu ăn/làm bánh." },
+  { cat: "🍽 Food & Restaurant", word: "shelf", sentence: "Please put the new stock on the ___ near the window.", answer: "shelf", options: ["shelf","counter","drawer","table"], note: "<strong>Shelf</strong> (n): giá/kệ để đồ. Số nhiều: <strong>shelves</strong>." },
+  { cat: "🍽 Food & Restaurant", word: "out of stock", sentence: "I'm sorry, that size is currently ___ – we expect a new shipment next week.", answer: "out of stock", options: ["out of stock","on sale","available","in demand"], note: "<strong>Out of stock</strong>: hết hàng. Hay dùng trong cửa hàng, siêu thị hoặc đơn đặt hàng." },
+  { cat: "🍽 Food & Restaurant", word: "catering company", sentence: "We hired a ___ to handle all the food and drinks at the conference.", answer: "catering company", options: ["catering company","delivery service","food truck","restaurant chain"], note: "<strong>Catering company</strong>: công ty cung cấp dịch vụ ăn uống cho sự kiện, tiệc, hội nghị." },
+  { cat: "🍽 Food & Restaurant", word: "flavor", sentence: "Which ___ of ice cream would you like – chocolate or vanilla?", answer: "flavor", options: ["flavor","texture","color","size"], note: "<strong>Flavor</strong> (n): hương vị. Dùng cho đồ ăn, đồ uống hoặc món tráng miệng." },
+  { cat: "🍽 Food & Restaurant", word: "vegetarian", sentence: "Do you have any ___ options on the menu? I don't eat meat.", answer: "vegetarian", options: ["vegetarian","organic","gluten-free","frozen"], note: "<strong>Vegetarian</strong> (adj/n): thuộc về món chay / người ăn chay. Chú ý spelling đúng." },
+
+  // Office & Equipment
+  { cat: "🏢 Office & Equipment", word: "by the stairs", sentence: "The copy machine is located in the corner ___.", answer: "by the stairs", options: ["by the stairs","on the roof","in the lobby","near the exit"], note: "<strong>By the stairs</strong>: ở cạnh/gần cầu thang. <strong>By</strong> ở đây nghĩa là 'gần/cạnh'." },
+  { cat: "🏢 Office & Equipment", word: "cartridge", sentence: "The printer stopped working because we need to replace the ink ___.", answer: "cartridge", options: ["cartridge","battery","cable","toner"], note: "<strong>Cartridge</strong> (n): hộp mực. Cụm hay gặp: <strong>ink cartridge</strong> = hộp mực máy in." },
+  { cat: "🏢 Office & Equipment", word: "require", sentence: "This software update will ___ you to restart your computer.", answer: "require", options: ["require","request","remind","recommend"], note: "<strong>Require</strong> (v): yêu cầu, cần. Cấu trúc: <strong>require sb to do sth</strong>." },
+  { cat: "🏢 Office & Equipment", word: "power cable", sentence: "The monitor won't turn on – I think the ___ is damaged.", answer: "power cable", options: ["power cable","USB port","screen","keyboard"], note: "<strong>Power cable</strong> (n): dây nguồn điện. Dùng cho thiết bị điện tử." },
+
+  // Health & Daily Life
+  { cat: "💊 Health & Daily Life", word: "annual checkup", sentence: "My doctor reminded me to schedule my ___ before the end of the year.", answer: "annual checkup", options: ["annual checkup","surgery","prescription","blood test"], note: "<strong>Annual checkup</strong>: buổi kiểm tra sức khỏe định kỳ hằng năm. <strong>Annual</strong> = hằng năm." },
+  { cat: "💊 Health & Daily Life", word: "fitness tracker", sentence: "She wears a ___ to monitor her heart rate and step count.", answer: "fitness tracker", options: ["fitness tracker","smartwatch","pedometer","GPS device"], note: "<strong>Fitness tracker</strong>: thiết bị theo dõi sức khỏe, thường đo bước chân, nhịp tim, giấc ngủ." },
+  { cat: "💊 Health & Daily Life", word: "speech therapist", sentence: "The child was referred to a ___ to help with his pronunciation difficulties.", answer: "speech therapist", options: ["speech therapist","dentist","counselor","pediatrician"], note: "<strong>Speech therapist</strong>: chuyên viên trị liệu ngôn ngữ – hỗ trợ vấn đề phát âm, nói, giao tiếp." },
+  { cat: "💊 Health & Daily Life", word: "session", sentence: "The yoga class is a 60-minute ___ held every Tuesday morning.", answer: "session", options: ["session","period","term","schedule"], note: "<strong>Session</strong> (n): buổi, phiên. Hay dùng trong học tập, tư vấn, trị liệu hoặc họp." },
+
+  // Business, Rental & Work
+  { cat: "💼 Business & Work", word: "car dealership", sentence: "He just got a new job as a sales manager at a ___ downtown.", answer: "car dealership", options: ["car dealership","repair shop","parking lot","driving school"], note: "<strong>Car dealership</strong>: đại lý bán xe hơi – nơi bán xe mới hoặc xe đã qua sử dụng." },
+  { cat: "💼 Business & Work", word: "rent", sentence: "They are looking for a place to ___ near the city center.", answer: "rent", options: ["rent","buy","sell","build"], note: "<strong>Rent</strong> (v/n): thuê / tiền thuê. Ví dụ: <strong>rent an apartment</strong>, <strong>pay the rent</strong>." },
+  { cat: "💼 Business & Work", word: "current lease", sentence: "My ___ expires at the end of this month, so I need to find a new place soon.", answer: "current lease", options: ["current lease","rental receipt","deposit slip","mortgage"], note: "<strong>Current lease</strong>: hợp đồng thuê hiện tại. <strong>Lease</strong> là hợp đồng thuê nhà, văn phòng hoặc xe." },
+  { cat: "💼 Business & Work", word: "standard", sentence: "Please fill out the ___ application form available at the front desk.", answer: "standard", options: ["standard","online","digital","special"], note: "<strong>Standard</strong> (adj/n): tiêu chuẩn, thông thường. Hay gặp: <strong>standard form</strong>, <strong>standard application</strong>." },
+  { cat: "💼 Business & Work", word: "rental application", sentence: "You must submit a completed ___ along with two forms of ID.", answer: "rental application", options: ["rental application","work permit","lease renewal","purchase agreement"], note: "<strong>Rental application</strong>: đơn xin thuê nhà/căn hộ. <strong>Application</strong> = đơn đăng ký." },
+  { cat: "💼 Business & Work", word: "lead", sentence: "Could you tell me who will ___ the orientation session for new staff?", answer: "lead", options: ["lead","attend","cancel","reschedule"], note: "<strong>Lead</strong> (v): dẫn dắt, phụ trách. <strong>Who will lead...?</strong> = Ai sẽ phụ trách/dẫn buổi...?" },
+  { cat: "💼 Business & Work", word: "coupon", sentence: "I saved a lot of money because I used a discount ___ at checkout.", answer: "coupon", options: ["coupon","receipt","invoice","voucher"], note: "<strong>Coupon</strong> (n): phiếu/mã giảm giá. Cụm hay dùng: <strong>discount coupon</strong>." },
+  { cat: "💼 Business & Work", word: "figure", sentence: "Can you share the latest sales ___ from last quarter?", answer: "figure", options: ["figure","result","outcome","feedback"], note: "<strong>Figure/figures</strong> (n): con số, số liệu. Ví dụ: <strong>production figures</strong> = số liệu sản xuất." },
+];
+
+const LETTERS = ['A','B','C','D'];
+let shuffled = [], current = 0, score = 0, answered = false;
+let catScore = {}, catTotal = {};
+
+function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+function startQuiz() {
+  shuffled = shuffle(questions);
+  current = 0; score = 0; answered = false;
+  catScore = {}; catTotal = {};
+  document.getElementById('result-screen').classList.remove('show');
+  document.getElementById('result-screen').style.display = 'none';
+  document.getElementById('quiz-screen').style.display = 'block';
+  render();
+}
+
+function render() {
+  const q = shuffled[current];
+  answered = false;
+
+  // progress
+  const pct = (current / shuffled.length) * 100;
+  document.getElementById('prog').style.width = pct + '%';
+  document.getElementById('q-count').textContent = 'Question ' + (current + 1) + ' / ' + shuffled.length;
+  document.getElementById('q-score').textContent = score + ' correct';
+  document.getElementById('q-num').textContent = 'QUESTION ' + String(current + 1).padStart(2, '0');
+  document.getElementById('cat-badge').textContent = q.cat;
+
+  // sentence
+  const parts = q.sentence.split('___');
+  document.getElementById('sentence').innerHTML =
+    parts[0] + '<span class="blank" id="blank">___</span>' + (parts[1] || '');
+
+  // options
+  const opts = shuffle(q.options);
+  const og = document.getElementById('options');
+  og.innerHTML = '';
+  opts.forEach((o, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt';
+    btn.innerHTML = `<span class="opt-letter">${LETTERS[i]}</span>${o}`;
+    btn.onclick = () => choose(btn, o, q);
+    og.appendChild(btn);
+  });
+
+  // reset feedback
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback'; fb.innerHTML = '';
+  const nb = document.getElementById('note-box');
+  nb.className = 'note-box'; nb.innerHTML = '';
+  const nextBtn = document.getElementById('next-btn');
+  nextBtn.className = 'next-btn';
+  nextBtn.textContent = current < shuffled.length - 1 ? 'Next →' : 'See results →';
+}
+
+function choose(btn, choice, q) {
+  if (answered) return;
+  answered = true;
+  const isCorrect = choice === q.answer;
+  if (isCorrect) score++;
+
+  // track by category
+  const c = q.cat;
+  catTotal[c] = (catTotal[c] || 0) + 1;
+  if (isCorrect) catScore[c] = (catScore[c] || 0) + 1;
+
+  // style buttons
+  document.querySelectorAll('.opt').forEach(b => {
+    b.disabled = true;
+    const txt = b.textContent.slice(1).trim();
+    if (txt === q.answer) b.classList.add('correct');
+    else if (b === btn && !isCorrect) b.classList.add('wrong');
+  });
+
+  // fill blank
+  const blank = document.getElementById('blank');
+  blank.textContent = q.answer;
+  blank.classList.add('filled');
+
+  // feedback
+  const fb = document.getElementById('feedback');
+  fb.className = 'feedback show ' + (isCorrect ? 'correct' : 'wrong');
+  fb.innerHTML = isCorrect
+    ? `<span class="feedback-icon">✓</span> <strong>Correct!</strong> "${q.answer}" fits perfectly in this context.`
+    : `<span class="feedback-icon">✗</span> The correct answer is <strong>"${q.answer}"</strong>.`;
+
+  // note box
+  const nb = document.getElementById('note-box');
+  nb.className = 'note-box show';
+  nb.innerHTML = '📝 ' + q.note;
+
+  document.getElementById('next-btn').classList.add('show');
+}
+
+document.getElementById('next-btn').onclick = () => {
+  current++;
+  if (current >= shuffled.length) showResult();
+  else render();
+};
+
+function showResult() {
+  document.getElementById('quiz-screen').style.display = 'none';
+  const rs = document.getElementById('result-screen');
+  rs.classList.add('show'); rs.style.display = 'block';
+
+  document.getElementById('final-num').textContent = score;
+  document.getElementById('final-denom').textContent = '/ ' + shuffled.length;
+
+  const pct = score / shuffled.length;
+  let title, msg;
+  if (pct === 1)       { title = "Perfect score! 🎉"; msg = "Bạn đã nắm vững toàn bộ từ vựng trong Test 3 Part 2. Xuất sắc!"; }
+  else if (pct >= 0.8) { title = "Great work! 👍"; msg = "Bạn làm rất tốt. Xem lại một vài từ sai là hoàn hảo rồi."; }
+  else if (pct >= 0.6) { title = "Good effort! 📖"; msg = "Ổn đấy! Hãy chú ý phần notes của các câu sai để ghi nhớ sâu hơn."; }
+  else                 { title = "Keep practicing! 💪"; msg = "Hãy ôn lại phần VOCABULARY và thử lại – bạn sẽ tiến bộ rất nhanh!"; }
+
+  document.getElementById('result-title').textContent = title;
+  document.getElementById('result-msg').textContent = msg;
+
+  // category breakdown
+  const cr = document.getElementById('cat-results');
+  cr.innerHTML = '';
+  Object.keys(catTotal).forEach(cat => {
+    const s = catScore[cat] || 0;
+    const t = catTotal[cat];
+    const barPct = Math.round((s / t) * 100);
+    cr.innerHTML += `
+      <div class="cat-row">
+        <div class="cat-name">${cat}</div>
+        <div class="cat-bar-wrap"><div class="cat-bar" style="width:${barPct}%"></div></div>
+        <div class="cat-score">${s}/${t}</div>
+      </div>`;
+  });
+}
+
+startQuiz();
+</script>
+</body>
+</html>
