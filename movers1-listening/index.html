@@ -1,0 +1,195 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Movers 1 · Listening Dictation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{--or:#E8730C;--or2:#C45A00;--cream:#FFF4EA;--peach:#FFE7D3;--line:#F2C9A6;--ink:#2B2B2B;--mute:#8a7f76;--bg:#fff}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html{background:var(--bg)}
+body{font-family:Montserrat,system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);padding:16px 16px 40px;min-height:100vh}
+.wrap{max-width:760px;margin:0 auto}
+button{font-family:inherit;cursor:pointer;border:0;background:none;color:inherit}
+.top{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:.12em;color:#9a8a7c;margin-bottom:12px}
+.top b{color:var(--or);display:flex;align-items:center;gap:6px}
+.top b:before{content:"";width:8px;height:8px;border-radius:50%;background:var(--or)}
+.hero{background:var(--or);color:#fff;border-radius:22px;padding:20px 20px 18px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;width:170px;height:170px;border-radius:50%;background:rgba(255,255,255,.12);right:-50px;top:-80px}
+.kick{font-size:11px;font-weight:800;letter-spacing:.2em;opacity:.9}
+.hero h1{font-size:clamp(30px,8vw,44px);font-weight:900;line-height:1;margin-top:4px}
+.hero p{font-size:16px;font-weight:800;margin-top:4px}
+.tabs{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap;position:relative;z-index:1}
+.tabs button{background:rgba(255,255,255,.22);color:#fff;font-weight:800;font-size:14px;border-radius:99px;padding:8px 16px}
+.tabs button.on{background:#fff;color:var(--or)}
+.parts{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.parts button{border:2px solid var(--line);border-radius:14px;padding:10px 8px;text-align:left;background:#fff}
+.parts button .k{font-size:11px;font-weight:800;letter-spacing:.14em;color:var(--or2)}
+.parts button .t{font-size:12.5px;font-weight:700;margin-top:2px;line-height:1.25}
+.parts button.on{background:var(--or);border-color:var(--or)}
+.parts button.on .k,.parts button.on .t{color:#fff}
+.player{position:sticky;top:8px;z-index:5;margin-top:14px;background:#fff;border:2px solid var(--line);border-radius:20px;padding:12px 14px;box-shadow:0 8px 22px rgba(120,60,10,.10)}
+.prow{display:flex;align-items:center;gap:12px}
+.big{flex:none;width:54px;height:54px;border-radius:50%;background:var(--or);color:#fff;font-size:22px;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 10px rgba(232,115,12,.35)}
+.pmeta{flex:1;min-width:0}
+.pttl{font-weight:800;font-size:14px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pstat{font-size:12px;color:var(--mute);font-weight:600;margin-top:1px}
+input[type=range]{width:100%;accent-color:var(--or);margin-top:6px;height:22px}
+.ctrls{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.ctrls button{background:var(--cream);color:var(--or2);font-weight:800;font-size:13px;border-radius:12px;padding:8px 11px}
+.ctrls .sp{margin-left:auto;display:flex;gap:4px}
+.ctrls .sp button{padding:8px 9px}
+.ctrls .sp button.on{background:var(--or);color:#fff}
+.hint{background:var(--cream);border-radius:14px;padding:11px 13px;font-size:13px;color:#5a5048;margin-top:14px;line-height:1.45}
+.hint b{color:var(--or2)}
+.bar{display:flex;justify-content:space-between;align-items:center;margin-top:16px}
+.bar h2{font-size:15px;font-weight:900;color:var(--or)}
+.rev{background:var(--peach);color:var(--or2);font-weight:800;font-size:12.5px;border-radius:99px;padding:7px 12px}
+.block{margin-top:14px}
+.bh{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:6px}
+.tag{background:var(--or);color:#fff;font-weight:800;font-size:12px;border-radius:99px;padding:4px 11px}
+.tag.ex{background:var(--peach);color:var(--or2)}
+.q{font-weight:800;font-size:14px}
+.ln{display:flex;align-items:center;gap:10px;padding:7px 8px;border-radius:14px;transition:background .15s}
+.ln.now{background:var(--cream)}
+.no{flex:none;width:42px;height:42px;border-radius:50%;background:var(--peach);color:var(--or2);font-weight:900;font-size:15px;display:flex;align-items:center;justify-content:center;position:relative}
+.no:after{content:"▶";position:absolute;right:-3px;bottom:-3px;width:17px;height:17px;border-radius:50%;background:var(--or);color:#fff;font-size:8px;display:flex;align-items:center;justify-content:center;border:2px solid #fff}
+.ln.now .no{background:var(--or);color:#fff}
+.ln.now .no:after{content:"♪"}
+.who{flex:none;width:62px;font-size:12.5px;font-weight:700;color:var(--mute)}
+.txt{flex:1;min-width:0;font-size:14.5px;line-height:1.4;font-weight:600}
+.txt.ex{color:#a39a92;font-style:italic;font-weight:500}
+.hid{display:inline-flex;align-items:center;gap:6px;color:#c7bbb0;font-weight:700;font-size:13px;border-bottom:2px dotted #d8ccc1;padding-bottom:2px;cursor:pointer;user-select:none}
+.hid:before{content:"👁";font-size:12px;opacity:.7}
+.cnt{flex:none;font-size:11px;color:#b0a69d;font-weight:600}
+.foot{margin-top:28px;text-align:center;font-size:11.5px;color:#9a8a7c;font-weight:600}
+@media (max-width:480px){.ctrls{flex-wrap:nowrap;gap:4px}.ctrls button{font-size:12px;padding:7px 7px}.ctrls .sp{gap:3px}.ctrls .sp button{padding:7px 6px}.big{width:48px;height:48px;font-size:19px}.player{padding:10px 11px}.who{width:48px;font-size:11.5px}.parts button .t{font-size:11.5px}.cnt{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><b>NOV ENGLISH CLASS</b><span>CAMBRIDGE MOVERS 1</span></div>
+  <div class="hero">
+    <div class="kick">CAMBRIDGE · LISTENING</div>
+    <h1>MOVERS 1</h1>
+    <p>Dictation · nghe từng câu</p>
+    <div class="tabs" id="tabs"></div>
+  </div>
+  <div class="parts" id="parts"></div>
+
+  <div class="player" id="player">
+    <div class="prow">
+      <button class="big" id="bigBtn" aria-label="Phát / dừng">▶</button>
+      <div class="pmeta">
+        <div class="pttl" id="pttl"></div>
+        <div class="pstat" id="pstat">0:00 / 0:00</div>
+      </div>
+    </div>
+    <input type="range" id="seek" min="0" max="1000" value="0" aria-label="Tua">
+    <div class="ctrls">
+      <button id="back2">⏪ 2s</button>
+      <button id="fwd2">2s ⏩</button>
+      <button id="restart">🔁 Đầu</button>
+      <div class="sp" id="spd">
+        <button data-r="0.75">0.75x</button><button data-r="1" class="on">1x</button><button data-r="1.25">1.25x</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="hint">✏️ <b>Viết vào sheet giấy nha!</b> Bấm <b>▶ to</b> để nghe cả bài. Bấm <b>số tròn</b> ở từng dòng để nghe lại đúng câu đó, nghe bao nhiêu lần cũng được.</div>
+
+  <div class="bar"><h2 id="ptitle"></h2><button class="rev" id="revAll">👁 Hiện tất cả</button></div>
+  <div id="list"></div>
+  <div class="foot">novenglishclass.com · Movers 1 Listening</div>
+</div>
+<audio id="au" preload="auto"></audio>
+<script>
+const DATA=[{"key": "1_2", "test": 1, "part": 2, "title": "Jill's information", "blocks": [{"label": "Example", "q": null, "lines": [{"who": "Man", "t": "Hello, Jill. Can I ask you some questions?", "s": 8.69, "e": 12.06}, {"who": "Girl", "t": "OK.", "s": 11.89, "e": 12.99}, {"who": "Man", "t": "What's your family name?", "s": 13.42, "e": 15.41}, {"who": "Girl", "t": "My family name's Walker.", "s": 15.61, "e": 17.95}, {"who": "Man", "t": "Jill Walker. Can you spell that?", "s": 18.21, "e": 21.27}, {"who": "Girl", "t": "W-A-L-K-E-R.", "s": 21.51, "e": 27.37}, {"who": "Man", "t": "Thank you.", "s": 27.42, "e": 28.29}]}, {"label": "Question 1", "q": null, "lines": [{"who": "Man", "t": "Where do you live, Jill?", "s": 41.43, "e": 43.06}, {"who": "Girl", "t": "I live at 7 Main Street.", "s": 43.59, "e": 46.39}, {"who": "Man", "t": "Can you spell that, please?", "s": 46.42, "e": 48.34}, {"who": "Girl", "t": "Yes. M-A-I-N.", "s": 48.34, "e": 52.65}]}, {"label": "Question 2", "q": null, "lines": [{"who": "Man", "t": "Do you like school, Jill?", "s": 62.72, "e": 64.72}, {"who": "Girl", "t": "Yes, I do.", "s": 64.85, "e": 66.3}, {"who": "Man", "t": "Which class are you in?", "s": 66.55, "e": 68.26}, {"who": "Girl", "t": "I'm in 4b. I've got a lot of friends in the class.", "s": 69.03, "e": 73.48}, {"who": "Man", "t": "4b.", "s": 73.5, "e": 75.3}]}, {"label": "Question 3", "q": null, "lines": [{"who": "Man", "t": "And what about sports?", "s": 85.61, "e": 87.62}, {"who": "Girl", "t": "Oh, I love swimming, hockey and basketball.", "s": 87.99, "e": 91.52}, {"who": "Man", "t": "Which is your favourite sport?", "s": 91.66, "e": 93.76}, {"who": "Girl", "t": "I love hockey best.", "s": 94.13, "e": 96.06}, {"who": "Man", "t": "Hockey's a good game.", "s": 95.69, "e": 97.3}]}, {"label": "Question 4", "q": null, "lines": [{"who": "Man", "t": "What do you do at the weekends?", "s": 107.03, "e": 109.28}, {"who": "Girl", "t": "I have a lot of hobbies. But I like reading best.", "s": 109.65, "e": 113.88}, {"who": "Man", "t": "Do you like reading books or comics?", "s": 113.83, "e": 116.97}, {"who": "Girl", "t": "Mmm… that's difficult. I think comics are my favourite.", "s": 117.51, "e": 121.9}]}, {"label": "Question 5", "q": null, "lines": [{"who": "Man", "t": "Have you got any pets?", "s": 132.13, "e": 133.86}, {"who": "Girl", "t": "Yes, I have. I love animals.", "s": 134.25, "e": 137.02}, {"who": "Man", "t": "What kind of pet have you got?", "s": 137.14, "e": 139.18}, {"who": "Girl", "t": "I've got a snake. He's very beautiful.", "s": 139.43, "e": 142.52}, {"who": "Man", "t": "A snake! That's a good pet.", "s": 142.35, "e": 144.75}]}]}, {"key": "1_3", "test": 1, "part": 3, "title": "What did Jane do last week?", "blocks": [{"label": "Example", "q": null, "lines": [{"who": "Man", "t": "Hello, Jane?", "s": 13.55, "e": 14.86}, {"who": "Girl", "t": "Hello, Uncle Tony.", "s": 15.23, "e": 16.78}, {"who": "Man", "t": "What did you do last week? Tell me.", "s": 17.45, "e": 20.23}, {"who": "Girl", "t": "Well, on Thursday, I went to my friend's birthday party.", "s": 20.78, "e": 25.41}, {"who": "Man", "t": "On Thursday?", "s": 26.11, "e": 27.39}, {"who": "Girl", "t": "Yes. She had a great cake!", "s": 27.78, "e": 30.86}]}, {"label": "Question 1", "q": null, "lines": [{"who": "Man", "t": "What did you do on Tuesday?", "s": 50.56, "e": 52.67}, {"who": "Girl", "t": "On Tuesday, I was at home. I did my homework.", "s": 53.45, "e": 58.07}, {"who": "Man", "t": "Was it difficult?", "s": 58.55, "e": 59.89}, {"who": "Girl", "t": "No, it was easy. I had to write a story.", "s": 60.07, "e": 63.83}]}, {"label": "Question 2", "q": null, "lines": [{"who": "Man", "t": "What about Saturday? What did you do then?", "s": 70.4, "e": 74.09}, {"who": "Girl", "t": "I watched a soccer game.", "s": 74.65, "e": 76.43}, {"who": "Man", "t": "Did you go with your friends?", "s": 77.21, "e": 79.23}, {"who": "Girl", "t": "No, I went there with my dad.", "s": 79.3, "e": 82.21}, {"who": "Man", "t": "Was it a good game?", "s": 82.88, "e": 84.44}, {"who": "Girl", "t": "Oh yes! It was very exciting.", "s": 84.33, "e": 87.29}]}, {"label": "Question 3", "q": null, "lines": [{"who": "Man", "t": "And did you go for a walk with the dog on Monday? It was a sunny day…", "s": 94.08, "e": 99.37}, {"who": "Girl", "t": "No, I sat inside all day. I had a bad cold.", "s": 99.62, "e": 104.99}, {"who": "Man", "t": "Oh dear! I didn't know that.", "s": 105.23, "e": 107.91}, {"who": "Girl", "t": "I read my new book. Mum gave it to me on my birthday.", "s": 108.27, "e": 112.44}]}, {"label": "Question 4", "q": null, "lines": [{"who": "Man", "t": "What about Sunday?", "s": 118.86, "e": 120.33}, {"who": "Girl", "t": "Erm… Dad drove us to the countryside that day.", "s": 120.78, "e": 125.67}, {"who": "Man", "t": "What did you do there?", "s": 126.14, "e": 127.54}, {"who": "Girl", "t": "We went for a walk near a waterfall.", "s": 128.3, "e": 130.84}, {"who": "Man", "t": "Great! Did you take any photos?", "s": 131.16, "e": 134.48}, {"who": "Girl", "t": "No.", "s": 134.38, "e": 135.3}]}, {"label": "Question 5", "q": null, "lines": [{"who": "Man", "t": "And what did you do on Wednesday?", "s": 142.16, "e": 144.43}, {"who": "Girl", "t": "We all went to the park.", "s": 144.67, "e": 146.51}, {"who": "Man", "t": "To watch another soccer game?", "s": 147.1, "e": 148.93}, {"who": "Girl", "t": "No. We played with our ball.", "s": 149.15, "e": 151.74}, {"who": "Man", "t": "And did you take the dog with you?", "s": 152.38, "e": 154.31}, {"who": "Girl", "t": "Oh yes!", "s": 154.25, "e": 155.44}]}]}, {"key": "1_4", "test": 1, "part": 4, "title": "Listen and tick", "blocks": [{"label": "Example", "q": "What is Jill wearing?", "lines": [{"who": "Girl", "t": "Look, Mum, can you see my friend Jill?", "s": 16.3, "e": 19.26}, {"who": "Woman", "t": "No, I can't. What's she wearing? Red trousers?", "s": 19.63, "e": 24.93}, {"who": "Girl", "t": "No. She's got a new dress.", "s": 24.92, "e": 28.12}, {"who": "Woman", "t": "Is it blue?", "s": 28.55, "e": 29.91}, {"who": "Girl", "t": "No, it's yellow.", "s": 30.09, "e": 31.87}]}, {"label": "Question 1", "q": "What does Daisy want for supper?", "lines": [{"who": "Girl", "t": "I'm hungry, Mum.", "s": 50.26, "e": 52.2}, {"who": "Woman", "t": "What would you like for supper, Daisy, a burger?", "s": 52.32, "e": 55.67}, {"who": "Girl", "t": "No, I had a burger at school today. Can I have some pasta?", "s": 55.94, "e": 61.31}, {"who": "Woman", "t": "Yes, with some juice and bread?", "s": 61.35, "e": 64.57}, {"who": "Girl", "t": "I'm thirsty but I don't want any bread.", "s": 64.91, "e": 68.55}]}, {"label": "Question 2", "q": "What did Sally get for her birthday?", "lines": [{"who": "Girl", "t": "It was Sally's birthday last week.", "s": 79.05, "e": 81.48}, {"who": "Woman", "t": "Oh, what did her parents give her?", "s": 81.46, "e": 84.26}, {"who": "Girl", "t": "I don't know.", "s": 84.62, "e": 85.86}, {"who": "Woman", "t": "She wanted a guitar or a computer.", "s": 86.83, "e": 90.08}, {"who": "Girl", "t": "Well, they didn't give her those. Oh yes, I know. They gave her a new camera.", "s": 90.65, "e": 97.24}, {"who": "Woman", "t": "She'll like that. She loves taking photos.", "s": 97.31, "e": 101.12}]}, {"label": "Question 3", "q": "Where did Peter go at the weekend?", "lines": [{"who": "Woman", "t": "Where did your friend Peter go at the weekend?", "s": 112.17, "e": 115.37}, {"who": "Girl", "t": "Well, he wanted to go and watch a basketball game.", "s": 115.43, "e": 119.17}, {"who": "Woman", "t": "So did he go?", "s": 119.26, "e": 121.16}, {"who": "Girl", "t": "No, he couldn't. His mum wanted to go to the mountains for the weekend and his dad wanted to go to the sea.", "s": 121.96, "e": 129.5}, {"who": "Woman", "t": "Did he go to the sea then?", "s": 129.74, "e": 131.64}, {"who": "Girl", "t": "No, his dad had to work but he went with his mum to the mountains.", "s": 131.86, "e": 136.78}]}, {"label": "Question 4", "q": "What was the matter with Mary?", "lines": [{"who": "Girl", "t": "Mary couldn't come to school today.", "s": 147.16, "e": 149.58}, {"who": "Woman", "t": "What was the matter with her? Did she have a stomach ache?", "s": 149.74, "e": 153.44}, {"who": "Girl", "t": "No, she had a temperature.", "s": 153.59, "e": 155.96}, {"who": "Woman", "t": "Was she in bed?", "s": 156.27, "e": 157.79}, {"who": "Girl", "t": "No, she sat on the sofa in the living room.", "s": 157.84, "e": 161.26}]}, {"label": "Question 5", "q": "What fruit has Fred got in his garden?", "lines": [{"who": "Girl", "t": "Mum, Fred's parents have got a new house in the country. It's very big.", "s": 172.14, "e": 178.0}, {"who": "Woman", "t": "That's good. Has it got a garden?", "s": 177.63, "e": 181.06}, {"who": "Girl", "t": "Yes, it has, and there's a lot of fruit.", "s": 181.87, "e": 186.2}, {"who": "Woman", "t": "Oh. Does it have coconuts or bananas?", "s": 186.15, "e": 190.4}, {"who": "Girl", "t": "No, but it's got a lot of pineapples.", "s": 190.48, "e": 194.2}]}]}, {"key": "2_2", "test": 2, "part": 2, "title": "Mary's information", "blocks": [{"label": "Example", "q": null, "lines": [{"who": "Man", "t": "Hello, Mary. Can I ask you some questions?", "s": 8.78, "e": 12.05}, {"who": "Girl", "t": "All right.", "s": 12.22, "e": 13.3}, {"who": "Man", "t": "What's your family name?", "s": 13.53, "e": 15.5}, {"who": "Girl", "t": "Do you mean Mary?", "s": 16.34, "e": 18.28}, {"who": "Man", "t": "No, your second name?", "s": 18.1, "e": 20.26}, {"who": "Girl", "t": "Oh, that's Smith.", "s": 20.49, "e": 22.73}, {"who": "Man", "t": "Is that S-M-I-T-H?", "s": 22.7, "e": 27.0}, {"who": "Girl", "t": "Yes.", "s": 27.14, "e": 28.01}]}, {"label": "Question 1", "q": null, "lines": [{"who": "Man", "t": "And how old are you, Mary?", "s": 40.74, "e": 43.04}, {"who": "Girl", "t": "I'm 9. It was my birthday last week.", "s": 43.13, "e": 46.64}, {"who": "Man", "t": "Did you have a party?", "s": 46.69, "e": 48.15}, {"who": "Girl", "t": "Yes, it was good.", "s": 48.22, "e": 50.18}]}, {"label": "Question 2", "q": null, "lines": [{"who": "Man", "t": "Now what about your hair?", "s": 60.27, "e": 62.87}, {"who": "Girl", "t": "My hair?", "s": 63.0, "e": 64.0}, {"who": "Man", "t": "Yes, what colour is it?", "s": 64.14, "e": 66.32}, {"who": "Girl", "t": "It's blonde.", "s": 66.37, "e": 67.7}]}, {"label": "Question 3", "q": null, "lines": [{"who": "Man", "t": "And what about your eyes?", "s": 77.5, "e": 79.97}, {"who": "Girl", "t": "Do you need to know the colour of my eyes?", "s": 80.32, "e": 82.95}, {"who": "Man", "t": "Yes, please.", "s": 82.58, "e": 83.69}, {"who": "Girl", "t": "They're blue.", "s": 83.71, "e": 84.95}, {"who": "Man", "t": "You've got very beautiful eyes, Mary!", "s": 84.79, "e": 87.33}, {"who": "Girl", "t": "Thank you!", "s": 87.22, "e": 88.16}]}, {"label": "Question 4", "q": null, "lines": [{"who": "Man", "t": "Now some questions about your family. Is that OK?", "s": 98.21, "e": 101.9}, {"who": "Girl", "t": "Yes, it's OK.", "s": 102.06, "e": 103.83}, {"who": "Man", "t": "Have you got any brothers?", "s": 104.12, "e": 105.8}, {"who": "Girl", "t": "Yes, I've got three brothers. Two are older than me and one is younger.", "s": 105.74, "e": 110.81}, {"who": "Man", "t": "That's a big family.", "s": 110.81, "e": 112.33}, {"who": "Girl", "t": "I like big families.", "s": 112.3, "e": 114.16}]}, {"label": "Question 5", "q": null, "lines": [{"who": "Man", "t": "What about sisters? How many sisters have you got?", "s": 123.93, "e": 127.41}, {"who": "Girl", "t": "Four. There are a lot of people in our house!", "s": 128.13, "e": 132.01}]}]}, {"key": "2_3", "test": 2, "part": 3, "title": "What did Paul do last week?", "blocks": [{"label": "Example", "q": null, "lines": [{"who": "Woman", "t": "Hello, Paul. Did you have a good week?", "s": 13.67, "e": 17.52}, {"who": "Boy", "t": "Yes, Grandma. I played a lot of sport.", "s": 17.69, "e": 21.61}, {"who": "Woman", "t": "What did you do on Tuesday?", "s": 21.88, "e": 24.31}, {"who": "Boy", "t": "On Tuesday, I played hockey at school.", "s": 24.64, "e": 28.59}, {"who": "Woman", "t": "Great!", "s": 28.56, "e": 29.87}]}, {"label": "Question 1", "q": null, "lines": [{"who": "Woman", "t": "What did you do on Thursday? It rained that day.", "s": 48.33, "e": 53.17}, {"who": "Boy", "t": "I watched basketball on Thursday.", "s": 53.63, "e": 56.61}, {"who": "Woman", "t": "At school?", "s": 56.97, "e": 58.22}, {"who": "Boy", "t": "No, I didn't go to school that day. I watched it on TV with Dad. It was an exciting game.", "s": 58.25, "e": 66.37}]}, {"label": "Question 2", "q": null, "lines": [{"who": "Boy", "t": "I sometimes go swimming on Friday, but not last week. It was my friend's birthday.", "s": 73.02, "e": 80.07}, {"who": "Woman", "t": "Oh! What did you do?", "s": 80.41, "e": 83.47}, {"who": "Boy", "t": "We went to the cinema to see a film about someone who lived on an island.", "s": 83.92, "e": 88.79}, {"who": "Woman", "t": "Mmm!", "s": 89.33, "e": 90.07}]}, {"label": "Question 3", "q": null, "lines": [{"who": "Woman", "t": "And what did you do on Wednesday?", "s": 96.95, "e": 99.63}, {"who": "Boy", "t": "I went to the pool. I was there all afternoon.", "s": 99.76, "e": 103.92}, {"who": "Woman", "t": "Was it nice and sunny there?", "s": 104.36, "e": 106.67}, {"who": "Boy", "t": "Yes. It was a very hot day. It was great there.", "s": 106.69, "e": 111.69}]}, {"label": "Question 4", "q": null, "lines": [{"who": "Boy", "t": "And on Saturday, it was basketball again.", "s": 118.23, "e": 121.83}, {"who": "Woman", "t": "At school?", "s": 122.35, "e": 123.56}, {"who": "Boy", "t": "With all my friends, yes.", "s": 123.77, "e": 126.24}, {"who": "Woman", "t": "Was it a good game?", "s": 126.55, "e": 128.28}, {"who": "Boy", "t": "Yes, it was. We all enjoyed it.", "s": 128.15, "e": 131.59}]}, {"label": "Question 5", "q": null, "lines": [{"who": "Woman", "t": "What did you do on Sunday?", "s": 138.35, "e": 140.76}, {"who": "Boy", "t": "I read a book that Dad gave me on my birthday.", "s": 140.83, "e": 144.23}, {"who": "Woman", "t": "What was it about?", "s": 144.85, "e": 146.46}, {"who": "Boy", "t": "All about different sports. I want to be a sports teacher one day, Grandma.", "s": 146.97, "e": 152.64}, {"who": "Woman", "t": "Great idea!", "s": 153.07, "e": 154.4}]}]}, {"key": "2_4", "test": 2, "part": 4, "title": "Listen and tick", "blocks": [{"label": "Example", "q": "Where is Pat's dad going?", "lines": [{"who": "Boy", "t": "Is that your father walking to the bus stop, Pat?", "s": 16.52, "e": 19.58}, {"who": "Girl", "t": "Yes, it is, Sam.", "s": 19.73, "e": 21.39}, {"who": "Boy", "t": "Where's he going?", "s": 21.99, "e": 23.51}, {"who": "Girl", "t": "He's going to town for Mum.", "s": 23.79, "e": 25.78}, {"who": "Boy", "t": "Is he going to the supermarket?", "s": 26.28, "e": 28.44}, {"who": "Girl", "t": "No, I went there yesterday and Mum's going to the library this afternoon. Oh, I know, he's going to the bank.", "s": 28.44, "e": 37.1}]}, {"label": "Question 1", "q": "Which one is Pat's mother?", "lines": [{"who": "Boy", "t": "Is your mother here, Pat?", "s": 54.6, "e": 56.44}, {"who": "Girl", "t": "Yes, she's in the garden with my aunts.", "s": 56.77, "e": 60.01}, {"who": "Boy", "t": "Has your mother got straight hair?", "s": 60.86, "e": 62.92}, {"who": "Girl", "t": "No, her hair is curly.", "s": 63.15, "e": 65.3}, {"who": "Boy", "t": "Oh, is she the one in the red dress?", "s": 64.93, "e": 69.09}, {"who": "Girl", "t": "No, she's wearing trousers today.", "s": 69.37, "e": 72.27}]}, {"label": "Question 2", "q": "What does Pat want to buy?", "lines": [{"who": "Boy", "t": "Where are you going to go now, Pat?", "s": 82.14, "e": 84.48}, {"who": "Girl", "t": "I'm going shopping.", "s": 84.75, "e": 86.25}, {"who": "Boy", "t": "What do you want to buy?", "s": 87.09, "e": 88.65}, {"who": "Girl", "t": "It's my birthday on Sunday and I want something new to wear at my party.", "s": 89.86, "e": 94.81}, {"who": "Boy", "t": "Do you want some new trousers?", "s": 94.44, "e": 98.22}, {"who": "Girl", "t": "No, I'd like a skirt because my mum gave me a beautiful blue sweater.", "s": 98.43, "e": 104.15}]}, {"label": "Question 3", "q": "What was the weather like here yesterday?", "lines": [{"who": "Boy", "t": "We went to the mountains yesterday and it rained. What was the weather like here, Pat?", "s": 114.47, "e": 120.65}, {"who": "Girl", "t": "It was a beautiful day.", "s": 120.93, "e": 122.75}, {"who": "Boy", "t": "Was it sunny?", "s": 123.05, "e": 124.46}, {"who": "Girl", "t": "It was sunny. It wasn't cloudy at all.", "s": 124.4, "e": 127.55}]}, {"label": "Question 4", "q": "Where's Peter?", "lines": [{"who": "Boy", "t": "Where's your brother, Pat?", "s": 136.51, "e": 138.37}, {"who": "Girl", "t": "Peter? I think he's playing outside.", "s": 138.68, "e": 142.29}, {"who": "Boy", "t": "Is he in the garden?", "s": 142.66, "e": 144.36}, {"who": "Girl", "t": "No, he isn't.", "s": 144.45, "e": 145.96}, {"who": "Boy", "t": "He isn't on the balcony.", "s": 146.27, "e": 148.16}, {"who": "Girl", "t": "I know. He went to the playground with his friends.", "s": 148.69, "e": 152.45}]}, {"label": "Question 5", "q": "What will they take on the picnic?", "lines": [{"who": "Boy", "t": "What do you want to eat on our picnic tomorrow, Pat?", "s": 162.38, "e": 165.75}, {"who": "Girl", "t": "Something we can eat with our hands.", "s": 166.05, "e": 168.57}, {"who": "Boy", "t": "What about sandwiches?", "s": 169.07, "e": 170.97}, {"who": "Girl", "t": "No, we always take sandwiches. Can we take burgers?", "s": 171.09, "e": 176.12}, {"who": "Boy", "t": "I don't like cold burgers. Shall we take sausages?", "s": 176.55, "e": 181.11}, {"who": "Girl", "t": "OK.", "s": 181.14, "e": 182.2}]}]}, {"key": "3_2", "test": 3, "part": 2, "title": "Tom's information", "blocks": [{"label": "Example", "q": null, "lines": [{"who": "Woman", "t": "Hello, Tom. Can I ask you some questions?", "s": 8.98, "e": 12.58}, {"who": "Boy", "t": "All right.", "s": 12.49, "e": 13.68}, {"who": "Woman", "t": "What's your family name?", "s": 13.79, "e": 15.91}, {"who": "Boy", "t": "Hill.", "s": 16.46, "e": 17.17}, {"who": "Woman", "t": "Can you spell that?", "s": 17.6, "e": 19.04}, {"who": "Boy", "t": "H-I-L-L.", "s": 20.28, "e": 24.57}, {"who": "Woman", "t": "Thank you.", "s": 24.78, "e": 25.66}]}, {"label": "Question 1", "q": null, "lines": [{"who": "Woman", "t": "And where do you live, Tom?", "s": 38.53, "e": 41.23}, {"who": "Boy", "t": "15 High Street.", "s": 41.74, "e": 44.18}, {"who": "Woman", "t": "Can you spell 'High', please?", "s": 44.5, "e": 47.1}, {"who": "Boy", "t": "H-I-G-H.", "s": 48.05, "e": 53.4}]}, {"label": "Question 2", "q": null, "lines": [{"who": "Woman", "t": "Now, how old are you, Tom?", "s": 63.2, "e": 65.94}, {"who": "Boy", "t": "Ten. It was my birthday last week.", "s": 66.49, "e": 69.85}, {"who": "Woman", "t": "You're very tall.", "s": 69.87, "e": 71.78}, {"who": "Boy", "t": "Yes, all my family are tall.", "s": 71.95, "e": 74.89}]}, {"label": "Question 3", "q": null, "lines": [{"who": "Woman", "t": "Now, what's your father's name?", "s": 84.73, "e": 87.71}, {"who": "Boy", "t": "John, like my older brother.", "s": 88.9, "e": 91.72}, {"who": "Woman", "t": "So there are two Johns in the family.", "s": 92.48, "e": 95.26}, {"who": "Boy", "t": "Yes.", "s": 95.55, "e": 96.5}]}, {"label": "Question 4", "q": null, "lines": [{"who": "Woman", "t": "And your mother's name?", "s": 106.49, "e": 108.31}, {"who": "Boy", "t": "It's Clare.", "s": 108.33, "e": 109.59}, {"who": "Woman", "t": "Is that C-L-A-R-E?", "s": 110.79, "e": 116.46}, {"who": "Boy", "t": "That's right.", "s": 116.94, "e": 118.2}]}, {"label": "Question 5", "q": null, "lines": [{"who": "Woman", "t": "Now, what's the matter?", "s": 128.55, "e": 130.83}, {"who": "Boy", "t": "My neck hurts.", "s": 131.24, "e": 132.92}, {"who": "Woman", "t": "Is it very bad?", "s": 133.18, "e": 134.92}, {"who": "Boy", "t": "Yes, it hurts a lot.", "s": 135.0, "e": 137.47}]}]}, {"key": "3_3", "test": 3, "part": 3, "title": "What did Jim do last week?", "blocks": [{"label": "Example", "q": null, "lines": [{"who": "Woman", "t": "Hello, Jim. What did you do last week?", "s": 13.81, "e": 17.74}, {"who": "Boy", "t": "Well, on Saturday when it rained, I helped Mum. We painted my bedroom.", "s": 17.9, "e": 24.83}, {"who": "Woman", "t": "Wow!", "s": 25.22, "e": 26.36}, {"who": "Boy", "t": "It looks great now, Aunt Lucy.", "s": 26.4, "e": 29.07}]}, {"label": "Question 1", "q": null, "lines": [{"who": "Woman", "t": "What did you do on Friday?", "s": 47.51, "e": 49.65}, {"who": "Boy", "t": "Erm… we went shopping. It rained that day.", "s": 49.98, "e": 54.91}, {"who": "Woman", "t": "That's right. Where did you go in the town?", "s": 55.33, "e": 59.58}, {"who": "Boy", "t": "Only to the supermarket to buy some food.", "s": 59.9, "e": 63.2}]}, {"label": "Question 2", "q": null, "lines": [{"who": "Woman", "t": "What did you do on Wednesday?", "s": 69.81, "e": 71.88}, {"who": "Boy", "t": "We drove to a lake. I went with my friend and his parents.", "s": 71.92, "e": 76.57}, {"who": "Woman", "t": "Oh! What did you do there?", "s": 76.52, "e": 79.4}, {"who": "Boy", "t": "We had a picnic.", "s": 79.73, "e": 81.3}, {"who": "Woman", "t": "And did you swim there too?", "s": 81.56, "e": 84.25}, {"who": "Boy", "t": "Yes, but it was cold!", "s": 83.88, "e": 86.47}]}, {"label": "Question 3", "q": null, "lines": [{"who": "Boy", "t": "I went in a boat on Thursday, no sorry, it was Sunday.", "s": 93.35, "e": 99.31}, {"who": "Woman", "t": "Where?", "s": 99.81, "e": 100.38}, {"who": "Boy", "t": "At the beach. Dad and I went there in the morning.", "s": 100.01, "e": 104.79}, {"who": "Woman", "t": "Did you enjoy that?", "s": 105.04, "e": 106.65}, {"who": "Boy", "t": "Yes, but it was windy so it was difficult.", "s": 106.63, "e": 110.85}]}, {"label": "Question 4", "q": null, "lines": [{"who": "Woman", "t": "And what did you do on Tuesday?", "s": 117.69, "e": 120.56}, {"who": "Boy", "t": "Tuesday?", "s": 120.72, "e": 121.93}, {"who": "Woman", "t": "Yes. Did you go to the beach that day too?", "s": 121.98, "e": 126.14}, {"who": "Boy", "t": "No, I went to the new bookshop. The town was very busy.", "s": 126.32, "e": 131.64}, {"who": "Woman", "t": "Oh.", "s": 131.6, "e": 132.73}, {"who": "Boy", "t": "I wanted to get a present for Dad.", "s": 132.8, "e": 135.45}]}, {"label": "Question 5", "q": null, "lines": [{"who": "Woman", "t": "What about Monday?", "s": 142.49, "e": 144.31}, {"who": "Boy", "t": "The weather wasn't good again that day. I went to my friend's flat.", "s": 144.7, "e": 149.45}, {"who": "Woman", "t": "What did you do?", "s": 149.64, "e": 151.01}, {"who": "Boy", "t": "We watched a DVD about someone who had a big sailing boat.", "s": 151.18, "e": 155.51}, {"who": "Woman", "t": "Did you enjoy it?", "s": 155.72, "e": 157.25}, {"who": "Boy", "t": "It was okay.", "s": 157.39, "e": 158.79}]}]}, {"key": "3_4", "test": 3, "part": 4, "title": "Listen and tick", "blocks": [{"label": "Example", "q": "Which is Ben's brother's car?", "lines": [{"who": "Boy", "t": "My brother's got a new car.", "s": 16.62, "e": 19.03}, {"who": "Girl", "t": "Oh, which one is it, Ben? That small one?", "s": 19.39, "e": 23.81}, {"who": "Boy", "t": "No, it's a beautiful, big one.", "s": 24.19, "e": 27.73}, {"who": "Girl", "t": "Is it blue?", "s": 27.98, "e": 29.2}, {"who": "Boy", "t": "No, his last car was blue. This one's red.", "s": 29.37, "e": 34.5}]}, {"label": "Question 1", "q": "What sport does Ben's brother do?", "lines": [{"who": "Girl", "t": "What sport does your brother do, Ben?", "s": 52.56, "e": 55.25}, {"who": "Boy", "t": "He plays basketball every weekend.", "s": 55.75, "e": 59.34}, {"who": "Girl", "t": "Does he like swimming or tennis?", "s": 59.62, "e": 62.33}, {"who": "Boy", "t": "No, he doesn't.", "s": 62.36, "e": 63.95}]}, {"label": "Question 2", "q": "Where does Ben's brother work?", "lines": [{"who": "Girl", "t": "Where does your brother work, Ben?", "s": 73.84, "e": 76.07}, {"who": "Boy", "t": "Here in the town.", "s": 76.58, "e": 78.17}, {"who": "Girl", "t": "Yes, but where? In a school?", "s": 78.41, "e": 81.7}, {"who": "Boy", "t": "No, he works in the zoo.", "s": 82.02, "e": 84.57}, {"who": "Girl", "t": "Where's that?", "s": 85.1, "e": 86.5}, {"who": "Boy", "t": "It's near the library.", "s": 87.06, "e": 88.81}, {"who": "Girl", "t": "Oh, yes.", "s": 88.87, "e": 90.05}]}, {"label": "Question 3", "q": "How did Ben go to his grandparents' house?", "lines": [{"who": "Girl", "t": "Did you see your grandparents at the weekend, Ben?", "s": 100.88, "e": 104.09}, {"who": "Boy", "t": "Yes, we did. I was very happy.", "s": 104.33, "e": 107.65}, {"who": "Girl", "t": "Did you go by bus?", "s": 107.93, "e": 109.77}, {"who": "Boy", "t": "No, the bus is very slow. We flew there.", "s": 109.84, "e": 114.6}, {"who": "Girl", "t": "Oh, did you?", "s": 114.99, "e": 116.71}, {"who": "Boy", "t": "Yes, it's quicker than the train.", "s": 116.81, "e": 119.81}]}, {"label": "Question 4", "q": "What can Ben give his sister for her birthday?", "lines": [{"who": "Boy", "t": "It's my sister's birthday on Saturday. What can I give her, Daisy?", "s": 130.87, "e": 136.68}, {"who": "Girl", "t": "Does she like dolls?", "s": 137.47, "e": 139.18}, {"who": "Boy", "t": "No, she doesn't.", "s": 139.06, "e": 140.84}, {"who": "Girl", "t": "What about a dress?", "s": 140.94, "e": 142.56}, {"who": "Boy", "t": "She never wears dresses. She likes playing football with me.", "s": 142.6, "e": 147.34}, {"who": "Girl", "t": "You can give her a ball then.", "s": 147.57, "e": 149.55}, {"who": "Boy", "t": "Oh yes!", "s": 150.09, "e": 151.59}]}, {"label": "Question 5", "q": "What's Ben's sister's favourite food?", "lines": [{"who": "Boy", "t": "Do you want to come to my sister's birthday party, Daisy?", "s": 162.13, "e": 165.67}, {"who": "Girl", "t": "Thanks. Have you got a birthday cake?", "s": 165.78, "e": 169.06}, {"who": "Boy", "t": "Yes, but my sister doesn't like cake.", "s": 169.17, "e": 172.56}, {"who": "Girl", "t": "What's her favourite food? Burgers?", "s": 172.81, "e": 175.92}, {"who": "Boy", "t": "She likes bananas best. She sometimes eats ten every day!", "s": 175.97, "e": 182.02}]}]}];
+const AUD={"1_2": "movers1_t1_p2.mp3", "1_3": "movers1_t1_p3.mp3", "1_4": "movers1_t1_p4.mp3", "2_2": "movers1_t2_p2.mp3", "2_3": "movers1_t2_p3.mp3", "2_4": "movers1_t2_p4.mp3", "3_2": "movers1_t3_p2.mp3", "3_3": "movers1_t3_p3.mp3", "3_4": "movers1_t3_p4.mp3"};
+const au=document.getElementById('au');
+let cur=null, segEnd=null, segRow=null, revealed=false, rafId=null;
+function ls(k,v){try{if(v===undefined)return localStorage.getItem(k);localStorage.setItem(k,v)}catch(e){return null}}
+const fmt=s=>{s=Math.max(0,s|0);return Math.floor(s/60)+':'+String(s%60).padStart(2,'0')};
+const words=s=>s.replace(/…|\.\.\./g,' ').split(/\s+/).filter(w=>/[A-Za-z0-9]/.test(w)).length;
+const esc=s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+let test=+(ls('mv_test')||1), part=+(ls('mv_part')||2);
+function renderTabs(){
+  const tabs=document.getElementById('tabs');
+  tabs.innerHTML=[1,2,3].map(t=>`<button class="${t===test?'on':''}" data-t="${t}">Test ${t}</button>`).join('');
+  tabs.querySelectorAll('button').forEach(b=>b.onclick=()=>{test=+b.dataset.t;load()});
+  const parts=document.getElementById('parts');
+  parts.innerHTML=DATA.filter(d=>d.test===test).map(d=>`<button class="${d.part===part?'on':''}" data-p="${d.part}"><div class="k">PART ${d.part}</div><div class="t">${esc(d.title)}</div></button>`).join('');
+  parts.querySelectorAll('button').forEach(b=>b.onclick=()=>{part=+b.dataset.p;load()});
+}
+function load(){
+  ls('mv_test',test);ls('mv_part',part);
+  cur=DATA.find(d=>d.test===test&&d.part===part);
+  stopSeg(); au.pause(); au.src=AUD[cur.key]; au.load(); setRate(curRate);
+  revealed=false; document.getElementById('revAll').textContent='👁 Hiện tất cả';
+  renderTabs();
+  document.getElementById('pttl').textContent=`Test ${test} · Part ${part} — ${cur.title}`;
+  document.getElementById('ptitle').textContent=`Test ${test} · Part ${part}`;
+  const L=document.getElementById('list');
+  L.innerHTML=cur.blocks.map((b,bi)=>{
+    const ex=b.label==='Example';
+    return `<div class="block"><div class="bh"><span class="tag${ex?' ex':''}">${ex?'Example · mẫu':b.label}</span>${b.q?`<span class="q">${esc(b.q)}</span>`:''}</div>`+
+      b.lines.map((l,li)=>`<div class="ln" data-b="${bi}" data-l="${li}"><button class="no" aria-label="Nghe câu ${li+1}">${li+1}</button><div class="who">${esc(l.who)}:</div><div class="txt${ex?' ex':''}">${ex?esc(l.t):`<span class="hid" data-full="${esc(l.t)}">Bấm để xem câu</span>`}</div><div class="cnt">(${words(l.t)} từ)</div></div>`).join('')+'</div>';
+  }).join('');
+  L.querySelectorAll('.ln').forEach(r=>{
+    const l=cur.blocks[+r.dataset.b].lines[+r.dataset.l];
+    r.querySelector('.no').onclick=()=>playSeg(l.s,l.e,r);
+    const h=r.querySelector('.hid'); if(h) h.onclick=()=>reveal(h);
+  });
+  updUI();
+}
+function reveal(h){const s=document.createElement('span');s.textContent=h.dataset.full;h.replaceWith(s)}
+document.getElementById('revAll').onclick=function(){
+  if(!revealed){document.querySelectorAll('.hid').forEach(reveal);revealed=true;this.textContent='🙈 Ẩn lại';}
+  else{load();}
+};
+function mark(row){document.querySelectorAll('.ln.now').forEach(x=>x.classList.remove('now'));if(row)row.classList.add('now')}
+function stopSeg(){segEnd=null;segRow=null;if(rafId)cancelAnimationFrame(rafId);rafId=null}
+function watch(){
+  if(segEnd!=null && au.currentTime>=segEnd){au.pause();stopSeg();updUI();return}
+  rafId=requestAnimationFrame(watch);
+}
+function playSeg(s,e,row){
+  if(s==null)return;
+  stopSeg(); segEnd=e; segRow=row; mark(row);
+  au.currentTime=Math.max(0,s);
+  const p=au.play(); if(p&&p.catch)p.catch(()=>{});
+  rafId=requestAnimationFrame(watch);
+}
+function rowAt(t){
+  for(const r of document.querySelectorAll('.ln')){const l=cur.blocks[+r.dataset.b].lines[+r.dataset.l];if(l.s!=null&&t>=l.s&&t<=l.e)return r}
+  return null;
+}
+function updUI(){
+  const d=au.duration||0, t=au.currentTime||0;
+  document.getElementById('pstat').textContent=`${fmt(t)} / ${fmt(d)}${segEnd!=null?' · đang nghe 1 câu':''}`;
+  if(!seeking) document.getElementById('seek').value=d?Math.round(t/d*1000):0;
+  document.getElementById('bigBtn').textContent=au.paused?'▶':'❚❚';
+  if(segEnd==null){ if(!au.paused) mark(rowAt(t)); }
+}
+let seeking=false;
+const seek=document.getElementById('seek');
+seek.oninput=()=>{seeking=true;if(au.duration){au.currentTime=seek.value/1000*au.duration}};
+seek.onchange=()=>{seeking=false;stopSeg()};
+au.ontimeupdate=updUI; au.onplay=updUI; au.onpause=updUI; au.onloadedmetadata=updUI;
+au.onended=()=>{stopSeg();mark(null);updUI()};
+document.getElementById('bigBtn').onclick=()=>{
+  if(au.paused){ if(segEnd!=null&&au.currentTime>=segEnd) stopSeg(); const p=au.play(); if(p&&p.catch)p.catch(()=>{}); }
+  else au.pause();
+};
+document.getElementById('back2').onclick=()=>{au.currentTime=Math.max(0,au.currentTime-2);updUI()};
+document.getElementById('fwd2').onclick=()=>{au.currentTime=Math.min(au.duration||0,au.currentTime+2);if(segEnd!=null&&au.currentTime>=segEnd)stopSeg();updUI()};
+document.getElementById('restart').onclick=()=>{stopSeg();mark(null);au.currentTime=0;const p=au.play();if(p&&p.catch)p.catch(()=>{})};
+let curRate=1;
+function setRate(r){curRate=r;au.playbackRate=r;document.querySelectorAll('#spd button').forEach(b=>b.classList.toggle('on',+b.dataset.r===r))}
+document.querySelectorAll('#spd button').forEach(b=>b.onclick=()=>setRate(+b.dataset.r));
+load();
+</script>
+</body>
+</html>
